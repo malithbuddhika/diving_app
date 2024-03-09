@@ -221,7 +221,7 @@ $participantname = $participantnameRow['participantname'];
             <form class="mt-3" id="parentSignatureForm">
                 <div class="form-group canvas-container">
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <canvas id="parentSignatureCanvas" class="signature-canvas" width="320%" height="150"></canvas>
+                    <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                 </div>
                 <div class="form-group btn-container">
                     <!-- Adjust button sizes for better usability on smaller screens -->

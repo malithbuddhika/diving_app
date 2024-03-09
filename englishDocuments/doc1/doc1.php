@@ -37,33 +37,12 @@ $vesselResult = mysqli_query($conn, $vesselQuery);
     <title>Doc1</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style type="text/css">
-        .logo {
-            display: block;
-            margin: auto;
-            max-width: 100%;
-            height: auto;
-        }
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-        .title {
-            margin-top: 10px;
-            font-size: 16px;
-            border-bottom: 4px solid #000;
-            padding-bottom: 5px;
-        }
+    <link rel="stylesheet" href="/includes/style.css">
 
-        .canvas-container {
-            text-align: center;
-        }
 
-        .signature-canvas {
-            border: 1px solid #ccc;
-        }
-
-        body {
-            overflow-x: hidden;
-        }
-    </style>
+  
 </head>
 
 <body class="container">
@@ -211,18 +190,16 @@ $vesselResult = mysqli_query($conn, $vesselQuery);
     <div class="row">
         <div class="col-md-12">
             <form class="mt-3" id="participantSignatureForm">
-                <div class="form-group canvas-container">
+                <div class="form-group canvas-container" style="position: relative;">
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <canvas id="participantSignatureCanvas" class="signature-canvas" width="320%" height="150"></canvas>
-                </div>
-                <div class="form-group btn-container">
-                    <!-- Adjust button sizes for better usability on smaller screens -->
-
-                    <button type="button" class="btn btn-secondary btn-sm" onclick="clearSignature()">Clear</button>
+                    <canvas id="participantSignatureCanvas" class="signature-canvas"></canvas>
+                    <button type="button" class="btn btn-secondary" onclick="clearSignature()" id="clearbutton"><span class="bi bi-x-lg"></span></button>
                 </div>
             </form>
         </div>
     </div>
+
+
 
     <div class="row mt-2">
         <div class="col-md-12">
@@ -235,7 +212,7 @@ $vesselResult = mysqli_query($conn, $vesselQuery);
             <form class="mt-3" id="parentSignatureForm">
                 <div class="form-group canvas-container">
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <canvas id="parentSignatureCanvas" class="signature-canvas" width="320%" height="150"></canvas>
+                    <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                 </div>
                 <div class="form-group btn-container">
                     <!-- Adjust button sizes for better usability on smaller screens -->
