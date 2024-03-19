@@ -5,6 +5,33 @@
     height: auto;
 }
 
+.logoDoc2 {
+    display: block;
+    margin: auto;
+    max-width: 10%;
+    height: auto;
+}
+
+.logo-Doc3 {
+    display: block;
+    margin: auto;
+    max-width: 10%;
+    height: auto;
+}
+.logo-Doc0 {
+    display: block;
+    margin: auto;
+    max-width: 47%;
+    height: auto;
+}
+
+.logo-Doc4 {
+    max-width: 99%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    height: auto;
+}
+
 .title {
     margin-top: 10px;
     font-size: 16px;
@@ -12,101 +39,388 @@
     padding-bottom: 5px;
 }
 
-.canvas-container {
-    text-align: center;
-}
-
-.signature-canvas {
-    border: 1px solid #ccc;
+.title-Doc4 {
+    margin-top: 10px;
+    font-size: 25px;
+    padding-bottom: 5px;
 }
 
 body {
     overflow-x: hidden;
+    margin-bottom: 15px;
 }
 
-/* Media query for screens up to 419px width */
-@media (max-width: 419px) {
+.crew {
+    text-decoration-color: red;
+}
 
-    /* Styles for both portrait and landscape orientations */
-    #clearbutton {
+.selectedInstructorLabel {
+    text-decoration: underline;
+    font-weight: bold;
+
+}
+
+.selectedResortName {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#policyNumberInput {
+    margin-bottom: 15px;
+}
+
+
+.titleDoc2 {
+    margin-top: 10px;
+    font-size: 22px;
+    text-align: center;
+}
+
+.title2Doc2 {
+    margin-top: 10px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.title_bottom {
+    border-bottom: 4px solid #000;
+    padding-bottom: 5px;
+    font-size: 19px;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.paragraph {
+    text-align: left;
+}
+
+.title-container-Doc3 {
+    position: relative;
+    background: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    padding-left: 17px;
+}
+
+.title-container-Doc0 {
+    position: relative;
+    background: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    padding-left: 17px;
+    margin-top: 6px;
+}
+
+.title-Doc3 {
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+.title-Doc0{
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.sub-titile-Doc3 {
+    margin-top: 10px;
+}
+
+.spaces {
+    text-decoration: underline;
+    font-weight: bold;
+}
+.spacesAnswer {
+    text-decoration: underline;
+}
+
+.signature_spaces {
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.signature-canvas {
+    border: 3px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signature-canvas-view {
+    width: 30%;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #000;
+    padding-top: 5px; /* Adjust this value to your preference */
+    width: 100%; /* Set initial width */
+    text-align: center;
+    margin-left: 50%;
+}
+
+
+.date-container {
+    text-align: center;
+    height: 160%;
+}
+
+.form-check {
+    margin-bottom: 10px;
+}
+
+.info {
+
+    margin-top: -10px;
+}
+
+/* Custom styles for left-aligning questions and right-aligning Yes/No */
+.question-table th,
+.question-table td:nth-child(2) {
+    text-align: left;
+}
+
+.question-table td:nth-child(3),
+.question-table td:nth-child(4) {
+    text-align: right;
+    width: 5%;
+}
+
+.question-table td:nth-child(1) {
+    text-align: left;
+    width: 2%;
+}
+
+.title2-Doc4 {
+    margin-top: 10px;
+    font-size: 24px;
+    text-align: center;
+}
+
+#submit-doc1:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+#homeBtn {
+    float: right;
+    margin-top: -44px;
+    margin-right: 8px;
+}
+
+
+
+/* Media query for devices up to 375px width (extra small devices) */
+@media (max-width: 375px) {
+    .clearbutton {
         position: absolute;
         bottom: 5px;
-        left: 305px;
-
+        right: 0px;
     }
-
-    /* Media query for portrait orientation within the max-width range */
-    @media (orientation: portrait) {
-        #clearbutton {
-            left: 305px;
-        }
-    }
-
-    /* Media query for landscape orientation within the max-width range */
-    @media (orientation: landscape) {
-        #clearbutton {
-            left: 400px;
-        }
+    .logo-Doc3 {
+        display: block;
+        margin: auto;
+        max-width: 20%;
+        height: auto;
     }
 }
 
-
-
-
-
-/* Media query for screens smaller than 768px and larger than 420px */
-@media (min-width: 420px) and (max-width: 767px) {
-    /* Styles for both portrait and landscape orientations */
-    #clearbutton {
+/* Media query for devices up to 430px width (extra small devices) */
+@media (min-width: 376px) and (max-width: 391px) {
+    .clearbutton {
         position: absolute;
         bottom: 5px;
-        left: 328px; /* Adjust the left position as needed */
+        right: -3px;
+    }
+    .logo-Doc3 {
+        display: block;
+        margin: auto;
+        max-width: 20%;
+        height: auto;
+    }
+}
+
+
+/* Media query for devices up to 414px width (extra small devices) */
+@media (min-width: 392px) and (max-width: 414px) {
+    .clearbutton {
+        position: absolute;
+        bottom: 5px;
+        right: 39px;
+    }
+    .logoDoc2 {
+        max-width: 17%;
+        /* Adjusted for smaller screens */
+    }
+    .logo-Doc3 {
+        display: block;
+        margin: auto;
+        max-width: 20%;
+        height: auto;
+    }
+}
+
+/* Media query for devices up to 430px width (extra small devices) */
+@media (min-width: 415px) and (max-width: 435px) {
+    .clearbutton {
+        position: absolute;
+        bottom: 5px;
+        right: 11px;
+    }
+    .logoDoc2 {
+        max-width: 17%;
+        /* Adjusted for smaller screens */
+    }
+    .logo-Doc3 {
+        display: block;
+        margin: auto;
+        max-width: 20%;
+        height: auto;
+    }
+}
+
+/* Media query for devices up to 575px width (extra small devices) */
+@media (max-width: 575px) {
+    .clearbutton {
+        position: absolute;
+        bottom: 6%;
+        right: 16%;
+    }
+    .logo-Doc4  {
+        max-width: 100%;
+        margin-top: 20px;
+        margin-bottom: 10px;
+
     }
 
-    .signature-canvas {
-        width: 350px;
-        height: 400px;
+    #policyNumberInput {
+        margin-bottom: 15px;
     }
 
-    /* Media query for portrait orientation within the max-width range */
-    @media (orientation: portrait) {
-        #clearbutton {
-            left: 328px; /* Adjust the left position as needed */
-        }
+    body {
+        margin-bottom: 15px;
+        overflow-x: hidden;
+    }
+    .logoDoc2 {
+        max-width: 17%;
+        /* Adjusted for smaller screens */
+    }
+    .logo-Doc3 {
+        display: block;
+        margin: auto;
+        max-width: 20%;
+        height: auto;
+    }
+}
+
+/* Media query for devices between 576px and 767px width (small devices) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .clearbutton {
+        position: absolute;
+        bottom: 5px;
+        right: 55px;
+    }
+    .logoDoc2 {
+        max-width: 17%;
+    }
+    .logo-Doc3 {
+        display: block;
+        margin: auto;
+        max-width: 20%;
+        height: auto;
+    }
+    .logo-Doc4  {
+        max-width: 100%;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+}
+
+/* Media query for devices between 768px and 991px width (medium devices) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .clearbutton {
+        position: absolute;
+        bottom: 25px;
+        right: 780px;
+    }
+    .logoDoc2 {
+        max-width: 17%;
+    }
+    .logo-Doc3 {
+        display: block;
+        margin: auto;
+        max-width: 20%;
+        height: auto;
     }
 
-    /* Media query for landscape orientation within the max-width range */
-    @media (orientation: landscape) {
-        #clearbutton {
-            left: 400px; /* Adjust the left position as needed */
-        }
+    .logo-Doc4  {
+        max-width: 100%;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
 
-        .signature-canvas {
-            width: 600px;
-            height: 400px;
-        }
+    .title {
+        font-size: 18px;
+    }
+
+    .title2 {
+        font-size: 20px;
+    }
+
+    .title_bottom {
+        font-size: 16px;
+    }
+
+    #policyNumberInput {
+        margin-bottom: 15px;
+    }
+
+    body {
+        margin-bottom: 15px;
+        overflow-x: hidden;
+    }
+}
+
+/* Media query for devices between 992px and 1199px width (large devices) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .clearbutton {
+        position: absolute;
+        bottom: 25px;
+        right: 780px;
+    }
+    .logo-Doc4 {
+        max-width: 99%;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        height: auto;
+    }
+}
+
+/* Media query for devices 1200px and larger (extra large devices) */
+@media (min-width: 1200px) {
+    .clearbutton {
+        position: absolute;
+        bottom: 25px;
+        right: 780px;
+    }
+    .logo-Doc4 {
+        max-width: 99%;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        height: auto;
     }
 }
 
 
 
 
-/* Media query for screens between 768px and 991px */
-/* @media (min-width: 768px) and (max-width: 991px) {
-    #clearbutton {
-        position: absolute;
-        bottom: 5;
-        left: 473;
-    }
 
-} */
 
-/* Media query for screens larger than 992px */
-/* @media (min-width: 992px) {
-    #clearbutton {
-        position: absolute;
-        bottom: 5;
-        left: 328;
-    }
-
-} */

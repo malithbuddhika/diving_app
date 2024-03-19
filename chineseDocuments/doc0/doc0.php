@@ -3,170 +3,68 @@ session_start();
 include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
 ?>
 
-<?php
-
-include $_SERVER['DOCUMENT_ROOT'] . '/connection.php';
-
-// Query to retrieve divemasters from the database
-$divemasterQuery = "SELECT divemasterName FROM divemasters";
-$divemasterResult = mysqli_query($conn, $divemasterQuery);
-
-// Query to retrieve crew members from the database
-$crewMemberQuery = "SELECT crewMemberName FROM crewmembers";
-$crewMemberResult = mysqli_query($conn, $crewMemberQuery);
-
-// Query to retrieve captains from the database
-$captainQuery = "SELECT captainName FROM captains";
-$captainResult = mysqli_query($conn, $captainQuery);
-
-// Query to retrieve vessel names from the database
-$vesselQuery = "SELECT vesselName FROM vessels";
-$vesselResult = mysqli_query($conn, $vesselQuery);
-
-// Close the statement and database connection
-// Query to retrieve medical examiner data from medical_examiner
-$queryDoc0 = "SELECT * FROM doc0 WHERE userID = $userID ;";
-$resultDoc0 = mysqli_query($conn, $queryDoc0);
-$rowDoc0 = mysqli_fetch_assoc($resultDoc0);
-$participantname = $rowDoc0['participantname'];
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Doc1</title>
+    <title>Doc 0</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/includes/style.css">
 
-
 </head>
 
 <body class="container">
     <div class="row">
-        <div class="col-md-12">
-            <img class="logo" src="logo.jpg" alt="logo">
+        <div class="col-md-2">
+            <img class="logo-Doc0" src="logo.png" alt="logo">
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <h3 class="title_bottom">STATEMENT OF RISKS AND LIABILITY – SCUBA DIVING TRIPS AND BOAT TRAVEL (PADI
-                International Ltd)</h3>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <p class="paragraph"><strong>Please read carefully and fill in all blanks before signing</strong></p>
-
-            <p>This is a statement in which you are informed of the risks of hazards occurring whilst travelling to and participating in scuba dives either as a certified diver or as a student under the control and supervision of a certified scuba instructor. This statement covers recreational scuba dive trips and scuba dive trips carried out as part of a scuba diving class. This statement also sets out the circumstances in which you participate in the scuba diving trip at your own risk.</p>
-            <p>Your signature on this statement is required as proof that you have received and read this statement. It is important that you read the contents of this statement before signing it. If you do not understand anything contained in this statement then please discuss it with your instructor / dive professional. If you are a minor, this form must also be signed by a parent or guardian.</p>
-
-            <p class="paragraph"><strong>WARNING</strong></p>
-            <p>Skin and scuba diving have inherent risks which may result in serious injury or death.</p>
-            <p>Diving with compressed air involves certain inherent risks; decompression sickness, embolism or other
-                hyperbaric
-                injury can occur that require treatment in a recompression chamber. Open water scuba diving trips may be
-                conducted at a site that is remote, either by time or distance, from such a recompression chamber.</p>
-            <p>In addition, during boat travel to and from dive sites, you should follow all safety instructions from
-                the
-                captain / crew members and take care while getting on or off the boat and while on board to avoid
-                slipping,
-                falling or drowning.
-            </p>
-
-            <p class="paragraph"><strong>EXCLUSION OF LIABILITY</strong></p>
-            <p><strong>I understand and agree that neither</strong></p>
+        <div class="col-md-10">
+            <div class="title-container-Doc0">
+                <h3 class="title-Doc0">标准安全潜水操作理解声明</h3>
+            </div>
             <div class="row">
-                <div class="col-md-12">
-                    <label for="divemaster">Divemaster's Name : </label>
-                    <select class="crew" id="divemaster">
-                        <?php
-                        while ($row = mysqli_fetch_assoc($divemasterResult)) {
-                            echo "<option value='" . $row['divemasterName'] . "'>" . $row['divemasterName'] . "</option>";
-                        }
-                        ?>
-                    </select>
-
-                    <label for="crewMember">Crew Member's Name : </label>
-                    <select class="crew" id="crewMember">
-                        <?php
-                        while ($row = mysqli_fetch_assoc($crewMemberResult)) {
-                            echo "<option value='" . $row['crewMemberName'] . "'>" . $row['crewMemberName'] . "</option>";
-                        }
-                        ?>
-                    </select>
-
-                    <label for="captain">Captain's Name : </label>
-                    <select class="crew" id="captain">
-                        <?php
-                        while ($row = mysqli_fetch_assoc($captainResult)) {
-                            echo "<option value='" . $row['captainName'] . "'>" . $row['captainName'] . "</option>";
-                        }
-                        ?>
-                    </select>
+                <div class="col-md-12 mt-3">
+                    <h6><strong>请仔细阅读并填写后再签字。</strong></h6>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <p><strong>nor the crew or the owner of the vessel,</strong></p>
-                    <label for="vesselName">Vessel Name : </label>
-                    <select class="vessel" id="vesselName">
-                        <?php
-                        while ($row = mysqli_fetch_assoc($vesselResult)) {
-                            echo "<option value='" . $row['vesselName'] . "'>" . $row['vesselName'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    <strong>nor</strong>
-                </div>
-            </div>
-
-            <p><strong> PADI International Ltd., nor PADI Americas Inc., nor their affiliate or subsidiary companies,
-                    nor any
-                    of their respective employees, officers, agents or assigns (hereinafter referred to as “Released
-                    Parties”)
-                    accept any responsibility for any death, injury or other loss suffered or caused by me or resulting
-                    from my
-                    own conduct or any matter or condition under my control which amounts to my own contributory
-                    negligence,
-                    during or as a consequence of my participation in this scuba diving trip.</strong></p>
-            <p><strong>In the absence of any negligence or breach of duty by the crew or owner of the vessel, PADI
-                    International
-                    Ltd., PADI Americas, Inc., and all released entities and released parties as defined above, my
-                    participation
-                    in this scuba diving trip is entirely at my own risk.</strong></p>
-
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <form>
-                <label for="participantname">Participant's Name:</label>
-                <!-- Input field for participant's name -->
-                <label class="spaces"> <?php echo $participantname; ?></label>
-            </form>
+            <p>这是一份声明，你被告知建立安全的潜水实践皮肤和水肺潜水。这些做法是为您的审查和确认而编制的，旨在提高您在潜水时的舒适度和安全性。你必须在这份声明上签字，以证明你知道这些安全的潜水练习。在签署声明前阅读并讨论。如果你是未成年人，这份表格也必须由父母或监护人签署。</p>
         </div>
     </div>
+
+    <p>我, <input type="text" id="participantname" name="participantname">我明白，作为一名潜水员我应该:</p>
+    <p>1. 为潜水保持良好的身心健康。潜水时避免酒精或危险药物的影响。保持对潜水技能的精通，在一段时间不活动潜水后，努力通过继续教育和在受控条件下复习来提高自己的潜水技能，并参考我的课程材料来了解最新情况，更新重要信息。</p>
+    <p>2. 熟悉我的潜水地点。如果没有，从一个有知识的当地人士那里获得正式的潜水指导。如果潜水条件比我的经验差，请推迟潜水或选择条件较好的备用地点。只从事与我的训练和经验相符的潜水活动。除非经过专门训练，否则不要从事洞穴潜水或技术潜水。</p>
+    <p>3. 使用自己熟悉的完整、维护良好、可靠的设备;并且在每次潜水前检查它的正确配合和功能。当你进行水肺潜水时，要准备好浮力控制装置、低压浮力控制充气系统、潜水压力表和备用气源以及潜水计划/监测设备(潜水电脑、RDP/潜水表——无论你接受过何种训练)。禁止未经认证的潜水员使用我的设备。</p>
+    <p>4. 认真听取潜水简报和指示，并尊重监督我潜水活动的人的建议。认识到参加专业潜水活动，在其他地理区域和在不活动超过六个月后，建议进行额外的培训。</p>
+    <p>5. 每次潜水都要坚持伙伴制度。和我的朋友一起计划潜水——包括沟通、分离时重聚的程序和紧急程序。</p>
+    <p>6. 精通潛水計劃表的用途。所作的潛水都要是免減壓潛水，並且預留安全餘地。備有工具在水底監測深度和時間。最大潛 水深度不超過我的訓練和經驗等級和範圍。上升速度不得超過每分鐘18 公尺／ 60 英呎。做一位安全（SAFE）的潛水員﹣每次潛水都要緩慢上升（Slowly Ascend From Every dive）。安全停留是另一個預防措施，通常在5 公尺∕ 15 英呎處停留3 分鐘以上。</p>
+    <p>7. 維持適當的浮力控制。在水面將配重調整成中性浮力，這時的浮力控制裝置內沒有空氣。在水底時要維持中性浮力。水面游泳和休息時要能浮起。將配重周邊的障礙清除，以便拆卸容易以及在潛水遭遇危難時可以建立浮力。</p>
+    <p>8. 潛水時要正確呼吸。在使用壓縮空氣呼吸時，絕對不要憋住呼吸或是跳躍式的呼吸，在憋氣潛水時（浮潛）要避免過分過度換氣。在水中和水底時避免過度疲累，並且要在自己的極限內潛水。</p>
+    <p>9. 只要可行時，都要使用船隻、浮具、或是其他水面支撐台。</p>
+    <p>10. 知道並遵守當地潛水法律和規定，包括對於漁獵和潛水旗的法律規定。</p>
+
+    <h6><strong>本人已詳閱以上聲明，相關問題也已得到滿意之答覆。本人了解此些既定規範之重要性與目的。我明白這是為我的安全與健康著想，也明白潛水時如沒有遵守此些規範，將可能導致自身的危險。</strong></h6>
 
     <div class="row">
         <div class="col-md-12">
             <form class="mt-3" id="participantSignatureForm">
                 <div class="form-group canvas-container">
-                    <!-- Set canvas dimensions relative to the screen size -->
-                    <label>Participant Signature</label>
+                    <label>参与者的签名</label>
                     <canvas id="participantSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                     <button type="button" class="btn btn-secondary clearbutton" onclick="clearSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
+
             </form>
         </div>
     </div>
@@ -175,36 +73,42 @@ $participantname = $rowDoc0['participantname'];
         <div class="col-md-12">
             <form class="mt-3" id="parentSignatureForm">
                 <div class="form-group canvas-container">
-                    <!-- Set canvas dimensions relative to the screen size -->
-                    <label>Signature of Parent of Guardian (where applicable)</label>
+                    <label>家长或监护人签署(如适用)</label>
                     <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                     <button type="button" class="btn btn-secondary clearbutton" onclick="clearParentSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
             </form>
         </div>
     </div>
+
     <div id="alert-container"></div>
 
     <div class="row">
         <div class="col-md-12 btn-container">
-            <button type="button" id="submit-doc1" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">Submit</button>
+            <button type="button" id="submit-doc3" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">提交</button>
         </div>
     </div>
 
-    <!-- Include Bootstrap JS and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 
     <script>
-        function submitForm() {
-            // Add logic to handle the submission of the entire form
-            alert('Form submitted successfully');
+        // Function to retrieve the participant's name from localStorage
+        function getParticipantName() {
+            return localStorage.getItem('participantName');
         }
 
-        // Participant Signature
+        // Function to set the participant's name in the input field
+        function setParticipantName() {
+            var participantName = getParticipantName();
+            if (participantName) {
+                document.getElementById("participantname").value = participantName; // Corrected variable name
+            }
+        }
 
+        // Call the function to set participant's name when the page loads
+        window.onload = function() {
+            setParticipantName();
+        };
+        // Participant Signature
         let participantCanvas = document.getElementById('participantSignatureCanvas');
         let ctx = participantCanvas.getContext('2d');
         let drawing = false;
@@ -291,7 +195,6 @@ $participantname = $rowDoc0['participantname'];
 
 
         // Parent Signature
-
         let parentCanvas = document.getElementById('parentSignatureCanvas');
         let parentCtx = parentCanvas.getContext('2d');
         let parentDrawing = false;
@@ -377,42 +280,36 @@ $participantname = $rowDoc0['participantname'];
         }
 
         function handleFormSubmission() {
-
+            let participantName = document.getElementById('participantname').value;
             // Capture current date for participant and parent signatures
             let participantDate = new Date().toISOString();
             let parentDate = new Date().toISOString();
 
-
             // Capture the final point before form submission
             let participantSignatureData = participantCanvas.toDataURL();
-
-            drawParentFinalPoint(); // Capture the final point for parent signature
+            drawFinalPoint(); // Capture the final point for participant signature
             let parentSignatureData = parentCanvas.toDataURL();
+            drawParentFinalPoint(); // Capture the final point for parent signature
 
             let formData = new FormData();
-            formData.append('divemaster', document.getElementById('divemaster').value);
-            formData.append('crewMember', document.getElementById('crewMember').value);
-            formData.append('captain', document.getElementById('captain').value);
-            formData.append('vesselName', document.getElementById('vesselName').value);
+            formData.append('participantname', participantName);
             formData.append('participantSignatureData', participantSignatureData);
             formData.append('participantDate', participantDate);
             formData.append('parentSignatureData', parentSignatureData);
             formData.append('parentDate', parentDate);
-
-            // Send the formData to the server using AJAX
             sendToServer(formData);
         }
 
         function sendToServer(formData) {
             let xhr = new XMLHttpRequest();
-            xhr.open('POST', 'doc1_save_data.php', true);
+            xhr.open('POST', 'doc0_save_data.php', true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         // Display success message using Bootstrap alert
                         showAlert('success', 'Form submitted successfully');
-                        // Redirect to doc2.php
-                        window.location.href = '/englishDocuments/doc2/doc2.php';
+                        // Redirect to doc4.php
+                        window.location.href = '/chineseDocuments/doc1/doc1.php';
 
                     } else {
                         // Display error message using Bootstrap alert
@@ -440,13 +337,9 @@ $participantname = $rowDoc0['participantname'];
             setTimeout(function() {
                 alertContainer.removeChild(alertElement);
             }, 7000);
-
-
+            
         }
     </script>
-
-
-
 </body>
 
 </html>

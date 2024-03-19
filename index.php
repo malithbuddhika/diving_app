@@ -22,7 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['ppNumber'])) {
             (CASE WHEN d1.id IS NOT NULL THEN 'doc1 submitted' ELSE NULL END) AS doc1_status,
             (CASE WHEN d2.id IS NOT NULL THEN 'doc2 submitted' ELSE NULL END) AS doc2_status,
             (CASE WHEN d3.id IS NOT NULL THEN 'doc3 submitted' ELSE NULL END) AS doc3_status,
-            (CASE WHEN d4.id IS NOT NULL THEN 'doc4 submitted' ELSE NULL END) AS doc4_status
+            (CASE WHEN d4.id IS NOT NULL THEN 'doc4 submitted' ELSE NULL END) AS doc4_status,
+            d4.status AS doc4_approval_status
         FROM user_data u
         LEFT JOIN doc1 d1 ON u.id = d1.userID
         LEFT JOIN doc2 d2 ON u.id = d2.userID
@@ -49,13 +50,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['ppNumber'])) {
     // Build the search results HTML
     $searchResults .= "Name: " . $row["name"] . "<br>";
     $searchResults .= "PP Number: " . $row["passport_number"] . "<br>";
+    // Display Approval Status of Doc4
+    $searchResults .= "Approval Status: " . $row["doc4_approval_status"] . "<br>";
 
     // Display document statuses and submission dates
-    $searchResults .= "Doc1 Status: " . $row["doc1_status"] . " (Submitted on: " . $row["doc1_date"] . ")<br>";
-    $searchResults .= "Doc2 Status: " . $row["doc2_status"] . " (Submitted on: " . $row["doc2_date"] . ")<br>";
-    $searchResults .= "Doc3 Status: " . $row["doc3_status"] . " (Submitted on: " . $row["doc3_date"] . ")<br>";
-    $searchResults .= "Doc4 Status: " . $row["doc4_status"] . " (Submitted on: " . $row["doc4_date"] . ")<br>";
-
+    $searchResults .= "Doc1 : " . $row["doc1_status"] . " (Submitted on: " . $row["doc1_date"] . ")<br>";
+    $searchResults .= "Doc2 : " . $row["doc2_status"] . " (Submitted on: " . $row["doc2_date"] . ")<br>";
+    $searchResults .= "Doc3 : " . $row["doc3_status"] . " (Submitted on: " . $row["doc3_date"] . ")<br>";
+    $searchResults .= "Doc4 : " . $row["doc4_status"] . " (Submitted on: " . $row["doc4_date"] . ")<br>";
   } else {
     // If no results found, set flag to indicate no results
     $showResults = false;
@@ -99,7 +101,7 @@ $conn->close();
         </form>
       </div>
     </div>
-<br><br>
+    <br><br>
     <?php
     // Display search results or "No results found" message
     if ($showResults) {
@@ -131,7 +133,7 @@ $conn->close();
     }
 
     function view_document() {
-      window.location.href = '/englishDocuments/doc1/doc1_view.php';
+      window.location.href = '/englishDocuments/doc0/doc0_view.php';
     }
   </script>
 

@@ -4,158 +4,121 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
 ?>
 
 <?php
-
 include $_SERVER['DOCUMENT_ROOT'] . '/connection.php';
 
-// Query to retrieve divemasters from the database
-$divemasterQuery = "SELECT divemasterName FROM divemasters";
-$divemasterResult = mysqli_query($conn, $divemasterQuery);
+// Query to retrieve instructors from the database
+$instructorQuery = "SELECT instructorName FROM doc2 WHERE userID = $userID ORDER BY id DESC LIMIT 1;";
+$instructorResult = mysqli_query($conn, $instructorQuery);
+$instructorRow = mysqli_fetch_assoc($instructorResult);
+$instructor = $instructorRow['instructorName'];
 
-// Query to retrieve crew members from the database
-$crewMemberQuery = "SELECT crewMemberName FROM crewmembers";
-$crewMemberResult = mysqli_query($conn, $crewMemberQuery);
 
-// Query to retrieve captains from the database
-$captainQuery = "SELECT captainName FROM captains";
-$captainResult = mysqli_query($conn, $captainQuery);
+// Query to retrieve resort from the database
+$resortQuery = "SELECT resortName FROM doc2 WHERE userID = $userID ORDER BY id DESC LIMIT 1;";
+$resortResult = mysqli_query($conn, $resortQuery);
+$resortRow = mysqli_fetch_assoc($resortResult);
+$resort = $resortRow['resortName'];
 
-// Query to retrieve vessel names from the database
-$vesselQuery = "SELECT vesselName FROM vessels";
-$vesselResult = mysqli_query($conn, $vesselQuery);
+// Query to retrieve resort from the database
+$participantnameQuery = "SELECT participantname FROM doc2 WHERE userID = $userID ORDER BY id DESC LIMIT 1;";
+$participantnameResult = mysqli_query($conn, $participantnameQuery);
+$participantnameRow = mysqli_fetch_assoc($participantnameResult);
+$participantname = $participantnameRow['participantname'];
 
-// Close the statement and database connection
-// Query to retrieve medical examiner data from medical_examiner
-$queryDoc0 = "SELECT * FROM doc0 WHERE userID = $userID ;";
-$resultDoc0 = mysqli_query($conn, $queryDoc0);
-$rowDoc0 = mysqli_fetch_assoc($resultDoc0);
-$participantname = $rowDoc0['participantname'];
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Doc1</title>
+    <title>Doc 3</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/includes/style.css">
 
-
 </head>
 
 <body class="container">
+
     <div class="row">
         <div class="col-md-12">
-            <img class="logo" src="logo.jpg" alt="logo">
+            <img class="logo-Doc3" src="logo.png" alt="logo">
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <h3 class="title_bottom">STATEMENT OF RISKS AND LIABILITY – SCUBA DIVING TRIPS AND BOAT TRAVEL (PADI
-                International Ltd)</h3>
+            <div class="title-container-Doc3">
+                <h3 class="title-Doc3">非机构披露和确认协议</h3>
+            </div>
+            <div class="col-md-12">
+                <div class="row sub-titile-Doc3">
+                    在欧盟和欧洲自由贸易联盟国家使用替代形式
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <p class="paragraph"><strong>Please read carefully and fill in all blanks before signing</strong></p>
+            <h6> <strong>请仔细阅读并填写后再签字。</strong></h6>
+            <br>
+            <p>我明白并同意PADI会员(“会员”)，包括 <?php echo '<label class="spaces">' . $resort . '</label>'; ?> 和/或任何与我所参加的项目相关的PADI教练和潜水师个人，被授权使用各种PADI商标并进行PADI培训，但不是PADI美洲公司或其母公司、子公司和附属公司(“PADI”)的代理、员工或特许经销商。我进一步了解，会员的商业活动是独立的，既不是PADI拥有也不是PADI经营的，虽然PADI制定了PADI潜水员培训计划的标准，但它不负责也没有权利控制会员的商业活动的运作、PADI计划的日常实施以及会员或其相关人员对潜水员的监督。我进一步理解并同意，代表我自己，我的继承人和我的遗产，在此活动中受伤或死亡的情况下，我和我的遗产不会寻求追究PADI的行为，不作为或疏忽的责任
+                <?php echo '<label class="spaces">' . $resort . '</label>'; ?> 和/或与该活动相关的教练和潜水员。</p>
+        </div>
+    </div>
 
-            <p>This is a statement in which you are informed of the risks of hazards occurring whilst travelling to and participating in scuba dives either as a certified diver or as a student under the control and supervision of a certified scuba instructor. This statement covers recreational scuba dive trips and scuba dive trips carried out as part of a scuba diving class. This statement also sets out the circumstances in which you participate in the scuba diving trip at your own risk.</p>
-            <p>Your signature on this statement is required as proof that you have received and read this statement. It is important that you read the contents of this statement before signing it. If you do not understand anything contained in this statement then please discuss it with your instructor / dive professional. If you are a minor, this form must also be signed by a parent or guardian.</p>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title-container-Doc3">
+                <h3 class="title-Doc3">责任免除和风险承担协议</h3>
+            </div>
+            <div class="col-md-12">
+                <div class="row sub-titile-Doc3">
+                    在欧盟和欧洲自由贸易联盟国家使用替代形式
+                </div>
+            </div>
+        </div>
+    </div>
 
-            <p class="paragraph"><strong>WARNING</strong></p>
-            <p>Skin and scuba diving have inherent risks which may result in serious injury or death.</p>
-            <p>Diving with compressed air involves certain inherent risks; decompression sickness, embolism or other
-                hyperbaric
-                injury can occur that require treatment in a recompression chamber. Open water scuba diving trips may be
-                conducted at a site that is remote, either by time or distance, from such a recompression chamber.</p>
-            <p>In addition, during boat travel to and from dive sites, you should follow all safety instructions from
-                the
-                captain / crew members and take care while getting on or off the boat and while on board to avoid
-                slipping,
-                falling or drowning.
+    <div class="row">
+        <div class="col-md-12">
+            <h6> <strong>请仔细阅读并填写后再签字。</strong></h6>
+            <br>
+            <p>我,<?php echo '<label class="spaces">' . $participantname . '</label>'; ?> 我在此声明，我知道皮肤潜水和水肺潜水有可能导致严重伤害或死亡的内在风险。</p>
+            <p>我知道用压缩空气潜水有一定的内在风险;包括但不限于减压病、栓塞或其他需要在再压缩室治疗的高压/空气扩张损伤。本人进一步了解，培训和认证所必需的开放水域潜水旅行可以在距离再压缩室或时间或距离较远的地点进行。尽管在潜水点附近可能没有再压缩室，我仍然选择进行这样的教学潜水。
+            <p>我理解并同意我的指导老师，<?php echo '<label class="spaces">' . $instructor . '</label>'; ?>,
+                我接受指导的设施，<?php echo '<label class="spaces">' . $resort . '</label>'; ?>
+                PADI Americas, Inc.、其关联公司和子公司，以及他们各自的员工、管理人员、代理、承包商或受让人(以下简称“豁免方”)不得以任何方式对我、我的家人、财产、继承人或受让人因我参加本潜水项目或因任何一方(包括豁免方)的疏忽而可能发生的伤害、死亡或其他损害承担责任。无论是被动还是主动。</p>
+            <p>
+                考虑到被允许参加本课程(和可选的冒险潜水)，以下简称“项目”，我在此个人承担在我参加本项目期间可能发生的所有可预见或不可预见的风险，包括但不限于学术、封闭水域和/或开放水域活动。
             </p>
 
-            <p class="paragraph"><strong>EXCLUSION OF LIABILITY</strong></p>
-            <p><strong>I understand and agree that neither</strong></p>
-            <div class="row">
-                <div class="col-md-12">
-                    <label for="divemaster">Divemaster's Name : </label>
-                    <select class="crew" id="divemaster">
-                        <?php
-                        while ($row = mysqli_fetch_assoc($divemasterResult)) {
-                            echo "<option value='" . $row['divemasterName'] . "'>" . $row['divemasterName'] . "</option>";
-                        }
-                        ?>
-                    </select>
+            <p>
+                对于因我注册和参与本项目而产生的任何索赔或诉讼，包括在项目期间或在我收到认证后产生的索赔，我进一步免除、豁免并使上述项目和被免除方免受损害。
 
-                    <label for="crewMember">Crew Member's Name : </label>
-                    <select class="crew" id="crewMember">
-                        <?php
-                        while ($row = mysqli_fetch_assoc($crewMemberResult)) {
-                            echo "<option value='" . $row['crewMemberName'] . "'>" . $row['crewMemberName'] . "</option>";
-                        }
-                        ?>
-                    </select>
+            </p>
+            <p>
+                我也明白，皮肤潜水和水肺潜水是体力活动，我将在此项目中发挥自己的力量，如果我因心脏病发作，恐慌，过度通气，溺水或任何其他原因受伤，我明确承担上述伤害的风险，并且我不要求被释放方对此负责。
 
-                    <label for="captain">Captain's Name : </label>
-                    <select class="crew" id="captain">
-                        <?php
-                        while ($row = mysqli_fetch_assoc($captainResult)) {
-                            echo "<option value='" . $row['captainName'] . "'>" . $row['captainName'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>
+            </p>
+            <p>
+                我进一步声明，我已达到法定年龄，在法律上有能力签署本免责声明，或者我已获得父母或监护人的书面同意。我明白这里的条款是合同，而不仅仅是背诵，我签署本协议是我自己的自由行为，并知道我在此同意放弃我的法律权利。我进一步同意，如果本协议的任何条款被发现是不可执行或无效的，该条款应从本协议中分离。本协议的其余部分将被解释为本协议中从未包含不可执行的条款。
+            </p>
+            <p>我理解并同意，我不仅放弃起诉被解约方的权利，而且放弃因我去世而我的继承人、受让人或受益人可能有权起诉被解约方的任何权利。我进一步声明，我有权这样做，我的继承人、受让人或受益人将被禁止因为我对被释放方的陈述而提出其他要求。</p>
+            <p>
+                我, <?php echo '<label class="spaces">' . $participantname . '</label>'; ?>, 通过本文件，同意豁免和释放我的指导员......................................我通过其接受指示的设施。 ................................... 、PADI AMERICAS, INC. 以及上述定义的所有相关实体，免于承担因任何原因造成的人身伤害、财产损失或非正常死亡的所有责任或责任，包括但不限于被免责方的疏忽，无论是主动还是被动。
+            </p>
+            <p><strong>在代表我本人和我的继承人签署以下协议之前，我已经充分了解了本非代理披露和承认协议以及责任免除和风险承担协议的内容。</strong></p>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <p><strong>nor the crew or the owner of the vessel,</strong></p>
-                    <label for="vesselName">Vessel Name : </label>
-                    <select class="vessel" id="vesselName">
-                        <?php
-                        while ($row = mysqli_fetch_assoc($vesselResult)) {
-                            echo "<option value='" . $row['vesselName'] . "'>" . $row['vesselName'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    <strong>nor</strong>
-                </div>
-            </div>
-
-            <p><strong> PADI International Ltd., nor PADI Americas Inc., nor their affiliate or subsidiary companies,
-                    nor any
-                    of their respective employees, officers, agents or assigns (hereinafter referred to as “Released
-                    Parties”)
-                    accept any responsibility for any death, injury or other loss suffered or caused by me or resulting
-                    from my
-                    own conduct or any matter or condition under my control which amounts to my own contributory
-                    negligence,
-                    during or as a consequence of my participation in this scuba diving trip.</strong></p>
-            <p><strong>In the absence of any negligence or breach of duty by the crew or owner of the vessel, PADI
-                    International
-                    Ltd., PADI Americas, Inc., and all released entities and released parties as defined above, my
-                    participation
-                    in this scuba diving trip is entirely at my own risk.</strong></p>
 
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <form>
-                <label for="participantname">Participant's Name:</label>
-                <!-- Input field for participant's name -->
-                <label class="spaces"> <?php echo $participantname; ?></label>
-            </form>
-        </div>
     </div>
 
     <div class="row">
@@ -163,10 +126,11 @@ $participantname = $rowDoc0['participantname'];
             <form class="mt-3" id="participantSignatureForm">
                 <div class="form-group canvas-container">
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <label>Participant Signature</label>
+                    <label>参与者的签名</label>
                     <canvas id="participantSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                     <button type="button" class="btn btn-secondary clearbutton" onclick="clearSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
+
             </form>
         </div>
     </div>
@@ -176,7 +140,7 @@ $participantname = $rowDoc0['participantname'];
             <form class="mt-3" id="parentSignatureForm">
                 <div class="form-group canvas-container">
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <label>Signature of Parent of Guardian (where applicable)</label>
+                    <label>家长或监护人签署(如适用)</label>
                     <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                     <button type="button" class="btn btn-secondary clearbutton" onclick="clearParentSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
@@ -187,24 +151,13 @@ $participantname = $rowDoc0['participantname'];
 
     <div class="row">
         <div class="col-md-12 btn-container">
-            <button type="button" id="submit-doc1" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">Submit</button>
+            <button type="button" id="submit-doc3" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">提交</button>
         </div>
     </div>
 
-    <!-- Include Bootstrap JS and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 
     <script>
-        function submitForm() {
-            // Add logic to handle the submission of the entire form
-            alert('Form submitted successfully');
-        }
-
         // Participant Signature
-
         let participantCanvas = document.getElementById('participantSignatureCanvas');
         let ctx = participantCanvas.getContext('2d');
         let drawing = false;
@@ -291,7 +244,6 @@ $participantname = $rowDoc0['participantname'];
 
 
         // Parent Signature
-
         let parentCanvas = document.getElementById('parentSignatureCanvas');
         let parentCtx = parentCanvas.getContext('2d');
         let parentDrawing = false;
@@ -377,23 +329,17 @@ $participantname = $rowDoc0['participantname'];
         }
 
         function handleFormSubmission() {
-
             // Capture current date for participant and parent signatures
             let participantDate = new Date().toISOString();
             let parentDate = new Date().toISOString();
 
-
             // Capture the final point before form submission
             let participantSignatureData = participantCanvas.toDataURL();
-
-            drawParentFinalPoint(); // Capture the final point for parent signature
+            drawFinalPoint(); // Capture the final point for participant signature
             let parentSignatureData = parentCanvas.toDataURL();
+            drawParentFinalPoint(); // Capture the final point for parent signature
 
             let formData = new FormData();
-            formData.append('divemaster', document.getElementById('divemaster').value);
-            formData.append('crewMember', document.getElementById('crewMember').value);
-            formData.append('captain', document.getElementById('captain').value);
-            formData.append('vesselName', document.getElementById('vesselName').value);
             formData.append('participantSignatureData', participantSignatureData);
             formData.append('participantDate', participantDate);
             formData.append('parentSignatureData', parentSignatureData);
@@ -401,22 +347,25 @@ $participantname = $rowDoc0['participantname'];
 
             // Send the formData to the server using AJAX
             sendToServer(formData);
+
+            // Redirect to doc4.php
+            // window.location.href = '/englishDocuments/doc4/doc4.php';
         }
 
         function sendToServer(formData) {
             let xhr = new XMLHttpRequest();
-            xhr.open('POST', 'doc1_save_data.php', true);
+            xhr.open('POST', 'doc3_save_data.php', true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         // Display success message using Bootstrap alert
-                        showAlert('success', 'Form submitted successfully');
-                        // Redirect to doc2.php
-                        window.location.href = '/englishDocuments/doc2/doc2.php';
+                        showAlert('success', '提交成功');
+                        // Redirect to doc4.php
+                        window.location.href = '/chineseDocuments/doc4/doc4.php';
 
                     } else {
                         // Display error message using Bootstrap alert
-                        showAlert('danger', 'Error submitting form. Check console for details.');
+                        showAlert('danger', '提交表单错误。');
                         console.error('Error:', xhr.status, xhr.statusText);
                     }
                 }
@@ -441,12 +390,8 @@ $participantname = $rowDoc0['participantname'];
                 alertContainer.removeChild(alertElement);
             }, 7000);
 
-
         }
     </script>
-
-
-
 </body>
 
 </html>

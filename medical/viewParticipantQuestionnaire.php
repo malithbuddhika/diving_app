@@ -206,8 +206,8 @@ $parentDate = $rowDoc4['parentDate'];
         }
 
         body {
-        overflow-x: hidden;
-    }
+            overflow-x: hidden;
+        }
     </style>
 </head>
 
@@ -689,7 +689,7 @@ $parentDate = $rowDoc4['parentDate'];
             </tbody>
         </table>
 
-     
+
 
         <div class="row">
             <div class="row mt-2">
@@ -713,60 +713,60 @@ $parentDate = $rowDoc4['parentDate'];
 
         <div id="alert-container"></div>
 
-            <div class="row">
-                <div class="row mt-2 ml-2">
-                    <div class="col-md-12">
-                        <label class="examiner-info">Medical Examiner’s Name :</label>
-                        <label><?php echo $examinerName; ?></label>
-                    </div>
+        <div class="row">
+            <div class="row mt-2 ml-2">
+                <div class="col-md-12">
+                    <label class="examiner-info">Medical Examiner’s Name :</label>
+                    <label><?php echo $examinerName; ?></label>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="row mt-2 ml-2">
-                    <div class="col-md-12">
-                        <label class="examiner-info">Clinical Degrees/Credentials :</label>
-                        <label><?php echo $degree; ?></label>
-                    </div>
+        <div class="row">
+            <div class="row mt-2 ml-2">
+                <div class="col-md-12">
+                    <label class="examiner-info">Clinical Degrees/Credentials :</label>
+                    <label><?php echo $degree; ?></label>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="row mt-2 ml-2">
-                    <div class="col-md-12">
-                        <label class="examiner-info">Clinic/Hospital :</label>
-                        <label> <?php echo $clinic; ?> </label>
-                    </div>
+        <div class="row">
+            <div class="row mt-2 ml-2">
+                <div class="col-md-12">
+                    <label class="examiner-info">Clinic/Hospital :</label>
+                    <label> <?php echo $clinic; ?> </label>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="row mt-2 ml-2">
-                    <div class="col-md-12">
-                        <label class="examiner-info">Address :</label>
-                        <label> <?php echo $address; ?> </label>
-                    </div>
+        <div class="row">
+            <div class="row mt-2 ml-2">
+                <div class="col-md-12">
+                    <label class="examiner-info">Address :</label>
+                    <label> <?php echo $address; ?> </label>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="row mt-2 ml-2">
-                    <div class="col-md-12">
-                        <label class="examiner-info">Phone :</label>
-                        <label> <?php echo $phone; ?> </label>
-                    </div>
+        <div class="row">
+            <div class="row mt-2 ml-2">
+                <div class="col-md-12">
+                    <label class="examiner-info">Phone :</label>
+                    <label> <?php echo $phone; ?> </label>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="row mt-2 ml-2">
-                    <div class="col-md-12">
-                        <label class="examiner-info">Email :</label>
-                        <label> <?php echo $email; ?> </label>
-                    </div>
+        <div class="row">
+            <div class="row mt-2 ml-2">
+                <div class="col-md-12">
+                    <label class="examiner-info">Email :</label>
+                    <label> <?php echo $email; ?> </label>
                 </div>
             </div>
-        
+        </div>
+
 
         <div class="row">
             <div class="col-md-12 btn-container">
@@ -849,16 +849,16 @@ $parentDate = $rowDoc4['parentDate'];
             }
         }
 
-            medicalExaminerSignatureCanvas.addEventListener('mousedown', startDrawing);
-            medicalExaminerSignatureCanvas.addEventListener('mousemove', draw);
-            medicalExaminerSignatureCanvas.addEventListener('mouseup', stopDrawing);
+        medicalExaminerSignatureCanvas.addEventListener('mousedown', startDrawing);
+        medicalExaminerSignatureCanvas.addEventListener('mousemove', draw);
+        medicalExaminerSignatureCanvas.addEventListener('mouseup', stopDrawing);
 
-            // Touch events
-            medicalExaminerSignatureCanvas.addEventListener('touchstart', startDrawing);
-            medicalExaminerSignatureCanvas.addEventListener('touchmove', draw);
-            medicalExaminerSignatureCanvas.addEventListener('touchend', stopDrawing);
+        // Touch events
+        medicalExaminerSignatureCanvas.addEventListener('touchstart', startDrawing);
+        medicalExaminerSignatureCanvas.addEventListener('touchmove', draw);
+        medicalExaminerSignatureCanvas.addEventListener('touchend', stopDrawing);
 
-            function saveSignature() {
+        function saveSignature() {
             let medicalExaminerSignatureData = medicalExaminerSignatureCanvas.toDataURL();
             let formData = new FormData(document.getElementById('medicalExaminerSignatureForm'));
 
@@ -914,6 +914,8 @@ $parentDate = $rowDoc4['parentDate'];
                     if (xhr.status === 200) {
                         // Display success message using Bootstrap alert
                         showAlert('success', 'Form submitted successfully');
+                        // Redirect to doc4_view.php
+                        window.location.href = '/medical/participant_list.php';
 
                     } else {
                         // Display error message using Bootstrap alert
@@ -942,6 +944,8 @@ $parentDate = $rowDoc4['parentDate'];
             setTimeout(function() {
                 alertContainer.removeChild(alertElement);
             }, 5000);
+
+
         }
     </script>
 

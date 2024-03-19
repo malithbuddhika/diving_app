@@ -38,115 +38,57 @@ $participantname = $participantnameRow['participantname'];
     <title>Doc 3</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style type="text/css">
-        .logo {
-            display: block;
-            margin: auto;
-            max-width: 100%;
-            height: auto;
-        }
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/includes/style.css">
 
-        .title-container {
-            position: relative;
-            background: black;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-right: 5px;
-            padding-left: 5px;
-        }
-
-        .title {
-            color: white;
-            margin: 0;
-            padding: 0;
-        }
-
-        .sub-titile {
-            margin-top: 10px;
-        }
-
-        .spaces {
-            text-decoration: underline;
-            font-weight: bold;
-
-        }
-
-        .canvas-container {
-            text-align: center;
-        }
-
-        .signature-canvas {
-            border: 1px solid #ccc;
-        }
-
-        @media (max-width: 768px) {
-            .logo {
-                max-width: 15%;
-                /* Adjusted for smaller screens */
-            }
-
-            body {
-                margin-bottom: 15px;
-            }
-
-        }
-
-        @media (max-width: 576px) {
-            .logo {
-                max-width: 15%;
-                /* Further adjusted for smaller screens */
-
-            }
-
-            body {
-                margin-bottom: 15px;
-                overflow-x: hidden;
-            }
-
-        }
-    </style>
 </head>
 
 <body class="container">
 
     <div class="row">
         <div class="col-md-12">
-            <img class="logo" src="logo.png" alt="logo">
+            <img class="logo-Doc3" src="logo.png" alt="logo">
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <div class="title-container">
-                <h2 class="title">Non-Agency Disclosure and Acknowledgment Agreement</h2>
+            <div class="title-container-Doc3">
+                <h3 class="title-Doc3">Non-Agency Disclosure and Acknowledgment Agreement</h3>
             </div>
-
-            <h5 class="sub-titile">In European Union and European Free Trade Association countries use alternative form</h6>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Please read carefully and fill in all blanks before signing.</h3>
-
-            <p>I understand and agree that PADI Members (“Members”), including <?php echo '<label class="spaces">' . $resort . '</label>'; ?> and/or any individual PADI Instructors and Divemasters associated with the program in which I am participat- ing, are licensed to use various PADI Trademarks and to conduct PADI training, but are not agents, employees or franchisees of PADI Americas, Inc, or its parent, subsidiary and affiliated corporations (“PADI”). I further understand that Member business activities are independent, and are neither owned nor operated by PADI, and that while PADI establishes the standards for PADI diver train- ing programs, it is not responsible for, nor does it have the right to control, the operation of the Members’ business activities and the day-to day conduct of PADI programs and supervision of divers by the Members or their associated staff. I further understand and agree on behalf of myself, my heirs and my estate that in the event of an injury or death during this activity, neither I nor my es-
-
-                tate shall seek to hold PADI liable for the actions, inactions or negligence of <?php echo '<label class="spaces">' . $resort . '</label>'; ?> and/or the instructors and divemasters associated with the activity.</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="title-container">
-                <h2 class="title">Non-Agency Disclosure and Acknowledgment Agreement</h2>
+            <div class="col-md-12">
+                <div class="row sub-titile-Doc3">
+                    In European Union and European Free Trade Association countries use alternative form
+                </div>
             </div>
-            <h5 class="sub-titile">In European Union and European Free Trade Association countries use alternative form</h6>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <h3>Please read carefully and fill in all blanks before signing.</h3>
+            <h6> <strong>Please read carefully and fill in all blanks before signing.</strong></h6>
+            <br>
+            <p>I understand and agree that PADI Members (“Members”), including <?php echo '<label class="spaces">' . $resort . '</label>'; ?> and/or any individual PADI Instructors and Divemasters associated with the program in which I am participating, are licensed to use various PADI Trademarks and to conduct PADI training, but are not agents, employees or franchisees of PADI Americas, Inc, or its parent, subsidiary and affiliated corporations (“PADI”). I further understand that Member business activities are independent, and are neither owned nor operated by PADI, and that while PADI establishes the standards for PADI diver training programs, it is not responsible for, nor does it have the right to control, the operation of the Members’ business activities and the day-to day conduct of PADI programs and supervision of divers by the Members or their associated staff. I further understand and agree on behalf of myself, my heirs and my estate that in the event of an injury or death during this activity, neither I nor my estate shall seek to hold PADI liable for the actions, inactions or negligence of <?php echo '<label class="spaces">' . $resort . '</label>'; ?> and/or the instructors and divemasters associated with the activity.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title-container-Doc3">
+                <h3 class="title-Doc3">Liability Release and Assumption of Risk Agreement</h3>
+            </div>
+            <div class="col-md-12">
+                <div class="row sub-titile-Doc3">
+                    In European Union and European Free Trade Association countries use alternative form
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h6> <strong>Please read carefully and fill in all blanks before signing.</strong></h6>
+            <br>
             <p>I, <?php echo '<label class="spaces">' . $participantname . '</label>'; ?> hereby affirm that I am aware that skin and scuba diving have inherent risks which may result in serious injury or death.</p>
             <p>I understand that diving with compressed air involves certain inherent risks; including but not limited to decompression sickness, embolism or other hyperbaric/air expansion injury that require treatment in a recompression chamber. I further understand that the open water diving trips which are necessary for training and for certification may be conducted at a site that is remote, either by time or distance or both, from such a recompression chamber. I still choose to proceed with such instructional dives in spite of the possible absence of a recompression chamber in proximity to the dive site.
             <p>I understand and agree that neither my instructor( s),<?php echo '<label class="spaces">' . $instructor . '</label>'; ?>,
@@ -156,86 +98,64 @@ $participantname = $participantnameRow['participantname'];
                 In consideration of being allowed to participate in this course (and optional Adventure Dive), hereinafter referred to as “program,” I hereby personally assume all risks of this program, whether foreseen or unforeseen, that may befall me while I am a participant in this program including, but not limited to, the academics, confined water and/or open water activities.
             </p>
             <p>
-                I further release, exempt and hold harmless said program and Re- leased Parties from any claim or lawsuit by me, my family, estate, heirs or assigns, arising out of my enrollment and participation in this program including both claims arising during the program or after I receive my certification.
+                I further release, exempt and hold harmless said program and Released Parties from any claim or lawsuit by me, my family, estate, heirs or assigns, arising out of my enrollment and participation in this program including both claims arising during the program or after I receive my certification.
             </p>
 
             <p>
-                I also understand that skin diving and scuba diving are physically strenuous activities and that I will be exerting myself during this program, and that if I am injured as a result of heart attack, panic, hyperventilation, drowning or any other cause, that I expressly as- sume the risk of said injuries and that I will not hold the Released Parties responsible for the same.
+                I also understand that skin diving and scuba diving are physically strenuous activities and that I will be exerting myself during this program, and that if I am injured as a result of heart attack, panic, hyperventilation, drowning or any other cause, that I expressly assume the risk of said injuries and that I will not hold the Released Parties responsible for the same.
 
             </p>
             <p>
-                I further state that I am of lawful age and legally competent to sign this liability release, or that I have acquired the written consent of my parent or guardian. I understand the terms herein are contractual and not a mere recital, and that I have signed this Agreement of my own free act and with the knowledge that I hereby agree to waive my legal rights. I further agree that if any provision of this Agree- ment is found to be unenforceable or invalid, that provision shall be severed from this Agreement. The remainder of this Agreement will then be construed as though the unenforceable provision had never been contained herein.
+                I further state that I am of lawful age and legally competent to sign this liability release, or that I have acquired the written consent of my parent or guardian. I understand the terms herein are contractual and not a mere recital, and that I have signed this Agreement of my own free act and with the knowledge that I hereby agree to waive my legal rights. I further agree that if any provision of this Agreement is found to be unenforceable or invalid, that provision shall be severed from this Agreement. The remainder of this Agreement will then be construed as though the unenforceable provision had never been contained herein.
 
             </p>
             <p>
-                I understand and agree that I am not only giving up my right to sue the Released Parties but also any rights my heirs, assigns, or benefi- ciaries may have to sue the Released Parties resulting from my death. I further represent I have the authority to do so and that my heirs, assigns, or beneficiaries will be estopped from claiming otherwise because of my representations to the Released Parties.
+                I understand and agree that I am not only giving up my right to sue the Released Parties but also any rights my heirs, assigns, or beneficiaries may have to sue the Released Parties resulting from my death. I further represent I have the authority to do so and that my heirs, assigns, or beneficiaries will be estopped from claiming otherwise because of my representations to the Released Parties.
             </p>
             <p>
                 I, <?php echo '<label class="spaces">' . $participantname . '</label>'; ?>, BY THIS INSTRUMENT AGREE TO EXEMPT AND RELEASE MY
                 INSTRUCTORS,.............................THE FACILITY THROUGH WHICH I
                 RECEIVE MY INSTRUCTION,...................................., AND
-                PADI AMERICAS, INC., AND ALL RELATED ENTITIES AS DEFINED ABOVE, FROM ALL LIABILITY OR RESPONSIBILITY WHATSOEVER FOR PERSONAL INJURY, PROPERTY DAMAGE OR WRONGFUL DEATH HOWEVER CAUSED, INCLUDING, BUT NOT LIMITED TO, THE NEGLI- GENCE OF THE RELEASED PARTIES, WHETHER PASSIVE OR ACTIVE.
+                PADI AMERICAS, INC., AND ALL RELATED ENTITIES AS DEFINED ABOVE, FROM ALL LIABILITY OR RESPONSIBILITY WHATSOEVER FOR PERSONAL INJURY, PROPERTY DAMAGE OR WRONGFUL DEATH HOWEVER CAUSED, INCLUDING, BUT NOT LIMITED TO, THE NEGLIGENCE OF THE RELEASED PARTIES, WHETHER PASSIVE OR ACTIVE.
 
             </p>
-            <p><strong>I HAVE FULLY INFORMED MYSELF AND MY HEIRS OF THE CONTENTS OF THIS NON-AGENCY DISCLOSURE AND ACKNOWLDGE- MENT AGREEMENT AND LIABILITY RELEASE AND ASSUMPTION OF RISK AGREEMENT BY READING BOTH BEFORE SIGNING BELOW ON BEHALF OF MYSELF AND MY HEIRS.</strong></p>
+            <p><strong>I HAVE FULLY INFORMED MYSELF AND MY HEIRS OF THE CONTENTS OF THIS NON-AGENCY DISCLOSURE AND ACKNOWLDGEMENT AGREEMENT AND LIABILITY RELEASE AND ASSUMPTION OF RISK AGREEMENT BY READING BOTH BEFORE SIGNING BELOW ON BEHALF OF MYSELF AND MY HEIRS.</strong></p>
 
 
         </div>
-
-        <div class="row mt-2">
-            <div class="col-md-12">
-                <label>Participant Signature</label>
-            </div>
-        </div>
-
     </div>
     </div>
-
-    <div id="alert-container"></div>
-
-
     <div class="row">
         <div class="col-md-12">
             <form class="mt-3" id="participantSignatureForm">
                 <div class="form-group canvas-container">
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <canvas id="participantSignatureCanvas" class="signature-canvas" width="320%" height="150"></canvas>
+                    <label>Participant Signature</label>
+                    <canvas id="participantSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
+                    <button type="button" class="btn btn-secondary clearbutton" onclick="clearSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
-                <div class="form-group btn-container">
-                    <!-- Adjust button sizes for better usability on smaller screens -->
 
-                    <button type="button" class="btn btn-secondary btn-sm" onclick="clearSignature()">Clear</button>
-                </div>
             </form>
         </div>
     </div>
-
-    <div class="row mt-2">
-        <div class="col-md-12">
-            <label>Signature of Parent of Guardian (where applicable)</label>
-        </div>
-    </div>
-
     <div class="row">
         <div class="col-md-12">
             <form class="mt-3" id="parentSignatureForm">
                 <div class="form-group canvas-container">
                     <!-- Set canvas dimensions relative to the screen size -->
+                    <label>Signature of Parent of Guardian (where applicable)</label>
                     <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
-                </div>
-                <div class="form-group btn-container">
-                    <!-- Adjust button sizes for better usability on smaller screens -->
-                    <button type="button" class="btn btn-secondary btn-sm" onclick="clearParentSignature()">Clear</button>
+                    <button type="button" class="btn btn-secondary clearbutton" onclick="clearParentSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
             </form>
         </div>
     </div>
 
+    <div id="alert-container"></div>
+
     <div class="row">
         <div class="col-md-12 btn-container">
-
             <button type="button" id="submit-doc3" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">Submit</button>
-
         </div>
     </div>
 
@@ -432,8 +352,8 @@ $participantname = $participantnameRow['participantname'];
             // Send the formData to the server using AJAX
             sendToServer(formData);
 
-              // Redirect to doc4.php
-             // window.location.href = '/englishDocuments/doc4/doc4.php';
+            // Redirect to doc4.php
+            // window.location.href = '/englishDocuments/doc4/doc4.php';
         }
 
         function sendToServer(formData) {

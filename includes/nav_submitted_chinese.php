@@ -20,9 +20,8 @@ if (isset($_SESSION['userID'])) {
   $isUserDocument3 = false;
   $isUserDocument4 = false;
 
-
-  // Check if the user is logged in
-  if ($userID !== null) {
+   // Check if the user is logged in
+   if ($userID !== null) {
     // Query to retrieve user ID from the database
     $userIdQuery0 = "SELECT userID FROM doc0 WHERE userID = $userID";
     $userIdResult0 = mysqli_query($conn, $userIdQuery0);
@@ -36,19 +35,19 @@ if (isset($_SESSION['userID'])) {
 } else {
 }
 
-// Check if the user is logged in
-if ($userID !== null) {
-  // Query to retrieve user ID from the database
-  $userIdQuery = "SELECT userID FROM doc1 WHERE userID = $userID";
-  $userIdResult = mysqli_query($conn, $userIdQuery);
+  // Check if the user is logged in
+  if ($userID !== null) {
+    // Query to retrieve user ID from the database
+    $userIdQuery = "SELECT userID FROM doc1 WHERE userID = $userID";
+    $userIdResult = mysqli_query($conn, $userIdQuery);
 
-  // Check if the query returned any results
-  if ($userIdResult && mysqli_num_rows($userIdResult) > 0) {
-    // User ID exists in the database
-    $isUserDocument1 = true;
+    // Check if the query returned any results
+    if ($userIdResult && mysqli_num_rows($userIdResult) > 0) {
+      // User ID exists in the database
+      $isUserDocument1 = true;
+    }
+  } else {
   }
-} else {
-}
 
 // Check if the user is logged in
 if ($userID !== null) {
@@ -127,19 +126,19 @@ switch ($pageName) {
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb mt-2 mb-2">
     <li class="breadcrumb-item <?php echo ($currentPage === 'doc0') ? 'active' : ''; ?>">
-      <a href="/englishDocuments/doc0/doc0_view.php" <?php echo ($currentPage !== 'doc0') ? 'style="color: blue;"' : ''; ?>>Step 1</a>
+      <a href="/chineseDocuments/doc0/doc0_view.php" <?php echo ($currentPage !== 'doc0') ? 'style="color: blue;"' : ''; ?>>Step 1</a>
     </li>
     <li class="breadcrumb-item <?php echo ($currentPage === 'doc1') ? 'active' : ''; ?>">
-      <a href="/englishDocuments/doc1/doc1_view.php" <?php echo ($currentPage !== 'doc1') ? 'style="color: blue;"' : ''; ?>>Step 2</a>
+      <a href="/chineseDocuments/doc1/doc1_view.php" <?php echo ($currentPage !== 'doc1') ? 'style="color: blue;"' : ''; ?>>Step 2</a>
     </li>
     <li class="breadcrumb-item <?php echo ($currentPage === 'doc2') ? 'active' : ''; ?>">
-      <a href="/englishDocuments/doc2/doc2_view.php" <?php echo ($currentPage !== 'doc2') ? 'style="color: blue;"' : ''; ?>>Step 3</a>
+      <a href="/chineseDocuments/doc2/doc2_view.php" <?php echo ($currentPage !== 'doc2') ? 'style="color: blue;"' : ''; ?>>Step 3</a>
     </li>
     <li class="breadcrumb-item <?php echo ($currentPage === 'doc3') ? 'active' : ''; ?>">
-      <a href="/englishDocuments/doc3/doc3_view.php" <?php echo ($currentPage !== 'doc3') ? 'style="color: blue;"' : ''; ?>>Step 4</a>
+      <a href="/chineseDocuments/doc3/doc3_view.php" <?php echo ($currentPage !== 'doc3') ? 'style="color: blue;"' : ''; ?>>Step 4</a>
     </li>
     <li class="breadcrumb-item <?php echo ($currentPage === 'doc4') ? 'active' : ''; ?>">
-      <a href="/englishDocuments/doc4/doc4_view.php" <?php echo ($currentPage !== 'doc4') ? 'style="color: blue;"' : ''; ?>>Step 5</a>
+      <a href="/chineseDocuments/doc4/doc4_view.php" <?php echo ($currentPage !== 'doc4') ? 'style="color: blue;"' : ''; ?>>Step 5</a>
     </li>
   </ol>
 </nav>

@@ -19,7 +19,9 @@ $parentDate = $_POST['parentDate'];
 $userID = $_SESSION['userID'];
 
 // Use prepared statements to prevent SQL injection
-$sql = "INSERT INTO doc1 (userID, divemaster, crewMember, captain, vesselName, participantSignature, participantDate, parentSignature, parentDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO doc1 (userID, divemaster, crewMember, captain, vesselName, participantSignature, participantDate, parentSignature, parentDate) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+
 
 $stmt = $conn->prepare($sql);
 

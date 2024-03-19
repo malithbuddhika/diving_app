@@ -24,15 +24,14 @@ $vesselQuery = "SELECT vesselName FROM vessels";
 $vesselResult = mysqli_query($conn, $vesselQuery);
 
 // Close the statement and database connection
-// Query to retrieve medical examiner data from medical_examiner
-$queryDoc0 = "SELECT * FROM doc0 WHERE userID = $userID ;";
+$queryDoc0 = "SELECT participantname FROM doc0 WHERE userID = $userID ;";
 $resultDoc0 = mysqli_query($conn, $queryDoc0);
 $rowDoc0 = mysqli_fetch_assoc($resultDoc0);
 $participantname = $rowDoc0['participantname'];
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
@@ -57,36 +56,27 @@ $participantname = $rowDoc0['participantname'];
 
     <div class="row">
         <div class="col-md-12">
-            <h3 class="title_bottom">STATEMENT OF RISKS AND LIABILITY – SCUBA DIVING TRIPS AND BOAT TRAVEL (PADI
-                International Ltd)</h3>
+            <h3 class="title_bottom"> 风险和责任声明 - 水肺潜水旅行和乘船旅行 (PADI International Ltd) </h3>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <p class="paragraph"><strong>Please read carefully and fill in all blanks before signing</strong></p>
+            <p class="paragraph"><strong>请仔细阅读并填写后再签字</strong></p>
 
-            <p>This is a statement in which you are informed of the risks of hazards occurring whilst travelling to and participating in scuba dives either as a certified diver or as a student under the control and supervision of a certified scuba instructor. This statement covers recreational scuba dive trips and scuba dive trips carried out as part of a scuba diving class. This statement also sets out the circumstances in which you participate in the scuba diving trip at your own risk.</p>
-            <p>Your signature on this statement is required as proof that you have received and read this statement. It is important that you read the contents of this statement before signing it. If you do not understand anything contained in this statement then please discuss it with your instructor / dive professional. If you are a minor, this form must also be signed by a parent or guardian.</p>
+            <p>这是一份声明，告知您在旅行和参与水肺潜水时发生的危险风险，无论是作为认证潜水员还是在认证水肺教练的控制和监督下作为学生。本声明包括娱乐性的水肺潜水旅行和作为水肺潜水课程的一部分进行的水肺潜水旅行。本声明还列出了您参加水肺潜水之旅的情况，风险由您自行承担。</p>
+            <p>您必须在此声明上签名，以证明您已收到并阅读此声明。你在签字前仔细阅读这份声明的内容是很重要的。如果您不理解本声明中的任何内容，请与您的教练/潜水专业人员讨论。如果你是未成年人，这份表格也必须由父母或监护人签署。</p>
 
-            <p class="paragraph"><strong>WARNING</strong></p>
-            <p>Skin and scuba diving have inherent risks which may result in serious injury or death.</p>
-            <p>Diving with compressed air involves certain inherent risks; decompression sickness, embolism or other
-                hyperbaric
-                injury can occur that require treatment in a recompression chamber. Open water scuba diving trips may be
-                conducted at a site that is remote, either by time or distance, from such a recompression chamber.</p>
-            <p>In addition, during boat travel to and from dive sites, you should follow all safety instructions from
-                the
-                captain / crew members and take care while getting on or off the boat and while on board to avoid
-                slipping,
-                falling or drowning.
-            </p>
+            <p class="paragraph"><strong>警告</strong></p>
+            <p>皮肤潜水和水肺潜水具有固有的风险，可能导致严重的伤害或死亡。</p>
+            <p>使用压缩空气潜水具有一定的内在风险;减压病、栓塞或其他高压损伤可能发生，需要在再压缩室中治疗。开放水域的水肺潜水旅行可以在距离这种再压缩室较远的地点进行，无论是时间上还是距离上。</p>
+            <p>此外，在乘船往返潜水地点期间，您应遵守船长/船员的所有安全指示，在上下船和在船上时要小心，以免滑倒、摔倒或溺水。</p>
 
-            <p class="paragraph"><strong>EXCLUSION OF LIABILITY</strong></p>
-            <p><strong>I understand and agree that neither</strong></p>
+            <p class="paragraph"><strong>责任排除</strong></p>
+            <p><strong>我理解并同意这两种观点</strong></p>
             <div class="row">
                 <div class="col-md-12">
-                    <label for="divemaster">Divemaster's Name : </label>
+                    <label for="divemaster">潜水长的名字: </label>
                     <select class="crew" id="divemaster">
                         <?php
                         while ($row = mysqli_fetch_assoc($divemasterResult)) {
@@ -95,7 +85,7 @@ $participantname = $rowDoc0['participantname'];
                         ?>
                     </select>
 
-                    <label for="crewMember">Crew Member's Name : </label>
+                    <label for="crewMember">船员姓名: </label>
                     <select class="crew" id="crewMember">
                         <?php
                         while ($row = mysqli_fetch_assoc($crewMemberResult)) {
@@ -104,7 +94,7 @@ $participantname = $rowDoc0['participantname'];
                         ?>
                     </select>
 
-                    <label for="captain">Captain's Name : </label>
+                    <label for="captain">船长的名字: </label>
                     <select class="crew" id="captain">
                         <?php
                         while ($row = mysqli_fetch_assoc($captainResult)) {
@@ -117,8 +107,8 @@ $participantname = $rowDoc0['participantname'];
 
             <div class="row">
                 <div class="col-md-12">
-                    <p><strong>nor the crew or the owner of the vessel,</strong></p>
-                    <label for="vesselName">Vessel Name : </label>
+                    <p><strong>无论是船员还是船主,</strong></p>
+                    <label for="vesselName">船舶名称: </label>
                     <select class="vessel" id="vesselName">
                         <?php
                         while ($row = mysqli_fetch_assoc($vesselResult)) {
@@ -126,24 +116,12 @@ $participantname = $rowDoc0['participantname'];
                         }
                         ?>
                     </select>
-                    <strong>nor</strong>
+                    <strong>也不</strong>
                 </div>
             </div>
 
-            <p><strong> PADI International Ltd., nor PADI Americas Inc., nor their affiliate or subsidiary companies,
-                    nor any
-                    of their respective employees, officers, agents or assigns (hereinafter referred to as “Released
-                    Parties”)
-                    accept any responsibility for any death, injury or other loss suffered or caused by me or resulting
-                    from my
-                    own conduct or any matter or condition under my control which amounts to my own contributory
-                    negligence,
-                    during or as a consequence of my participation in this scuba diving trip.</strong></p>
-            <p><strong>In the absence of any negligence or breach of duty by the crew or owner of the vessel, PADI
-                    International
-                    Ltd., PADI Americas, Inc., and all released entities and released parties as defined above, my
-                    participation
-                    in this scuba diving trip is entirely at my own risk.</strong></p>
+            <p><strong>PADI International Ltd.、PADI Americas Inc.、它们的附属公司或子公司，以及它们各自的雇员、官员、代理或受让人(以下简称“免责方”)，对我在参加这次水肺潜水旅行期间或由于我自己的行为或我控制下的任何事项或情况造成的任何死亡、受伤或其他损失承担任何责任。</strong></p>
+            <p><strong>在船员或船东、PADI International Ltd.、PADI Americas, Inc.以及上述所有被释放实体和被释放方没有任何疏忽或违反义务的情况下，我参加这次水肺潜水之旅的风险完全由我自己承担。</strong></p>
 
         </div>
     </div>
@@ -151,7 +129,7 @@ $participantname = $rowDoc0['participantname'];
     <div class="row">
         <div class="col-md-12">
             <form>
-                <label for="participantname">Participant's Name:</label>
+                <label for="participantname">参与者的名字:</label>
                 <!-- Input field for participant's name -->
                 <label class="spaces"> <?php echo $participantname; ?></label>
             </form>
@@ -163,31 +141,30 @@ $participantname = $rowDoc0['participantname'];
             <form class="mt-3" id="participantSignatureForm">
                 <div class="form-group canvas-container">
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <label>Participant Signature</label>
+                    <label>参与者的签名</label>
                     <canvas id="participantSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                     <button type="button" class="btn btn-secondary clearbutton" onclick="clearSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
             </form>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <form class="mt-3" id="parentSignatureForm">
                 <div class="form-group canvas-container">
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <label>Signature of Parent of Guardian (where applicable)</label>
+                    <label>家长或监护人签署(如适用)</label>
                     <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                     <button type="button" class="btn btn-secondary clearbutton" onclick="clearParentSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
             </form>
         </div>
     </div>
+    
     <div id="alert-container"></div>
-
     <div class="row">
         <div class="col-md-12 btn-container">
-            <button type="button" id="submit-doc1" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">Submit</button>
+            <button type="button" id="submit-doc1" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">提交</button>
         </div>
     </div>
 
@@ -198,6 +175,8 @@ $participantname = $rowDoc0['participantname'];
 
 
     <script>
+
+
         function submitForm() {
             // Add logic to handle the submission of the entire form
             alert('Form submitted successfully');
@@ -410,13 +389,13 @@ $participantname = $rowDoc0['participantname'];
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         // Display success message using Bootstrap alert
-                        showAlert('success', 'Form submitted successfully');
+                        showAlert('success', '提交成功');
                         // Redirect to doc2.php
-                        window.location.href = '/englishDocuments/doc2/doc2.php';
+                        window.location.href = '/chineseDocuments/doc2/doc2.php';
 
                     } else {
                         // Display error message using Bootstrap alert
-                        showAlert('danger', 'Error submitting form. Check console for details.');
+                        showAlert('danger', '提交表单错误');
                         console.error('Error:', xhr.status, xhr.statusText);
                     }
                 }

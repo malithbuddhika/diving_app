@@ -17,11 +17,20 @@ $divemaster = $rowDoc1['divemaster'];
 $crewMember = $rowDoc1['crewMember'];
 $captain = $rowDoc1['captain'];
 $vesselName = $rowDoc1['vesselName'];
-$participantname = $rowDoc1['participantname'];
 $participantSignature = $rowDoc1['participantSignature'];
 $participantDate = $rowDoc1['participantDate'];
 $parentSignature = $rowDoc1['parentSignature'];
 $parentDate = $rowDoc1['parentDate'];
+
+$queryDoc0 = "SELECT participantname FROM doc0 WHERE userID = $userID ;";
+$resultDoc0 = mysqli_query($conn, $queryDoc0);
+$rowDoc0 = mysqli_fetch_assoc($resultDoc0);
+
+$participantname = $rowDoc0['participantname'];
+
+
+$formattedParticipantDate = date("d/m/Y", strtotime($participantDate));
+$formattedParentDate = date("d/m/Y", strtotime($parentDate));
 
 ?>
 
@@ -36,50 +45,12 @@ $parentDate = $rowDoc1['parentDate'];
     <title>Doc1</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style type="text/css">
-        .logo {
-            display: block;
-            margin: auto;
-            max-width: 100%;
-            height: auto;
-        }
-
-        .title {
-            margin-top: 10px;
-            font-size: 16px;
-            border-bottom: 4px solid #000;
-            padding-bottom: 5px;
-        }
-
-        .canvas-container {
-            text-align: center;
-        }
-
-        .signature-canvas {
-            border: 1px solid #ccc;
-        }
-
-        body {
-            overflow-x: hidden;
-        }
-
-        #submit-doc1:disabled {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        #homeBtn {
-            float: right;
-            margin-top: -51px;
-            margin-right: 12;
-        }
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/includes/style.css">
     </style>
 </head>
 
 <body class="container">
-
-
-
     <div class="row">
         <div class="col-md-12">
             <img class="logo" src="logo.jpg" alt="logo">
@@ -88,35 +59,19 @@ $parentDate = $rowDoc1['parentDate'];
 
     <div class="row">
         <div class="col-md-12">
-            <h2 class="title">STATEMENT OF RISKS AND LIABILITY – <br>SCUBA DIVING TRIPS AND BOAT TRAVEL <br>(PADI
-                International Ltd)</h2>
+            <h3 class="title_bottom">STATEMENT OF RISKS AND LIABILITY – SCUBA DIVING TRIPS AND BOAT TRAVEL (PADI
+                International Ltd)</h3>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <h3>Please read carefully and fill in all blanks before signing</h3>
+        <p class="paragraph"><strong>Please read carefully and fill in all blanks before signing</strong></p>
 
-            <p>This is a statement in which you are informed of the risks of hazards occurring
-                whilst travelling to and participating in scuba dives either as a certified diver or as a student under
-                the
-                control and supervision of a certified scuba instructor. This statement covers recreational scuba dive
-                trips and
-                scuba dive trips carried out as part of a scuba diving class.
-                This statement also sets out the circumstances in which you participate in the scuba diving trip at your
-                own
-                risk.</p>
-            <p>This is a statement in which you are informed of the risks of hazards occurring whilst travelling to and
-                participating in scuba dives either as a certified diver or as a student under the control and
-                supervision of a
-                certified scuba instructor. This statement covers recreational scuba dive trips and scuba dive trips
-                carried out
-                as part of a scuba diving class.
-                This statement also sets out the circumstances in which you participate in the scuba diving trip at your
-                own
-                risk.</p>
+            <p>This is a statement in which you are informed of the risks of hazards occurring whilst travelling to and participating in scuba dives either as a certified diver or as a student under the control and supervision of a certified scuba instructor. This statement covers recreational scuba dive trips and scuba dive trips carried out as part of a scuba diving class. This statement also sets out the circumstances in which you participate in the scuba diving trip at your own risk.</p>
+            <p>Your signature on this statement is required as proof that you have received and read this statement. It is important that you read the contents of this statement before signing it. If you do not understand anything contained in this statement then please discuss it with your instructor / dive professional. If you are a minor, this form must also be signed by a parent or guardian.</p>
 
-            <h3>WARNING</h3>
+                <p class="paragraph"><strong>WARNING</strong></p>
             <p>Skin and scuba diving have inherent risks which may result in serious injury or death.</p>
             <p>Diving with compressed air involves certain inherent risks; decompression sickness, embolism or other
                 hyperbaric
@@ -129,7 +84,7 @@ $parentDate = $rowDoc1['parentDate'];
                 falling or drowning.
             </p>
 
-            <h3>EXCLUSION OF LIABILITY</h3>
+            <p class="paragraph"><strong>EXCLUSION OF LIABILITY</strong></p>
             <p><strong>I understand and agree that neither</strong></p>
             <div class="row">
                 <div class="col-md-12">
@@ -199,7 +154,6 @@ $parentDate = $rowDoc1['parentDate'];
         <div class="col-md-12">
             <form>
                 <label for="participantname">Participant's Name : </label>
-                <!-- Input field for participant's name -->
                 <?php
 
                 echo $participantname;
@@ -209,47 +163,30 @@ $parentDate = $rowDoc1['parentDate'];
         </div>
     </div>
 
-
-    <div class="row mt-2">
-        <div class="col-md-12">
-            <label class="sign-label">Participant Signature</label>
-        </div>
-    </div>
-
     </div>
 
     <div class="row">
         <div class="col-md-12">
             <form class="mt-3" id="participantSignatureForm">
                 <div class="form-group canvas-container">
-                    <!-- Set canvas dimensions relative to the screen size -->
-
-                    <?php echo '<img class="signature-canvas" src="' . $participantSignature . '" alt="Participant Signature">'; ?>
-
-                    <span>Date : <?php echo $participantDate ?></span>
-
+                <label>Participant Signature</label>
+                  <?php echo '<img class="signature-canvas" src="' . $participantSignature . '" alt="Participant Signature">'; ?>
+                    <span>Date : <?php echo $formattedParticipantDate ?> </span>
                 </div>
-
             </form>
         </div>
     </div>
 
-
-    <div class="row mt-2">
-        <div class="col-md-12">
-            <label>Signature of Parent of Guardian (where applicable)</label>
-        </div>
-    </div>
+    <br> <br>
 
     <div class="row">
         <div class="col-md-12">
             <form class="mt-3" id="participantSignatureForm">
                 <div class="form-group canvas-container">
-                    <!-- Set canvas dimensions relative to the screen size -->
+                <label>Signature of Parent of Guardian (where applicable)</label>
+                  <?php echo '<img class="signature-canvas" src="' . $parentSignature . '" alt=" Parent Signature">'; ?>
 
-                    <?php echo '<img class="signature-canvas" src="' . $parentSignature . '" alt=" Parent Signature">'; ?>
-
-                    <span>Date : <?php echo $parentDate ?></span>
+                    <span>Date : <?php echo $formattedParentDate ?></span>
 
                 </div>
 

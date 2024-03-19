@@ -20,11 +20,10 @@ $resultDoc0 = mysqli_query($conn, $queryDoc0);
 $rowDoc0 = mysqli_fetch_assoc($resultDoc0);
 $participantname = $rowDoc0['participantname'];
 
-
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
@@ -46,20 +45,20 @@ $participantname = $rowDoc0['participantname'];
 
         <div class="row">
             <div class="col-12">
-                <h3 class="titleDoc2">Statement of Risk and Liability/Non-agency Acknowledgment Form</h3>
-                <h1 class="title2Doc2"> <strong>DIVER ACTIVITIES</strong></h1>
-                <h5 class="title_bottom">(EU Version)</h5>
+                <h3 class="titleDoc2">风险和责任声明/非代理确认表</h3>
+                <h1 class="title2Doc2"> <strong>潜水活动</strong></h1>
+                <h5 class="title_bottom">(欧盟版)</h5>
             </div>
         </div>
 
         <div class="row">
             <div class="col-12">
-                <p class="paragraph"><strong>Please read carefully and fill in all blanks before signing</strong></p>
-                <h4 class="text-center">Non-Agency Disclosure and Acknowledgment Agreement</h4>
+                <p class="paragraph"><strong>请仔细阅读并填写后再签字</strong></p>
+                <h4 class="text-center">非机构披露和确认协议</h4>
             </div>
         </div>
 
-        <p class="paragraph">I understand and agree that PADI® Members (“Members”), including
+        <p class="paragraph">我明白并同意PADI®会员(“会员”)，包括
 
             <select id="resortSelect" class="underline">
                 <?php
@@ -68,25 +67,25 @@ $participantname = $rowDoc0['participantname'];
                 }
                 ?>
             </select>
-            , and/or any individual PADI Instructors and Divemasters associated with the program in which I am participating, are licensed to use various PADI Trademarks and to conduct PADI training, but are not agents, employees or franchisees of PADI EMEA Ltd., PADI Americas, Inc., or its parent, subsidiary and affiliated corporations (“PADI”). I further understand that Member business activities are independent, and are neither owned nor operated by PADI, and that while PADI establishes the standards for PADI diver training programs, it is not responsible for, nor does it have the right to control, the operation of the Members’ business activities and the day-to-day conduct of PADI programs and supervision of divers by the Members or their associated staff.
+            ，和/或与我所参加的项目相关的任何PADI教练和潜水师个人，被授权使用各种PADI商标和进行PADI培训，但不是PADI EMEA有限公司、PADI Americas, Inc.或其母公司、子公司和附属公司(“PADI”)的代理、员工或特许经营商。我进一步了解，会员的商业活动是独立的，既不属于PADI所有也不属于PADI运营。虽然PADI制定了PADI潜水员培训项目的标准，但它不负责也无权控制会员商业活动的运作、PADI项目的日常实施以及会员或其相关人员对潜水员的监督。
         </p>
 
-        <h5 class="text-center">Statement of Risk and Liability</h5>
+        <h5 class="text-center">风险和责任声明</h5>
 
-        <p class="paragraph">This is a statement in which you, the certified diver, or a student diver under the control and supervision of a certified scuba instructor, are informed that skin diving, freediving and scuba diving have inherent risks, including those risks associated with boat travel to and from the dive site. The statement also sets out the circumstances in which you participate in the diving experience at your own risk.</p>
+        <p class="paragraph">这是一份声明，在此声明中，您，持证潜水员，或在持证水肺教练的控制和监督下的学生潜水员，被告知皮肤潜水，自由潜水和水肺潜水具有固有的风险，包括与往返潜水地点的船只相关的风险。该声明还列出了您参与潜水体验的情况，风险由您自己承担。</p>
 
-        <p class="paragraph">Your signature on this statement is required as proof that you have received, read and understood this statement. It is important that you read the contents of this statement before signing it. If you do not understand anything contained in this statement, then you should discuss it with your instructor. If you are a minor, this form must also be signed by a parent or guardian.</p>
+        <p class="paragraph">您必须在此声明上签名，以证明您已收到、阅读并理解此声明。你在签字前仔细阅读这份声明的内容是很重要的。如果你不明白这句话中的任何内容，那么你应该和你的老师讨论一下。如果你是未成年人，这份表格也必须由父母或监护人签署。</p>
 
-        <h6 class="paragraph">Warning</h6>
-        <p class="paragraph">Skin diving, freediving and scuba diving have inherent risks which may result in serious injury or death.</p>
-        <p class="paragraph">Diving with compressed air involves certain inherent risks; decompression sickness, embolism or other hyperbaric injury can occur that require treatment in a recompression chamber. Risks also include slipping or falling while on board a boat, if one is used, being cut or struck by a boat while in the water, injuries occurring while getting on or off a boat, and other perils of the sea. Open water diving trips that may be necessary for this experience may be conducted at a site that is remote, either by time or distance or both, from such a recompression chamber. Skin diving, freediving and scuba diving are physically strenuous activities and you will be exerting yourself during this diving experience. Past or present medical conditions may be contraindicative to your participation in this experience. You must be in good mental and physical fitness for diving, and not under the influence of alcohol, nor any drugs that are contraindicatory to diving. If you are taking medications, you affirm that you have seen a physician and have approval to dive under the influence of the medications/drugs. You must inspect all of your equipment prior to this experience and notify the dive professionals and the facility through which this experience is offered if any of your equipment is not working properly.</p>
-        <p class="paragraph">If diving from a boat, you must be present at and attentive to the briefing given by the boat crew. If there is anything you do not understand you will notify the boat crew or captain immediately.</p>
-        <p class="paragraph">You must follow safe dive practices and plan dives as no-decompression dives and within parameters that allow a safety stop before ascending to the surface, arriving on board the vessel with gas remaining in your cylinder as a measure of safety. If distressed on the surface, you must immediately drop your weights and inflate your BCD (orally or with the low pressure inflator) to establish buoyancy on the surface.</p>
-        <p class="paragraph">If a Guide is present to assist during the dive, and you choose to dive with the Guide, it is your responsibility to stay in proximity to the Guide during the dive.</p>
+        <h6 class="paragraph"> <strong>警告</strong> </h6>
+        <p class="paragraph">皮肤潜水、自由潜水和水肺潜水具有固有的风险，可能导致严重的伤害或死亡。</p>
+        <p class="paragraph">使用压缩空气潜水具有一定的内在风险;减压病、栓塞或其他高压损伤可能发生，需要在再压缩室中治疗。风险还包括在船上滑倒或摔倒(如果使用的话)，在水中被船划伤或撞到，在上船或下船时受伤，以及其他海上危险。这种体验可能需要的开放水域潜水之旅可能在距离再压缩室较远的地点进行，无论是从时间上还是距离上，或者两者都有。皮肤潜水、自由潜水和水肺潜水都是体力活动，你将在这次潜水经历中发挥你自己。过去或现在的医疗状况可能是您参加此体验的禁忌症。您必须有良好的精神和身体素质，没有酒精的影响，也没有任何禁止潜水的药物。如果您正在服用药物，您确认您已经看过医生，并获得在药物/药物影响下潜水的许可。在此体验之前，您必须检查您的所有设备，如果您的任何设备不能正常工作，请通知潜水专业人员和提供此体验的设施。</p>
+        <p class="paragraph">如果从船上潜水，你必须出席并注意听取船员的简报。如果有任何不明白的地方，请立即通知船员或船长。</p>
+        <p class="paragraph">你必须遵循安全潜水练习，计划潜水为无减压潜水，并在升到水面之前允许安全停止的参数范围内，到达船上时气瓶中仍有气体作为安全措施。如果浮在水面上，必须立即放下重物，给BCD充气(口服或使用低压充气器)，以在水面上建立浮力。</p>
+        <p class="paragraph">如果在潜水过程中有向导在场协助，并且你选择与向导一起潜水，那么你有责任在潜水过程中与向导保持接近。</p>
 
-        <h5 class="text-center">Acceptance of Risk</h5>
+        <h5 class="text-center">风险承担</h5>
 
-        <p class="paragraph">I understand and agree that neither the dive professionals conducting this program,
+        <p class="paragraph">我理解并同意，无论是潜水专业人士进行这个项目，
 
 
 
@@ -96,45 +95,49 @@ $participantname = $rowDoc0['participantname'];
                     echo "<option value='" . $row['instructorName'] . "'>" . $row['instructorName'] . "</option>";
                 }
                 ?>
-
             </select>
-            , nor
+            ,也不
         </p>
 
-        <p class="paragraph">the facility through which this program is conducted,
+
+
+
+
+
+        <p class="paragraph">执行这个项目的机构，
 
             <!-- resort name -->
-            <label class="selectedResortName"></label>, nor PADI EMEA Ltd., nor
+            <label class="selectedResortName"></label>
 
-            PADI Americas, Inc. nor their affiliate or subsidiary corporations, nor any of their respective employees, officers, agents, contractors or assigns accept any responsibility for any death, injury or other loss suffered by me to the extent that it results from my own conduct or any matter or condition under my control that amounts to my own contributory negligence.
+            PADI EMEA Ltd.、PADI Americas, Inc.、它们的关联公司或子公司，以及它们各自的员工、官员、代理、承包商或受让人，都不对我因自己的行为或在我控制下的构成我的共同过失的任何事项或情况而遭受的任何死亡、受伤或其他损失承担任何责任。
         </p>
-        <p class="paragraph">In the absence of any negligence or other breach of duty by the dive professionals conducting this program,
+        <p class="paragraph">在潜水专业人员没有任何疏忽或其他违反职责的情况下，
 
             <!-- Instructor name -->
             <label class="selectedInstructorLabel"></label>
         </p>
 
-        <p class="paragraph">the facility through which this program is offered,
+        <p class="paragraph">提供这个项目的机构，
 
             <!-- resort name -->
 
             <label class="selectedResortName">,</label>
 
-            PADI EMEA Ltd., PADI Americas, Inc. and all parties referred to above, my participation in this diving program is entirely at my own risk.
+            PADI EMEA有限公司，PADI Americas, Inc.和上述各方，我参加这个潜水项目的风险完全由我自己承担。
         </p>
-        <p class="paragraph">I HAVE FULLY INFORMED MYSELF OF THE CONTENTS OF THIS NON-AGENCY DISCLOSURE AND ACKNOWLEDGMENT AGREEMENT AND STATEMENT OF RISK AND LIABILITY BY READING BOTH BEFORE SIGNING THESE STATEMENTS.</p>
-        <p class="paragraph">I acknowledge and agree that this Diver Activities form will be effective for one (1) year from the date on which I sign for any skin diving, freediving or scuba diving activities in which I participate with the named PADI Members.</p>
+        <p class="paragraph">在签署这些声明之前，我通过阅读这两份非代理披露和确认协议以及风险和责任声明，充分了解了自己的内容。</p>
+        <p class="paragraph">本人承认并同意，本潜水员活动表自本人与指定的PADI会员一起参加任何裸潜、自由潜水或水肺潜水活动之日起一(1)年内有效。</p>
 
 
         <div class="row">
             <div class="col-md-12">
                 <form>
-                    <label for="participantname">Participant's Name:</label>
-                    <!-- Input field for participant's name -->
+                    <label for="participantname">参与者的名字:</label>
                     <label class="spaces"> <?php echo $participantname; ?></label>
                 </form>
             </div>
         </div>
+
     </div>
     </div>
 
@@ -143,7 +146,7 @@ $participantname = $rowDoc0['participantname'];
             <form class="mt-3" id="participantSignatureForm">
                 <div class="form-group canvas-container">
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <label>Participant Signature</label>
+                    <label>参与者的签名</label>
                     <canvas id="participantSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                     <button type="button" class="btn btn-secondary clearbutton" onclick="clearSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
@@ -156,7 +159,7 @@ $participantname = $rowDoc0['participantname'];
             <form class="mt-3" id="parentSignatureForm">
                 <div class="form-group canvas-container">
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <label>Signature of Parent of Guardian (where applicable)</label>
+                    <label>家长或监护人签署(如适用)</label>
                     <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                     <button type="button" class="btn btn-secondary clearbutton" onclick="clearParentSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
@@ -170,21 +173,21 @@ $participantname = $rowDoc0['participantname'];
         <p></p>
         <div class="col-md-12">
             <div class="form-check">
-                <p>Diver Accident Insurance?</p>
+                <p>潜水员意外保险?</p>
                 <input class="form-check-input" type="checkbox" id="diverAccidentInsuranceYes" name="diverAccidentInsurance" value="Yes">
                 <label class="form-check-label" for="diverAccidentInsuranceYes">
-                    Yes
+                    是的
                 </label>
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="diverAccidentInsuranceNo" name="diverAccidentInsurance" value="No">
                 <label class="form-check-label" for="diverAccidentInsuranceNo">
-                    No
+                    没有
                 </label>
             </div>
             <!-- Add the input field for Policy Number -->
             <div id="policyNumberInput" style="display: none;">
-                <label for="policyNumber">Enter Policy Number:</label>
+                <label for="policyNumber">输入保单编号:</label>
                 <input type="text" id="policyNumber" name="policyNumber">
             </div>
         </div>
@@ -195,7 +198,7 @@ $participantname = $rowDoc0['participantname'];
     <div class="row">
         <div class="col-md-12 btn-container">
 
-            <button type="button" id="submit-doc2" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">Submit</button>
+            <button type="button" id="submit-doc2" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">提交</button>
 
         </div>
     </div>
@@ -484,11 +487,13 @@ $participantname = $rowDoc0['participantname'];
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         // Display success message using Bootstrap alert
-                        showAlert('success', 'Form submitted successfully');
+                        showAlert('success', '提交成功');
+                        // Redirect to doc3.php
+                        window.location.href = '/chineseDocuments/doc3/doc3.php';
 
                     } else {
                         // Display error message using Bootstrap alert
-                        showAlert('danger', 'Error submitting form. Check console for details.');
+                        showAlert('danger', '提交表单错误。');
                         console.error('Error:', xhr.status, xhr.statusText);
                     }
                 }
@@ -512,8 +517,7 @@ $participantname = $rowDoc0['participantname'];
             setTimeout(function() {
                 alertContainer.removeChild(alertElement);
             }, 7000);
-            // Redirect to doc3.php
-            window.location.href = '/englishDocuments/doc3/doc3.php';
+
         }
     </script>
 </body>

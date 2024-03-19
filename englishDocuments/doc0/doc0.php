@@ -1,34 +1,8 @@
 <?php
 session_start();
 include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
-?>
 
-<?php
 
-include $_SERVER['DOCUMENT_ROOT'] . '/connection.php';
-
-// Query to retrieve divemasters from the database
-$divemasterQuery = "SELECT divemasterName FROM divemasters";
-$divemasterResult = mysqli_query($conn, $divemasterQuery);
-
-// Query to retrieve crew members from the database
-$crewMemberQuery = "SELECT crewMemberName FROM crewmembers";
-$crewMemberResult = mysqli_query($conn, $crewMemberQuery);
-
-// Query to retrieve captains from the database
-$captainQuery = "SELECT captainName FROM captains";
-$captainResult = mysqli_query($conn, $captainQuery);
-
-// Query to retrieve vessel names from the database
-$vesselQuery = "SELECT vesselName FROM vessels";
-$vesselResult = mysqli_query($conn, $vesselQuery);
-
-// Close the statement and database connection
-// Query to retrieve medical examiner data from medical_examiner
-$queryDoc0 = "SELECT * FROM doc0 WHERE userID = $userID ;";
-$resultDoc0 = mysqli_query($conn, $queryDoc0);
-$rowDoc0 = mysqli_fetch_assoc($resultDoc0);
-$participantname = $rowDoc0['participantname'];
 ?>
 
 <!DOCTYPE html>
@@ -39,134 +13,64 @@ $participantname = $rowDoc0['participantname'];
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Doc1</title>
+    <title>Doc 0</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/includes/style.css">
 
-
 </head>
 
 <body class="container">
     <div class="row">
-        <div class="col-md-12">
-            <img class="logo" src="logo.jpg" alt="logo">
+        <div class="col-md-2">
+            <img class="logo-Doc0" src="logo.png" alt="logo">
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <h3 class="title_bottom">STATEMENT OF RISKS AND LIABILITY – SCUBA DIVING TRIPS AND BOAT TRAVEL (PADI
-                International Ltd)</h3>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <p class="paragraph"><strong>Please read carefully and fill in all blanks before signing</strong></p>
-
-            <p>This is a statement in which you are informed of the risks of hazards occurring whilst travelling to and participating in scuba dives either as a certified diver or as a student under the control and supervision of a certified scuba instructor. This statement covers recreational scuba dive trips and scuba dive trips carried out as part of a scuba diving class. This statement also sets out the circumstances in which you participate in the scuba diving trip at your own risk.</p>
-            <p>Your signature on this statement is required as proof that you have received and read this statement. It is important that you read the contents of this statement before signing it. If you do not understand anything contained in this statement then please discuss it with your instructor / dive professional. If you are a minor, this form must also be signed by a parent or guardian.</p>
-
-            <p class="paragraph"><strong>WARNING</strong></p>
-            <p>Skin and scuba diving have inherent risks which may result in serious injury or death.</p>
-            <p>Diving with compressed air involves certain inherent risks; decompression sickness, embolism or other
-                hyperbaric
-                injury can occur that require treatment in a recompression chamber. Open water scuba diving trips may be
-                conducted at a site that is remote, either by time or distance, from such a recompression chamber.</p>
-            <p>In addition, during boat travel to and from dive sites, you should follow all safety instructions from
-                the
-                captain / crew members and take care while getting on or off the boat and while on board to avoid
-                slipping,
-                falling or drowning.
-            </p>
-
-            <p class="paragraph"><strong>EXCLUSION OF LIABILITY</strong></p>
-            <p><strong>I understand and agree that neither</strong></p>
+        <div class="col-md-10">
+            <div class="title-container-Doc0">
+                <h3 class="title-Doc0">Standard Safe Diving Practices Statement of Understanding</h3>
+            </div>
             <div class="row">
-                <div class="col-md-12">
-                    <label for="divemaster">Divemaster's Name : </label>
-                    <select class="crew" id="divemaster">
-                        <?php
-                        while ($row = mysqli_fetch_assoc($divemasterResult)) {
-                            echo "<option value='" . $row['divemasterName'] . "'>" . $row['divemasterName'] . "</option>";
-                        }
-                        ?>
-                    </select>
-
-                    <label for="crewMember">Crew Member's Name : </label>
-                    <select class="crew" id="crewMember">
-                        <?php
-                        while ($row = mysqli_fetch_assoc($crewMemberResult)) {
-                            echo "<option value='" . $row['crewMemberName'] . "'>" . $row['crewMemberName'] . "</option>";
-                        }
-                        ?>
-                    </select>
-
-                    <label for="captain">Captain's Name : </label>
-                    <select class="crew" id="captain">
-                        <?php
-                        while ($row = mysqli_fetch_assoc($captainResult)) {
-                            echo "<option value='" . $row['captainName'] . "'>" . $row['captainName'] . "</option>";
-                        }
-                        ?>
-                    </select>
+                <div class="col-md-12 mt-3">
+                    <h6> <strong>Please read carefully and fill in all blanks before signing.</strong></h6>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <p><strong>nor the crew or the owner of the vessel,</strong></p>
-                    <label for="vesselName">Vessel Name : </label>
-                    <select class="vessel" id="vesselName">
-                        <?php
-                        while ($row = mysqli_fetch_assoc($vesselResult)) {
-                            echo "<option value='" . $row['vesselName'] . "'>" . $row['vesselName'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    <strong>nor</strong>
-                </div>
-            </div>
-
-            <p><strong> PADI International Ltd., nor PADI Americas Inc., nor their affiliate or subsidiary companies,
-                    nor any
-                    of their respective employees, officers, agents or assigns (hereinafter referred to as “Released
-                    Parties”)
-                    accept any responsibility for any death, injury or other loss suffered or caused by me or resulting
-                    from my
-                    own conduct or any matter or condition under my control which amounts to my own contributory
-                    negligence,
-                    during or as a consequence of my participation in this scuba diving trip.</strong></p>
-            <p><strong>In the absence of any negligence or breach of duty by the crew or owner of the vessel, PADI
-                    International
-                    Ltd., PADI Americas, Inc., and all released entities and released parties as defined above, my
-                    participation
-                    in this scuba diving trip is entirely at my own risk.</strong></p>
-
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <form>
-                <label for="participantname">Participant's Name:</label>
-                <!-- Input field for participant's name -->
-                <label class="spaces"> <?php echo $participantname; ?></label>
-            </form>
+            <p>This is a statement in which you are informed of the established safe diving practices for skin and scuba diving. These practices have been compiled for your review and acknowledgement and are intended to increase your comfort and safety in diving. Your signature on this statement is required as proof that you are aware of these safe diving practices. Read and discuss the statement prior to signing it. If you are a minor, this form must also be signed by a parent or guardian.</p>
         </div>
     </div>
+
+
+    <p>I, <input type="text" id="participantname" name="participantname">, understand that as a diver I should:</p>
+    <p>1. Maintain good mental and physical fitness for diving. Avoid being under the influence of alcohol or dangerous drugs when diving. Keep proficient in diving skills, striving to increase them through continuing education and reviewing them in controlled conditions after a period of diving inactivity, and refer to my course materials to stay current and refresh myself on important information.</p>
+    <p>2. Be familiar with my dive sites. If not, obtain a formal diving orientation from a knowledgeable, local source. If diving conditions are worse than those in which I am experienced, postpone diving or select an alternate site with better conditions. Engage only in diving activities consistent with my training and experience. Do not engage in cave or technical diving unless specifically trained to do so.</p>
+    <p>3. Use complete, well-maintained, reliable equipment with which I am familiar; and inspect it for correct fit and function prior to each dive. Have a buoyancy control device, low-pressure buoyancy control inflation system, submersible pressure gauge and alternate air source and dive planning/monitoring device (dive computer, RDP/dive tables-whichever you are trained to use) when scuba diving. Deny use of my equipment to uncertified divers.</p>
+    <p>4. Listen carefully to dive briefings and directions and respect the advice of those supervising my diving activities. Re- cognize that additional training is recommended for participation in specialty diving activities, in other geographic areas and after periods of inactivity that exceed six months.</p>
+    <p>5. Adhere to the buddy system throughout every dive. Plan dives – including communications, procedures for reuniting in case of separation and emergency procedures – with my buddy.</p>
+    <p>6. Be proficient in dive planning (dive computer or dive table use). Make all dives no decompression dives and allow a margin of safety. Have a means to monitor depth and time underwater. Limit maximum depth to my level of training and experience. Ascend at a rate of not more than 18 meters/60 feet per minute. Be a SAFE diver – <b>S</b>lowly <b>A</b>scend <b>F</b>rom <b>E</b>very dive. Make a safety stop as an added precaution, usually at 5 meters/15 feet for three minutes or longer.</p>
+    <p>7. Maintain proper buoyancy. Adjust weighting at the surface for neutral buoyancy with no air in my buoyancy control device. Maintain neutral buoyancy while underwater. Be buoyant for surface swimming and resting. Have weights clear for easy removal, and establish buoyancy when in distress while diving. Carry at least one surface signaling device (such as signal tube, whistle, mirror).</p>
+    <p>8. Breathe properly for diving. Never breath-hold or skip-breathe when breathing compressed air, and avoid excessive hyperventilation when breath-hold diving. Avoid overexertion while in and underwater and dive within my limitations.</p>
+    <p>9. Use a boat, float or other surface support station, whenever feasible.</p>
+    <p>10. Know and obey local dive laws and regulations, including fish and game and dive flag laws.</p>
+
+    <h6> <strong>I understand the importance and purposes of these established practices. I recognize they are for my own safety and well-being, and that failure to adhere to them can place me in jeopardy when diving.</strong> </h6>
+
 
     <div class="row">
         <div class="col-md-12">
             <form class="mt-3" id="participantSignatureForm">
                 <div class="form-group canvas-container">
-                    <!-- Set canvas dimensions relative to the screen size -->
                     <label>Participant Signature</label>
+                    <!-- Set canvas dimensions relative to the screen size -->
                     <canvas id="participantSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                     <button type="button" class="btn btn-secondary clearbutton" onclick="clearSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
+
             </form>
         </div>
     </div>
@@ -183,28 +87,35 @@ $participantname = $rowDoc0['participantname'];
             </form>
         </div>
     </div>
+
     <div id="alert-container"></div>
 
     <div class="row">
         <div class="col-md-12 btn-container">
-            <button type="button" id="submit-doc1" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">Submit</button>
+            <button type="button" id="submit-doc3" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">Submit</button>
         </div>
     </div>
 
-    <!-- Include Bootstrap JS and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 
     <script>
-        function submitForm() {
-            // Add logic to handle the submission of the entire form
-            alert('Form submitted successfully');
+        // Function to retrieve the participant's name from localStorage
+        function getParticipantName() {
+            return localStorage.getItem('participantName');
         }
 
-        // Participant Signature
+        // Function to set the participant's name in the input field
+        function setParticipantName() {
+            var participantName = getParticipantName();
+            if (participantName) {
+                document.getElementById("participantname").value = participantName; // Corrected variable name
+            }
+        }
 
+        // Call the function to set participant's name when the page loads
+        window.onload = function() {
+            setParticipantName();
+        };
+        // Participant Signature
         let participantCanvas = document.getElementById('participantSignatureCanvas');
         let ctx = participantCanvas.getContext('2d');
         let drawing = false;
@@ -291,7 +202,6 @@ $participantname = $rowDoc0['participantname'];
 
 
         // Parent Signature
-
         let parentCanvas = document.getElementById('parentSignatureCanvas');
         let parentCtx = parentCanvas.getContext('2d');
         let parentDrawing = false;
@@ -377,42 +287,34 @@ $participantname = $rowDoc0['participantname'];
         }
 
         function handleFormSubmission() {
-
+            let participantName = document.getElementById('participantname').value;
             // Capture current date for participant and parent signatures
             let participantDate = new Date().toISOString();
             let parentDate = new Date().toISOString();
 
-
             // Capture the final point before form submission
             let participantSignatureData = participantCanvas.toDataURL();
-
-            drawParentFinalPoint(); // Capture the final point for parent signature
+            drawFinalPoint(); // Capture the final point for participant signature
             let parentSignatureData = parentCanvas.toDataURL();
+            drawParentFinalPoint(); // Capture the final point for parent signature
 
             let formData = new FormData();
-            formData.append('divemaster', document.getElementById('divemaster').value);
-            formData.append('crewMember', document.getElementById('crewMember').value);
-            formData.append('captain', document.getElementById('captain').value);
-            formData.append('vesselName', document.getElementById('vesselName').value);
+            formData.append('participantname', participantName);
             formData.append('participantSignatureData', participantSignatureData);
             formData.append('participantDate', participantDate);
             formData.append('parentSignatureData', parentSignatureData);
             formData.append('parentDate', parentDate);
-
-            // Send the formData to the server using AJAX
             sendToServer(formData);
         }
 
         function sendToServer(formData) {
             let xhr = new XMLHttpRequest();
-            xhr.open('POST', 'doc1_save_data.php', true);
+            xhr.open('POST', 'doc0_save_data.php', true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         // Display success message using Bootstrap alert
                         showAlert('success', 'Form submitted successfully');
-                        // Redirect to doc2.php
-                        window.location.href = '/englishDocuments/doc2/doc2.php';
 
                     } else {
                         // Display error message using Bootstrap alert
@@ -440,8 +342,8 @@ $participantname = $rowDoc0['participantname'];
             setTimeout(function() {
                 alertContainer.removeChild(alertElement);
             }, 7000);
-
-
+            // Redirect to doc4.php
+            window.location.href = '/englishDocuments/doc1/doc1.php';
         }
     </script>
 

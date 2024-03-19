@@ -10,7 +10,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/connection.php';
 $userID = $_SESSION['userID'];
 
 // Define your SQL query with a WHERE clause to filter by the retrieved userID
-$query = "SELECT userID, q1, q1_1, q1_2, q1_3, q1_4, q1_5, q2, q2_1, q2_2, q2_3, q2_4, q3, q4, q4_1, q4_2, q4_3, q4_4, q5, q6, q6_1, q6_2, q6_3, q6_4, q6_5, q7, q7_1, q7_2, q7_3, q7_4, q8, q8_1, q8_2, q8_3, q8_4, q8_5, q9, q9_1, q9_2, q9_3, q9_4, q9_5, q9_6, q10, status FROM doc4 WHERE userID = $userID";
+$query = "SELECT userID, q1, q1_1, q1_2, q1_3, q1_4, q1_5, q2, q2_1, q2_2, q2_3, q2_4, q3, q4, q4_1, q4_2, q4_3, q4_4, q5, q6, q6_1, q6_2, q6_3, q6_4, q6_5, q7, q7_1, q7_2, q7_3, q7_4, q8, q8_1, q8_2, q8_3, q8_4, q8_5, q9, q9_1, q9_2, q9_3, q9_4, q9_5, q9_6, q10, medicalUserID, medicalExaminerSignatureData, medicalExaminerSignatureDate, status FROM doc4 WHERE userID = $userID";
 
 // Execute the query
 $result = $conn->query($query);
@@ -33,15 +33,41 @@ if ($result->num_rows > 0) {
     $displayBoxE = ($row["q7"] == 'yes') ? 'block' : 'none';
     $displayBoxF = ($row["q8"] == 'yes') ? 'block' : 'none';
     $displayBoxG = ($row["q9"] == 'yes') ? 'block' : 'none';
+
+    $medicalUserID = $row['medicalUserID'];
+    $medicalExaminerSignatureData = $row['medicalExaminerSignatureData'];
+    $medicalExaminerSignatureDate = $row['medicalExaminerSignatureDate'];
+    $medicalApprovalStatus = $row['status'];
+
 } else {
     echo "No results found for userID = $userID";
 }
 
+$formattedMedicalExaminerSignatureDate = date("d/m/Y", strtotime($medicalExaminerSignatureDate));
+
+if ($medicalUserID != 0) {
+    // Query to retrieve medical examiner data from medical_examiner
+    $queryMedicalExaminer = "SELECT name, degree, clinic, address, phone, email, stamp FROM medical_examiner WHERE id = $medicalUserID;";
+    $resultMedicalExaminer = mysqli_query($conn, $queryMedicalExaminer);
+    $rowMedicalExaminer = mysqli_fetch_assoc($resultMedicalExaminer);
+    $examinerName = $rowMedicalExaminer['name'];
+    $degree = $rowMedicalExaminer['degree'];
+    $clinic = $rowMedicalExaminer['clinic'];
+    $address = $rowMedicalExaminer['address'];
+    $phone = $rowMedicalExaminer['phone'];
+    $email = $rowMedicalExaminer['email'];
+    $stamp = $rowMedicalExaminer['stamp'];
+}
+
+$queryDoc0 = "SELECT participantname FROM doc0 WHERE userID = $userID ;";
+$resultDoc0 = mysqli_query($conn, $queryDoc0);
+$rowDoc0 = mysqli_fetch_assoc($resultDoc0);
+$participantname = $rowDoc0['participantname'];
+
 // Query to retrieve participant name, instructor name, and resort name from doc2
-$queryDoc2 = "SELECT participantname, instructorName, resortName FROM doc2 WHERE userID = $userID ORDER BY id DESC LIMIT 1;";
+$queryDoc2 = "SELECT instructorName, resortName FROM doc2 WHERE userID = $userID ORDER BY id DESC LIMIT 1;";
 $resultDoc2 = mysqli_query($conn, $queryDoc2);
 $rowDoc2 = mysqli_fetch_assoc($resultDoc2);
-$participantname = $rowDoc2['participantname'];
 $instructor = $rowDoc2['instructorName'];
 $resortName = $rowDoc2['resortName'];
 
@@ -60,7 +86,8 @@ $parentSignatureData = $rowDoc4['parentSignatureData'];
 $participantDate = $rowDoc4['participantDate'];
 $parentDate = $rowDoc4['parentDate'];
 
-
+$formattedParticipantDate = date("d/m/Y", strtotime($participantDate));
+$formattedParentDate = date("d/m/Y", strtotime($parentDate));
 
 ?>
 
@@ -72,148 +99,19 @@ $parentDate = $rowDoc4['parentDate'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document 4</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style type="text/css">
-        .logo {
-            max-width: 100%;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            /* Adjusted for responsiveness */
-            height: auto;
-        }
-
-        @media (max-width: 768px) {
-            .logo {
-                max-width: 100%;
-                margin-top: 20px;
-                margin-bottom: 10px;
-                /* Adjusted for smaller screens */
-            }
-        }
-
-        @media (max-width: 576px) {
-            .logo {
-                max-width: 100%;
-                margin-top: 20px;
-                margin-bottom: 10px;
-                /* Further adjusted for smaller screens */
-
-            }
-
-            .paragraph {
-                text-align: left;
-            }
-        }
-
-        .title2 {
-            margin-top: 10px;
-            font-size: 24px;
-            text-align: center;
-        }
-
-        .form-check {
-            margin-bottom: 10px;
-        }
-
-        /* Custom styles for left-aligning questions and right-aligning Yes/No */
-        .question-table th,
-        .question-table td:nth-child(2) {
-            text-align: left;
-
-
-        }
-
-        .question-table td:nth-child(3),
-        .question-table td:nth-child(4) {
-            text-align: right;
-            width: 5%;
-        }
-
-        .question-table td:nth-child(1) {
-            text-align: left;
-            width: 2%;
-        }
-
-        .signature-canvas {
-            border: 1px solid #ccc;
-            align-items: center;
-        }
-
-        .spaces {
-            text-decoration: underline;
-            font-weight: bold;
-
-        }
-
-        .info {
-
-            margin-top: -10px;
-        }
-
-        @media (max-width: 414px) {
-
-
-            .paragraph {
-                font-size: 1rem;
-            }
-
-            .title {
-                font-size: 2rem;
-            }
-
-            .title2 {
-
-                font-size: 1.5rem;
-
-            }
-
-            .title3 {
-                font-size: 1rem;
-                border-bottom: 2px solid #000;
-                padding-bottom: 5px;
-
-            }
-        }
-
-        .title3 {
-            border-bottom: 2px solid #000;
-            padding-bottom: 5px;
-        }
-
-        .evaluation-table {
-            margin-left: 18px;
-        }
-
-        .sign-label {
-            margin-left: 18px;
-
-        }
-
-        .examiner-info {
-            font-weight: bold;
-        }
-
-        body {
-        overflow-x: hidden;
-    }
-
-    #homeBtn {
-            float: right;
-            margin-top: -51px;
-            margin-right: 12;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/includes/style.css">
 </head>
 
 <body class="container">
-    <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <img class="logo" src="logo.png" alt="logo">
+                <img class="logo-Doc4" src="logo.png" alt="logo">
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h2 class="title">Diver Medical | Participant Questionnaire</h2>
+                <h2 class="title-Doc4"> <strong>Diver Medical |</strong> Participant Questionnaire</h2>
             </div>
             <div class="col-md-12">
                 <p class="paragraph">Recreational scuba diving and freediving requires good physical and mental health. There are a few medical conditions which can be hazardous while diving, listed below. Those who have, or are predisposed to, any of these conditions, should be evaluated by a physician. This Diver Medical Participant Questionnaire provides a basis to determine if you should seek out that evaluation. If you have any concerns about your diving fitness not represented on this form, consult with your physician before diving. If you are feeling ill, avoid diving. If you think you may have a contagious disease, protect yourself and others by not participating in dive training and/or dive activities. References to “diving” on this form encompass both recreational scuba diving and freediving. This form is principally designed as an initial medical screen for new divers, but is also appropriate for divers taking continuing education. For your safety, and that of others who may dive with you, answer all questions honestly.</p>
@@ -221,13 +119,12 @@ $parentDate = $rowDoc4['parentDate'];
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h4 class="title2">Directions</h4>
-                <h6>Complete this questionnaire as a prerequisite to a recreational scuba diving or freediving course.</h6>
+                <h4 class="title2-Doc4">Directions</h4>
+                <h5>Complete this questionnaire as a prerequisite to a recreational scuba diving or freediving course.</h5>
                 <span><b>Note to women:</b> If you are pregnant, or attempting to become pregnant, <i>do not dive.</i></span>
             </div>
         </div>
 
-        <br>
         <!-- Question 01 -->
         <table class="table question-table">
             <tbody>
@@ -589,15 +486,6 @@ $parentDate = $rowDoc4['parentDate'];
                     <p><strong>If you answered NO</strong> to all 10 questions above, a medical evaluation is not required. Please read and agree to the participant statement below by signing and dating it.</p>
                     <p><strong>Participant Statement: </strong>I have answered all questions honestly, and understand that I accept responsibility for any consequences resulting from any questions I may have answered inaccurately or for my failure to disclose any existing or past health conditions.</p>
                 </div>
-
-
-
-                <div class="row mt-2">
-                    <div class="col-md-12">
-                        <label class="sign-label">Participant Signature</label>
-                    </div>
-                </div>
-
             </div>
 
             <div class="row">
@@ -605,20 +493,12 @@ $parentDate = $rowDoc4['parentDate'];
                     <form class="mt-3" id="participantSignatureForm">
                         <div class="form-group canvas-container">
                             <!-- Set canvas dimensions relative to the screen size -->
-
+                            <label class="sign-label">Participant Signature</label>
                             <?php echo '<img class="signature-canvas" src="' . $participantSignatureData . '" alt="Participant Signature">'; ?>
-
-                            <span>Date : <?php echo $participantDate ?></span>
-
+                            <span>Date : <?php echo $formattedParticipantDate ?></span>
                         </div>
 
                     </form>
-                </div>
-            </div>
-
-            <div class="row mt-2">
-                <div class="col-md-12">
-                    <label>Signature of Parent of Guardian (where applicable)</label>
                 </div>
             </div>
 
@@ -626,10 +506,10 @@ $parentDate = $rowDoc4['parentDate'];
                 <div class="col-md-12">
                     <form class="mt-3" id="parentSignatureForm">
                         <div class="form-group canvas-container">
+                        <label>Signature of Parent of Guardian (where applicable)</label>
                             <?php echo '<img class="signature-canvas" src="' . $parentSignatureData . '" alt="Participant Signature">'; ?>
-                            <span>Date : <?php echo $parentDate ?></span>
+                            <span>Date : <?php echo $formattedParentDate ?></span>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -660,19 +540,21 @@ $parentDate = $rowDoc4['parentDate'];
             </div>
         </div>
 
-        <div class="row">
-        <div class="col-md-12 btn-container">
+        <div class="container">
+            <div class="col-md-12 btn-container">
+                <br>
 
-        <button type="button" id="submit-doc1" class="btn btn-primary btn-sm disable" disabled>Submitted</button>
-
+                <?php
+                if ($medicalUserID != 0) {
+                    include('doc4_approved.php');
+                }
+                ?>
+                <button type="button" id="submit-doc1" class="btn btn-primary btn-sm disable" disabled>Submitted</button>
+            </div>
         </div>
-    </div>
-
         <br>
-
-        
-
-    </div>
+  
+    
 
 
 

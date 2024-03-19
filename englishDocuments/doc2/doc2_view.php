@@ -17,7 +17,6 @@ $rowDoc2 = mysqli_fetch_assoc($resultDoc2);
 
 $instructorName = $rowDoc2['instructorName'];
 $resortName = $rowDoc2['resortName'];
-$participantname = $rowDoc2['participantname'];
 $participantSignature = $rowDoc2['participantSignature'];
 $participantDate = $rowDoc2['participantDate'];
 $parentSignature = $rowDoc2['parentSignature'];
@@ -25,10 +24,16 @@ $parentDate = $rowDoc2['parentDate'];
 $diverAccidentInsurance = $rowDoc2['diverAccidentInsurance'];
 $policyNumber = $rowDoc2['policyNumber'];
 
+$queryDoc0 = "SELECT participantname FROM doc0 WHERE userID = $userID ;";
+$resultDoc0 = mysqli_query($conn, $queryDoc0);
+$rowDoc0 = mysqli_fetch_assoc($resultDoc0);
+
+$participantname = $rowDoc0['participantname'];
+
+$formattedParticipantDate = date("d/m/Y", strtotime($participantDate));
+$formattedParentDate = date("d/m/Y", strtotime($parentDate));
+
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,151 +42,37 @@ $policyNumber = $rowDoc2['policyNumber'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/includes/style.css"> 
     <title>Document 2</title>
-    <style type="text/css">
-        .logo {
-            display: block;
-            margin: auto;
-            max-width: 40%;
-            /* Adjusted for responsiveness */
-            height: auto;
-        }
-
-        .title {
-            margin-top: 10px;
-            font-size: 22px;
-            text-align: center;
-        }
-
-        .title2 {
-            margin-top: 10px;
-            font-size: 24px;
-            text-align: center;
-        }
-
-        .title_bottom {
-            border-bottom: 4px solid #000;
-            padding-bottom: 5px;
-            font-size: 19px;
-            margin-top: 12px;
-            text-align: center;
-        }
-
-        .paragraph {
-            text-align: left;
-        }
-
-        .canvas-container {
-            text-align: center;
-        }
-
-        .signature-canvas {
-            border: 1px solid #ccc;
-        }
-
-        @media (max-width: 768px) {
-            .logo {
-                max-width: 15%;
-                /* Adjusted for smaller screens */
-            }
-
-            .title {
-                font-size: 18px;
-            }
-
-            .title2 {
-                font-size: 20px;
-            }
-
-            .title_bottom {
-                font-size: 16px;
-            }
-
-            #policyNumberInput {
-                margin-bottom: 15px;
-            }
-
-            body {
-                margin-bottom: 15px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .logo {
-                max-width: 15%;
-                /* Further adjusted for smaller screens */
-
-            }
-
-            #policyNumberInput {
-                margin-bottom: 15px;
-            }
-
-            body {
-                margin-bottom: 15px;
-            }
-
-        }
-
-        .crew {
-            text-decoration-color: red;
-        }
-
-        .selectedInstructorLabel {
-            text-decoration: underline;
-            font-weight: bold;
-
-        }
-
-        .selectedResortName {
-            text-decoration: underline;
-            font-weight: bold;
-        }
-
-        #policyNumberInput {
-            margin-bottom: 15px;
-        }
-
-        body {
-            margin-bottom: 15px;
-            overflow-x: hidden;
-        }
-      
-        #homeBtn {
-            float: right;
-            margin-top: -51px;
-            margin-right: 12;
-        }
-    </style>
 </head>
 
 <body class="container">
-
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <img class="logo" src="logo.png" alt="logo">
+                <img class="logoDoc2" src="logo.png" alt="logo">
             </div>
         </div>
 
         <div class="row">
             <div class="col-12">
-                <h3 class="title">Statement of Risk and Liability/Non-agency Acknowledgment Form</h3>
-                <h1 class="title2">DIVER ACTIVITIES</h1>
+                <h3 class="titleDoc2">Statement of Risk and Liability/Non-agency Acknowledgment Form</h3>
+                <h1 class="title2Doc2"> <strong>DIVER ACTIVITIES</strong></h1>
                 <h5 class="title_bottom">(EU Version)</h5>
             </div>
         </div>
 
         <div class="row">
             <div class="col-12">
-                <p class="paragraph">Please read carefully and fill in all blanks before signing</p>
+                <p class="paragraph"><strong>Please read carefully and fill in all blanks before signing</strong></p>
                 <h4 class="text-center">Non-Agency Disclosure and Acknowledgment Agreement</h4>
             </div>
         </div>
 
         <p class="paragraph">I understand and agree that PADI® Members (“Members”), including
 
-            <span id="resortSelect" class="underline">
+            <span id="resortSelect" class="spaces">
                 <?php echo $resortName; ?>
             </span>
             , and/or any individual PADI Instructors and Divemasters associated with the program in which I am participating, are licensed to use various PADI Trademarks and to conduct PADI training, but are not agents, employees or franchisees of PADI EMEA Ltd., PADI Americas, Inc., or its parent, subsidiary and affiliated corporations (“PADI”). I further understand that Member business activities are independent, and are neither owned nor operated by PADI, and that while PADI establishes the standards for PADI diver training programs, it is not responsible for, nor does it have the right to control, the operation of the Members’ business activities and the day-to-day conduct of PADI programs and supervision of divers by the Members or their associated staff.
@@ -206,7 +97,7 @@ $policyNumber = $rowDoc2['policyNumber'];
 
 
 
-            <span id="instructorSelect" class="underline">
+            <span id="instructorSelect" class="spaces">
 
                 <?php echo $instructorName; ?>
 
@@ -217,21 +108,21 @@ $policyNumber = $rowDoc2['policyNumber'];
         <p class="paragraph">the facility through which this program is conducted,
 
             <!-- resort name -->
-            <label class="underline"> <?php echo $resortName; ?></label>
+            <label class="spaces"> <?php echo $resortName; ?></label>
 
             , nor PADI EMEA Ltd., nor
 
             PADI Americas, Inc. nor their affiliate or subsidiary corporations, nor any of their respective employees, officers, agents, contractors or assigns accept any responsibility for any death, injury or other loss suffered by me to the extent that it results from my own conduct or any matter or condition under my control that amounts to my own contributory negligence.
         </p>
         <p class="paragraph">In the absence of any negligence or other breach of duty by the dive professionals conducting this program,
-            <label class="underline"> <?php echo $instructorName; ?></label>
+            <label class="spaces"> <?php echo $instructorName; ?></label>
         </p>
 
         <p class="paragraph">the facility through which this program is offered,
 
             <!-- resort name -->
 
-            <label class="underline"> <?php echo $resortName; ?></label>
+            <label class="spaces"> <?php echo $resortName; ?></label>
 
             PADI EMEA Ltd., PADI Americas, Inc. and all parties referred to above, my participation in this diving program is entirely at my own risk.
         </p>
@@ -244,18 +135,10 @@ $policyNumber = $rowDoc2['policyNumber'];
                 <form>
                     <label for="participantname">Participant's Name:</label>
                     <!-- Input field for participant's name -->
-                    <label class="underline"> <?php echo $participantname; ?></label>
+                    <label class="spaces"> <?php echo $participantname; ?></label>
                 </form>
             </div>
         </div>
-
-
-        <div class="row mt-2">
-            <div class="col-md-12">
-                <label class="sign-label">Participant Signature</label>
-            </div>
-        </div>
-
     </div>
 
     <div class="row">
@@ -263,20 +146,11 @@ $policyNumber = $rowDoc2['policyNumber'];
             <form class="mt-3" id="participantSignatureForm">
                 <div class="form-group canvas-container">
                     <!-- Set canvas dimensions relative to the screen size -->
-
+                    <label class="sign-label">Participant Signature</label>
                     <?php echo '<img class="signature-canvas" src="' . $participantSignature . '" alt="Participant Signature">'; ?>
-
-                    <span>Date : <?php echo $participantDate ?></span>
-
+                    <span>Date : <?php echo $formattedParticipantDate ?></span>
                 </div>
-
             </form>
-        </div>
-    </div>
-
-    <div class="row mt-2">
-        <div class="col-md-12">
-            <label>Signature of Parent of Guardian (where applicable)</label>
         </div>
     </div>
 
@@ -285,29 +159,18 @@ $policyNumber = $rowDoc2['policyNumber'];
             <form class="mt-3" id="participantSignatureForm">
                 <div class="form-group canvas-container">
                     <!-- Set canvas dimensions relative to the screen size -->
-
+                    <label>Signature of Parent of Guardian (where applicable)</label>
                     <?php echo '<img class="signature-canvas" src="' . $parentSignature . '" alt=" Parent Signature">'; ?>
-
-                    <span>Date : <?php echo $parentDate ?></span>
-
+                    <span>Date : <?php echo $formattedParentDate ?></span>
                 </div>
-
             </form>
         </div>
     </div>
 
-
-
-    <!-- Add the checkboxes for Diver Accident Insurance -->
     <div class="row mt-2">
-        <p></p>
         <div class="col-md-12">
-            <div class="form-check">
-                <p>Diver Accident Insurance? <?php echo $diverAccidentInsurance ?></p>
-            </div>
-            
-            <!-- Add the input field for Policy Number -->
             <div id="policyNumberInput">
+                <label>Diver Accident Insurance? <?php echo $diverAccidentInsurance ?></label>
                 <label for="policyNumber">Enter Policy Number: <?php echo $policyNumber ?></label>
             </div>
         </div>
