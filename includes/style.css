@@ -50,10 +50,6 @@ body {
     margin-bottom: 15px;
 }
 
-.crew {
-    text-decoration-color: red;
-}
-
 .selectedInstructorLabel {
     text-decoration: underline;
     font-weight: bold;

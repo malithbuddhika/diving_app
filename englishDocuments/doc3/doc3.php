@@ -20,7 +20,7 @@ $resortRow = mysqli_fetch_assoc($resortResult);
 $resort = $resortRow['resortName'];
 
 // Query to retrieve resort from the database
-$participantnameQuery = "SELECT participantname FROM doc2 WHERE userID = $userID ORDER BY id DESC LIMIT 1;";
+$participantnameQuery = "SELECT participantname FROM doc0 WHERE userID = $userID ORDER BY id DESC LIMIT 1;";
 $participantnameResult = mysqli_query($conn, $participantnameQuery);
 $participantnameRow = mysqli_fetch_assoc($participantnameResult);
 $participantname = $participantnameRow['participantname'];
@@ -114,8 +114,8 @@ $participantname = $participantnameRow['participantname'];
             </p>
             <p>
                 I, <?php echo '<label class="spaces">' . $participantname . '</label>'; ?>, BY THIS INSTRUMENT AGREE TO EXEMPT AND RELEASE MY
-                INSTRUCTORS,.............................THE FACILITY THROUGH WHICH I
-                RECEIVE MY INSTRUCTION,...................................., AND
+                INSTRUCTORS,<?php echo '<label class="spaces">' . $instructor . '</label>'; ?>THE FACILITY THROUGH WHICH I
+                RECEIVE MY INSTRUCTION,<?php echo '<label class="spaces">' . $resort . '</label>'; ?>, AND
                 PADI AMERICAS, INC., AND ALL RELATED ENTITIES AS DEFINED ABOVE, FROM ALL LIABILITY OR RESPONSIBILITY WHATSOEVER FOR PERSONAL INJURY, PROPERTY DAMAGE OR WRONGFUL DEATH HOWEVER CAUSED, INCLUDING, BUT NOT LIMITED TO, THE NEGLIGENCE OF THE RELEASED PARTIES, WHETHER PASSIVE OR ACTIVE.
 
             </p>

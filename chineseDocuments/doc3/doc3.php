@@ -20,7 +20,7 @@ $resortRow = mysqli_fetch_assoc($resortResult);
 $resort = $resortRow['resortName'];
 
 // Query to retrieve resort from the database
-$participantnameQuery = "SELECT participantname FROM doc2 WHERE userID = $userID ORDER BY id DESC LIMIT 1;";
+$participantnameQuery = "SELECT participantname FROM doc0 WHERE userID = $userID ORDER BY id DESC LIMIT 1;";
 $participantnameResult = mysqli_query($conn, $participantnameQuery);
 $participantnameRow = mysqli_fetch_assoc($participantnameResult);
 $participantname = $participantnameRow['participantname'];
@@ -112,7 +112,7 @@ $participantname = $participantnameRow['participantname'];
             </p>
             <p>我理解并同意，我不仅放弃起诉被解约方的权利，而且放弃因我去世而我的继承人、受让人或受益人可能有权起诉被解约方的任何权利。我进一步声明，我有权这样做，我的继承人、受让人或受益人将被禁止因为我对被释放方的陈述而提出其他要求。</p>
             <p>
-                我, <?php echo '<label class="spaces">' . $participantname . '</label>'; ?>, 通过本文件，同意豁免和释放我的指导员......................................我通过其接受指示的设施。 ................................... 、PADI AMERICAS, INC. 以及上述定义的所有相关实体，免于承担因任何原因造成的人身伤害、财产损失或非正常死亡的所有责任或责任，包括但不限于被免责方的疏忽，无论是主动还是被动。
+                我, <?php echo '<label class="spaces">' . $participantname . '</label>'; ?>, 通过本文件，同意豁免和释放我的指导员<?php echo '<label class="spaces">' . $instructor . '</label>'; ?> 我通过其接受指示的设施。 <?php echo '<label class="spaces">' . $resort . '</label>'; ?> 、PADI AMERICAS, INC. 以及上述定义的所有相关实体，免于承担因任何原因造成的人身伤害、财产损失或非正常死亡的所有责任或责任，包括但不限于被免责方的疏忽，无论是主动还是被动。
             </p>
             <p><strong>在代表我本人和我的继承人签署以下协议之前，我已经充分了解了本非代理披露和承认协议以及责任免除和风险承担协议的内容。</strong></p>
 

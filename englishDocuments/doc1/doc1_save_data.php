@@ -2,12 +2,11 @@
 session_start();
 
 // Database connection parameters
-
 include $_SERVER['DOCUMENT_ROOT'] . '/connection.php';
 
 // Retrieve data from the form
 $divemaster = $_POST['divemaster'];
-$crewMember = $_POST['crewMember'];
+$crewMember = isset($_POST['crewMember']) ? json_decode($_POST['crewMember']) : [];
 $captain = $_POST['captain'];
 $vesselName = $_POST['vesselName'];
 $participantSignatureData = $_POST['participantSignatureData']; // Correct key
@@ -25,26 +24,21 @@ $stmt = $conn->prepare($sql);
 
 // Check if preparing the statement was successful
 if (!$stmt) {
-  die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+    die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
 }
 
 // Bind parameters
-$stmt->bind_param("issssssss", $userID, $divemaster, $crewMember, $captain, $vesselName, $participantSignatureData, $participantDate, $parentSignatureData, $parentDate);
+$crewMemberString = !empty($crewMember) ? implode(', ', $crewMember) : null;
+$stmt->bind_param("issssssss", $userID, $divemaster, $crewMemberString, $captain, $vesselName, $participantSignatureData, $participantDate, $parentSignatureData, $parentDate);
+
 // Execute the statement
 if ($stmt->execute()) {
-  echo "Data saved successfully!";
-
+    echo "Data saved successfully!";
 } else {
-  // Display error message using Bootstrap alert
-  echo '<div class="alert alert-danger" role="alert">
-            Error: ' . $sql . '<br>' . $stmt->error . '
-          </div>';
+    // Display error message
+    echo "Error: " . $stmt->error;
 }
 
 $stmt->close();
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
 $conn->close();
+?>

@@ -89,7 +89,7 @@ $formattedParentDate = date("d/m/Y", strtotime($parentDate));
             <div class="row">
                 <div class="col-md-12">
                     <label for="divemaster">Divemaster's Name : </label>
-                    <span class="crew" id="divemaster">
+                    <span class="spaces" id="divemaster">
                         <?php
 
                         echo $divemaster . ", ";
@@ -98,7 +98,7 @@ $formattedParentDate = date("d/m/Y", strtotime($parentDate));
                     </span>
 
                     <label for="crewMember">Crew Member's Name : </label>
-                    <span class="crew" id="crewMember">
+                    <span class="spaces" id="crewMember">
                         <?php
 
                         echo $crewMember . ", ";
@@ -107,7 +107,7 @@ $formattedParentDate = date("d/m/Y", strtotime($parentDate));
                     </span>
 
                     <label for="captain">Captain's Name : </label>
-                    <span class="crew" id="captain">
+                    <span class="spaces" id="captain">
                         <?php
 
                         echo $captain . ", ";
@@ -122,7 +122,7 @@ $formattedParentDate = date("d/m/Y", strtotime($parentDate));
                     <p><strong>nor the crew or the owner of the vessel,</strong></p>
 
                     <label for="vesselName">Vessel Name : </label>
-                    <span class="vessel" id="vesselName">
+                    <span class="spaces" id="vesselName">
                         <?php
 
                         echo $vesselName . ", ";
@@ -154,11 +154,7 @@ $formattedParentDate = date("d/m/Y", strtotime($parentDate));
         <div class="col-md-12">
             <form>
                 <label for="participantname">Participant's Name : </label>
-                <?php
-
-                echo $participantname;
-
-                ?>
+                 <label class="spaces" > <?php echo $participantname;?> </label>
             </form>
         </div>
     </div>

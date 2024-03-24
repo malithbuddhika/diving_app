@@ -113,8 +113,8 @@ $formattedParentDate = date("d/m/Y", strtotime($parentDate));
             </p>
             <p>
                 I, <label class="spaces"> <?php echo $participantname; ?></label>, BY THIS INSTRUMENT AGREE TO EXEMPT AND RELEASE MY
-                INSTRUCTORS,.............................THE FACILITY THROUGH WHICH I
-                RECEIVE MY INSTRUCTION,...................................., AND
+                INSTRUCTORS,<label class="spaces"> <?php echo $instructorName; ?></label> THE FACILITY THROUGH WHICH I
+                RECEIVE MY INSTRUCTION,<label class="spaces"> <?php echo $resortName; ?>, AND
                 PADI AMERICAS, INC., AND ALL RELATED ENTITIES AS DEFINED ABOVE, FROM ALL LIABILITY OR RESPONSIBILITY WHATSOEVER FOR PERSONAL INJURY, PROPERTY DAMAGE OR WRONGFUL DEATH HOWEVER CAUSED, INCLUDING, BUT NOT LIMITED TO, THE NEGLI- GENCE OF THE RELEASED PARTIES, WHETHER PASSIVE OR ACTIVE.
 
             </p>

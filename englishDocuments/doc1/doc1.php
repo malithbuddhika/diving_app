@@ -44,6 +44,7 @@ $participantname = $rowDoc0['participantname'];
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/includes/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
 
 </head>
@@ -96,7 +97,7 @@ $participantname = $rowDoc0['participantname'];
                     </select>
 
                     <label for="crewMember">Crew Member's Name : </label>
-                    <select class="crew" id="crewMember">
+                    <select class="crew" id="crewMember" name="crewMember[]" multiple>
                         <?php
                         while ($row = mysqli_fetch_assoc($crewMemberResult)) {
                             echo "<option value='" . $row['crewMemberName'] . "'>" . $row['crewMemberName'] . "</option>";
@@ -196,6 +197,17 @@ $participantname = $rowDoc0['participantname'];
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+    <!-- Initialize Select2 -->
+    <script>
+        $(document).ready(function() {
+            $('#crewMember').select2();
+        });
+    </script>
 
     <script>
         function submitForm() {
@@ -377,21 +389,22 @@ $participantname = $rowDoc0['participantname'];
         }
 
         function handleFormSubmission() {
-
             // Capture current date for participant and parent signatures
             let participantDate = new Date().toISOString();
             let parentDate = new Date().toISOString();
 
-
             // Capture the final point before form submission
             let participantSignatureData = participantCanvas.toDataURL();
-
             drawParentFinalPoint(); // Capture the final point for parent signature
             let parentSignatureData = parentCanvas.toDataURL();
 
+            // Get all selected crew members
+            let selectedCrewMembers = Array.from(document.getElementById('crewMember').selectedOptions).map(option => option.value);
+
+            // Create FormData object and append form data
             let formData = new FormData();
             formData.append('divemaster', document.getElementById('divemaster').value);
-            formData.append('crewMember', document.getElementById('crewMember').value);
+            formData.append('crewMember', JSON.stringify(selectedCrewMembers)); // Convert array to JSON string
             formData.append('captain', document.getElementById('captain').value);
             formData.append('vesselName', document.getElementById('vesselName').value);
             formData.append('participantSignatureData', participantSignatureData);
@@ -403,6 +416,8 @@ $participantname = $rowDoc0['participantname'];
             sendToServer(formData);
         }
 
+
+
         function sendToServer(formData) {
             let xhr = new XMLHttpRequest();
             xhr.open('POST', 'doc1_save_data.php', true);
@@ -411,8 +426,8 @@ $participantname = $rowDoc0['participantname'];
                     if (xhr.status === 200) {
                         // Display success message using Bootstrap alert
                         showAlert('success', 'Form submitted successfully');
-                        // Redirect to doc2.php
-                        window.location.href = '/englishDocuments/doc2/doc2.php';
+
+                         window.location.href = '/englishDocuments/doc2/doc2.php';
 
                     } else {
                         // Display error message using Bootstrap alert

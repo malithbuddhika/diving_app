@@ -19,8 +19,6 @@ $queryDoc0 = "SELECT participantname FROM doc0 WHERE userID = $userID ;";
 $resultDoc0 = mysqli_query($conn, $queryDoc0);
 $rowDoc0 = mysqli_fetch_assoc($resultDoc0);
 $participantname = $rowDoc0['participantname'];
-
-
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +30,7 @@ $participantname = $rowDoc0['participantname'];
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/includes/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <title>Risk and Liability/Non-agency Acknowledgment</title>
 </head>
 
@@ -89,15 +88,14 @@ $participantname = $rowDoc0['participantname'];
 
 
 
-            <select id="instructorSelect" class="underline">
+            <select id="instructorSelect" class="crew" name="instructors[]" multiple>
                 <?php
                 while ($row = mysqli_fetch_assoc($instructorResult)) {
                     echo "<option value='" . $row['instructorName'] . "'>" . $row['instructorName'] . "</option>";
                 }
                 ?>
 
-            </select>
-            , nor
+            </select> , nor
         </p>
 
         <p class="paragraph">the facility through which this program is conducted,
@@ -203,6 +201,18 @@ $participantname = $rowDoc0['participantname'];
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+    <!-- Initialize Select2 -->
+    <script>
+        $(document).ready(function() {
+            $('#instructorSelect').select2();
+        });
+    </script>
 
 
     <script>
@@ -446,19 +456,22 @@ $participantname = $rowDoc0['participantname'];
             let parentSignatureData = parentCanvas.toDataURL();
             drawParentFinalPoint(); // Capture the final point for parent signature
 
+            // Get all selected crew members
+            let selectedInstructors = Array.from(document.getElementById('instructorSelect').selectedOptions).map(option => option.value);
+
             let formData = new FormData();
             formData.append('participantSignatureData', participantSignatureData);
             formData.append('participantDate', participantDate);
             formData.append('parentSignatureData', parentSignatureData);
             formData.append('parentDate', parentDate);
+            // Include selected instructor names in form data
+            selectedInstructors.forEach(instructor => {
+                formData.append('selectedInstructor[]', instructor);
+            });
 
             // Include selected resort name
             let selectedResortName = document.getElementById('resortSelect').value;
             formData.append('selectedResortName', selectedResortName);
-
-            // Include selected instructor name
-            let selectedInstructorLabel = document.getElementById('instructorSelect').value;
-            formData.append('selectedInstructorLabel', selectedInstructorLabel);
 
             // Include diver accident insurance information
             if (document.getElementById('diverAccidentInsuranceYes').checked) {
@@ -470,10 +483,6 @@ $participantname = $rowDoc0['participantname'];
 
             // Send the formData to the server using AJAX
             sendToServer(formData);
-
-            // Redirect to doc3.php
-            // window.location.href = '/englishDocuments/doc3/doc3.php';
-
         }
 
         function sendToServer(formData) {
@@ -484,6 +493,8 @@ $participantname = $rowDoc0['participantname'];
                     if (xhr.status === 200) {
                         // Display success message using Bootstrap alert
                         showAlert('success', 'Form submitted successfully');
+                        // Redirect to doc3.php
+                        window.location.href = '/englishDocuments/doc3/doc3.php';
 
                     } else {
                         // Display error message using Bootstrap alert
@@ -511,8 +522,7 @@ $participantname = $rowDoc0['participantname'];
             setTimeout(function() {
                 alertContainer.removeChild(alertElement);
             }, 7000);
-            // Redirect to doc3.php
-            window.location.href = '/englishDocuments/doc3/doc3.php';
+
         }
     </script>
 </body>
