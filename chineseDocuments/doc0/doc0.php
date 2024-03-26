@@ -8,8 +8,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
 
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>SAFE DIVING PRACTICES</title>
     <!-- Include Bootstrap CSS -->

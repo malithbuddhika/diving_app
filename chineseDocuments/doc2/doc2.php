@@ -27,7 +27,7 @@ $participantname = $rowDoc0['participantname'];
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/includes/style.css">
@@ -91,20 +91,14 @@ $participantname = $rowDoc0['participantname'];
 
 
         <select id="instructorSelect" class="crew" name="instructors[]" multiple>
+                <option value="" disabled selected>选择讲师(年代)</option>
                 <?php
                 while ($row = mysqli_fetch_assoc($instructorResult)) {
                     echo "<option value='" . $row['instructorName'] . "'>" . $row['instructorName'] . "</option>";
                 }
                 ?>
-
-            </select>
-            ,也不
+            </select> , 也不
         </p>
-
-
-
-
-
 
         <p class="paragraph">执行这个项目的机构，
 
@@ -175,14 +169,14 @@ $participantname = $rowDoc0['participantname'];
         <p></p>
         <div class="col-md-12">
             <div class="form-check">
-                <p>潜水员意外保险?</p>
-                <input class="form-check-input" type="checkbox" id="diverAccidentInsuranceYes" name="diverAccidentInsurance" value="Yes">
+                <p>D潜水员意外保险?</p>
+                <input class="form-check-input" type="checkbox" id="diverAccidentInsuranceYes" name="diverAccidentInsurance" value="Yes" required>
                 <label class="form-check-label" for="diverAccidentInsuranceYes">
                     是的
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="diverAccidentInsuranceNo" name="diverAccidentInsurance" value="No">
+                <input class="form-check-input" type="checkbox" id="diverAccidentInsuranceNo" name="diverAccidentInsurance" value="No" required>
                 <label class="form-check-label" for="diverAccidentInsuranceNo">
                     没有
                 </label>
@@ -194,6 +188,7 @@ $participantname = $rowDoc0['participantname'];
             </div>
         </div>
     </div>
+
 
     <div id="alert-container"></div>
 
@@ -222,24 +217,57 @@ $participantname = $rowDoc0['participantname'];
         });
     </script>
     <script>
-        // Add event listener to checkboxes
-        document.getElementById('diverAccidentInsuranceYes').addEventListener('change', function() {
-            if (this.checked) {
-                document.getElementById('policyNumberInput').style.display = 'block';
-                // Uncheck the "No" checkbox if "Yes" is checked
-                document.getElementById('diverAccidentInsuranceNo').checked = false;
-            } else {
-                document.getElementById('policyNumberInput').style.display = 'none';
+      function checkInstructorSelection() {
+            var selectElement = document.getElementById("instructorSelect");
+            if (selectElement.value.length === 0) {
+                showAlert('danger', '请选择至少一名教师。');
+                return false; // Prevent form submission
+            }
+            // Form submission logic if needed
+        }
+
+        function validateForm() {
+            var diverAccidentInsuranceYes = document.getElementById('diverAccidentInsuranceYes');
+            var diverAccidentInsuranceNo = document.getElementById('diverAccidentInsuranceNo');
+
+            if (!diverAccidentInsuranceYes.checked && !diverAccidentInsuranceNo.checked) {
+                //alert('Please select whether you have Diver Accident Insurance.');
+                return false; // Prevent form submission if no checkbox is checked
+            }
+
+            return true; // Allow form submission if at least one checkbox is checked
+        }
+
+        document.getElementById("submit-doc2").addEventListener("click", function(event) {
+            if (!checkInstructorSelection()) {
+                event.preventDefault(); // Prevent form submission if instructor selection check fails
+            }
+
+            if (!validateForm()) {
+                event.preventDefault(); // Prevent form submission if form validation fails
             }
         });
 
-        document.getElementById('diverAccidentInsuranceNo').addEventListener('change', function() {
-            if (this.checked) {
-                document.getElementById('policyNumberInput').style.display = 'none';
-                // Uncheck the "Yes" checkbox if "No" is checked
-                document.getElementById('diverAccidentInsuranceYes').checked = false;
+        // Function to toggle the visibility and requirement of the policy number input field
+        function togglePolicyNumberInput() {
+            var policyNumberInput = document.getElementById('policyNumberInput');
+            var diverAccidentInsuranceYes = document.getElementById('diverAccidentInsuranceYes');
+
+            if (diverAccidentInsuranceYes.checked) {
+                policyNumberInput.style.display = 'block';
+                document.getElementById('policyNumber').required = true;
+            } else {
+                policyNumberInput.style.display = 'none';
+                document.getElementById('policyNumber').required = false;
             }
-        });
+        }
+
+        // Add event listeners to the checkboxes to call the toggle function when their state changes
+        document.getElementById('diverAccidentInsuranceYes').addEventListener('change', togglePolicyNumberInput);
+        document.getElementById('diverAccidentInsuranceNo').addEventListener('change', togglePolicyNumberInput);
+
+        // Call the toggle function initially to set up the form according to the initial state of the checkboxes
+        togglePolicyNumberInput();
 
         // Get the initially selected instructor        
         var instructorSelect = document.getElementById('instructorSelect');
@@ -482,7 +510,12 @@ $participantname = $rowDoc0['participantname'];
             // Include diver accident insurance information
             if (document.getElementById('diverAccidentInsuranceYes').checked) {
                 formData.append('diverAccidentInsurance', 'Yes');
-                formData.append('policyNumber', document.getElementById('policyNumber').value);
+                let policyNumber = document.getElementById('policyNumber').value;
+                if (policyNumber.trim() === '') {
+                    showAlert('danger', '请输入潜水员意外保险保单编号。');
+                    return; // Stop form submission if policy number is not provided
+                }
+                formData.append('policyNumber', policyNumber);
             } else {
                 formData.append('diverAccidentInsurance', 'No');
             }
@@ -490,7 +523,6 @@ $participantname = $rowDoc0['participantname'];
             // Send the formData to the server using AJAX
             sendToServer(formData);
         }
-
 
         function sendToServer(formData) {
             let xhr = new XMLHttpRequest();
@@ -515,6 +547,15 @@ $participantname = $rowDoc0['participantname'];
                 showAlert('danger', 'Network error. Check console for details.');
                 console.error('Network error occurred');
             };
+
+            // Check if Diver Accident Insurance checkbox is checked
+            var diverAccidentInsuranceYes = document.getElementById('diverAccidentInsuranceYes');
+            var diverAccidentInsuranceNo = document.getElementById('diverAccidentInsuranceNo');
+            if (!diverAccidentInsuranceYes.checked && !diverAccidentInsuranceNo.checked) {
+                showAlert('danger', '请选择是否购买潜水员意外保险。');
+                return; // Stop form submission if Diver Accident Insurance is not selected
+            }
+
             xhr.send(formData);
         }
 
@@ -533,5 +574,4 @@ $participantname = $rowDoc0['participantname'];
         }
     </script>
 </body>
-
 </html>

@@ -26,11 +26,11 @@ $participantname = $rowDoc0['participantname'];
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/includes/style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.default.min.css">
     <title>Risk and Liability/Non-agency Acknowledgment</title>
 </head>
 
@@ -89,12 +89,12 @@ $participantname = $rowDoc0['participantname'];
 
 
             <select id="instructorSelect" class="crew" name="instructors[]" multiple>
+                <option value="" disabled selected>Select Instructors</option>
                 <?php
                 while ($row = mysqli_fetch_assoc($instructorResult)) {
                     echo "<option value='" . $row['instructorName'] . "'>" . $row['instructorName'] . "</option>";
                 }
                 ?>
-
             </select> , nor
         </p>
 
@@ -157,7 +157,6 @@ $participantname = $rowDoc0['participantname'];
                     <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                     <button type="button" class="btn btn-secondary clearbutton" onclick="clearParentSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
-
             </form>
         </div>
     </div>
@@ -168,13 +167,13 @@ $participantname = $rowDoc0['participantname'];
         <div class="col-md-12">
             <div class="form-check">
                 <p>Diver Accident Insurance?</p>
-                <input class="form-check-input" type="checkbox" id="diverAccidentInsuranceYes" name="diverAccidentInsurance" value="Yes">
+                <input class="form-check-input" type="checkbox" id="diverAccidentInsuranceYes" name="diverAccidentInsurance" value="Yes" required>
                 <label class="form-check-label" for="diverAccidentInsuranceYes">
                     Yes
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="diverAccidentInsuranceNo" name="diverAccidentInsurance" value="No">
+                <input class="form-check-input" type="checkbox" id="diverAccidentInsuranceNo" name="diverAccidentInsurance" value="No" required>
                 <label class="form-check-label" for="diverAccidentInsuranceNo">
                     No
                 </label>
@@ -205,35 +204,54 @@ $participantname = $rowDoc0['participantname'];
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Include Select2 JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
 
-    <!-- Initialize Select2 -->
     <script>
-        $(document).ready(function() {
-            $('#instructorSelect').select2();
+    $(document).ready(function() {
+        $('#instructorSelect').selectize({
+            plugins: ['remove_button'],
+            delimiter: ',',
+            persist: false,
+            create: true,
+            maxItems: null,
+            placeholder: 'Select Instructors',
+            render: {
+                item: function(data, escape) {
+                    return '<div>' + escape(data.text) + '</div>';
+                }
+            }
         });
-    </script>
-
+    });
+</script>
 
     <script>
-        // Add event listener to checkboxes
-        document.getElementById('diverAccidentInsuranceYes').addEventListener('change', function() {
-            if (this.checked) {
-                document.getElementById('policyNumberInput').style.display = 'block';
-                // Uncheck the "No" checkbox if "Yes" is checked
-                document.getElementById('diverAccidentInsuranceNo').checked = false;
+        function checkInstructorSelection() {
+            var selectElement = document.getElementById("instructorSelect");
+            if (selectElement.value.length === 0) {
+                showAlert('danger', 'Please select at least one instructor.');
+                return false; // Prevent form submission
+            }
+        }
+        // Function to toggle the visibility and requirement of the policy number input field
+        function togglePolicyNumberInput() {
+            var policyNumberInput = document.getElementById('policyNumberInput');
+            var diverAccidentInsuranceYes = document.getElementById('diverAccidentInsuranceYes');
+
+            if (diverAccidentInsuranceYes.checked) {
+                policyNumberInput.style.display = 'block';
+                document.getElementById('policyNumber').required = true;
             } else {
-                document.getElementById('policyNumberInput').style.display = 'none';
+                policyNumberInput.style.display = 'none';
+                document.getElementById('policyNumber').required = false;
             }
-        });
+        }
 
-        document.getElementById('diverAccidentInsuranceNo').addEventListener('change', function() {
-            if (this.checked) {
-                document.getElementById('policyNumberInput').style.display = 'none';
-                // Uncheck the "Yes" checkbox if "No" is checked
-                document.getElementById('diverAccidentInsuranceYes').checked = false;
-            }
-        });
+        // Add event listeners to the checkboxes to call the toggle function when their state changes
+        document.getElementById('diverAccidentInsuranceYes').addEventListener('change', togglePolicyNumberInput);
+        document.getElementById('diverAccidentInsuranceNo').addEventListener('change', togglePolicyNumberInput);
+
+        // Call the toggle function initially to set up the form according to the initial state of the checkboxes
+        togglePolicyNumberInput();
 
         // Get the initially selected instructor        
         var instructorSelect = document.getElementById('instructorSelect');
@@ -476,7 +494,12 @@ $participantname = $rowDoc0['participantname'];
             // Include diver accident insurance information
             if (document.getElementById('diverAccidentInsuranceYes').checked) {
                 formData.append('diverAccidentInsurance', 'Yes');
-                formData.append('policyNumber', document.getElementById('policyNumber').value);
+                let policyNumber = document.getElementById('policyNumber').value;
+                if (policyNumber.trim() === '') {
+                    showAlert('danger', 'Please enter the Policy Number for Diver Accident Insurance.');
+                    return; // Stop form submission if policy number is not provided
+                }
+                formData.append('policyNumber', policyNumber);
             } else {
                 formData.append('diverAccidentInsurance', 'No');
             }
@@ -494,7 +517,7 @@ $participantname = $rowDoc0['participantname'];
                         // Display success message using Bootstrap alert
                         showAlert('success', 'Form submitted successfully');
                         // Redirect to doc3.php
-                        window.location.href = '/englishDocuments/doc3/doc3.php';
+                        // window.location.href = '/englishDocuments/doc3/doc3.php';
 
                     } else {
                         // Display error message using Bootstrap alert
@@ -508,8 +531,23 @@ $participantname = $rowDoc0['participantname'];
                 showAlert('danger', 'Network error. Check console for details.');
                 console.error('Network error occurred');
             };
+
+            // Check if Diver Accident Insurance checkbox is checked
+            var diverAccidentInsuranceYes = document.getElementById('diverAccidentInsuranceYes');
+            var diverAccidentInsuranceNo = document.getElementById('diverAccidentInsuranceNo');
+            if (!diverAccidentInsuranceYes.checked && !diverAccidentInsuranceNo.checked) {
+                showAlert('danger', 'Please select whether you have Diver Accident Insurance');
+
+                var selectElement = document.getElementById("instructorSelect");
+                if (selectElement.value.length === 0) {
+                    showAlert('danger', 'Please select at least one instructor.');
+                    return false; // Prevent form submission
+                }
+                return; // Stop form submission if Diver Accident Insurance is not selected
+            }
             xhr.send(formData);
         }
+
 
         function showAlert(type, message) {
             let alertContainer = document.getElementById('alert-container');

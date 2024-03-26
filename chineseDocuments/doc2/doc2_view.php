@@ -40,7 +40,7 @@ $formattedParentDate = date("d/m/Y", strtotime($parentDate));
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/includes/style.css"> 
@@ -170,7 +170,7 @@ $formattedParentDate = date("d/m/Y", strtotime($parentDate));
         <div class="col-md-12">
             <div id="policyNumberInput">
                 <label>潜水员意外保险? <?php echo $diverAccidentInsurance ?></label>
-                <label for="policyNumber">保单号码: <?php echo $policyNumber ?></label>
+                <label for="policyNumber">保险单编号: <?php echo $policyNumber ?></label>
             </div>
         </div>
     </div>
@@ -179,7 +179,6 @@ $formattedParentDate = date("d/m/Y", strtotime($parentDate));
         <div class="col-md-12 btn-container">
 
             <button type="button" id="submit-doc1" class="btn btn-primary btn-sm disable" disabled>提交</button>
-
 
         </div>
     </div>
