@@ -51,12 +51,16 @@ if ($result->num_rows > 0) {
 }
 
 // Query to retrieve participant name, instructor name, and resort name from doc2
-$queryDoc2 = "SELECT participantname, instructorName, resortName FROM doc2 WHERE userID = $userID ORDER BY id DESC LIMIT 1;";
+$queryDoc2 = "SELECT instructorName, resortName FROM doc2 WHERE userID = $userID ORDER BY id DESC LIMIT 1;";
 $resultDoc2 = mysqli_query($conn, $queryDoc2);
 $rowDoc2 = mysqli_fetch_assoc($resultDoc2);
-$participantname = $rowDoc2['participantname'];
 $instructor = $rowDoc2['instructorName'];
 $resortName = $rowDoc2['resortName'];
+
+$queryDoc0 = "SELECT participantname FROM doc0 WHERE userID = $userID ORDER BY id DESC LIMIT 1;";
+$resultDoc0 = mysqli_query($conn, $queryDoc0);
+$rowDoc0 = mysqli_fetch_assoc($resultDoc0);
+$participantname = $rowDoc0['participantname'];
 
 // Query to retrieve birthday from user_data
 $queryUserData = "SELECT birthday FROM user_data WHERE id = $userID ORDER BY id DESC LIMIT 1;";

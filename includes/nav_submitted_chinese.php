@@ -126,19 +126,19 @@ switch ($pageName) {
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb mt-2 mb-2">
     <li class="breadcrumb-item <?php echo ($currentPage === 'doc0') ? 'active' : ''; ?>">
-      <a href="/chineseDocuments/doc0/doc0_view.php" <?php echo ($currentPage !== 'doc0') ? 'style="color: blue;"' : ''; ?>>Step 1</a>
+      <a href="/chineseDocuments/doc0/doc0_view.php" <?php echo ($currentPage !== 'doc0') ? 'style="color: blue;"' : ''; ?>>Page 1</a>
     </li>
     <li class="breadcrumb-item <?php echo ($currentPage === 'doc1') ? 'active' : ''; ?>">
-      <a href="/chineseDocuments/doc1/doc1_view.php" <?php echo ($currentPage !== 'doc1') ? 'style="color: blue;"' : ''; ?>>Step 2</a>
+      <a href="/chineseDocuments/doc1/doc1_view.php" <?php echo ($currentPage !== 'doc1') ? 'style="color: blue;"' : ''; ?>>Page 2</a>
     </li>
     <li class="breadcrumb-item <?php echo ($currentPage === 'doc2') ? 'active' : ''; ?>">
-      <a href="/chineseDocuments/doc2/doc2_view.php" <?php echo ($currentPage !== 'doc2') ? 'style="color: blue;"' : ''; ?>>Step 3</a>
+      <a href="/chineseDocuments/doc2/doc2_view.php" <?php echo ($currentPage !== 'doc2') ? 'style="color: blue;"' : ''; ?>>Page 3</a>
     </li>
     <li class="breadcrumb-item <?php echo ($currentPage === 'doc3') ? 'active' : ''; ?>">
-      <a href="/chineseDocuments/doc3/doc3_view.php" <?php echo ($currentPage !== 'doc3') ? 'style="color: blue;"' : ''; ?>>Step 4</a>
+      <a href="/chineseDocuments/doc3/doc3_view.php" <?php echo ($currentPage !== 'doc3') ? 'style="color: blue;"' : ''; ?>>Page 4</a>
     </li>
     <li class="breadcrumb-item <?php echo ($currentPage === 'doc4') ? 'active' : ''; ?>">
-      <a href="/chineseDocuments/doc4/doc4_view.php" <?php echo ($currentPage !== 'doc4') ? 'style="color: blue;"' : ''; ?>>Step 5</a>
+      <a href="/chineseDocuments/doc4/doc4_view.php" <?php echo ($currentPage !== 'doc4') ? 'style="color: blue;"' : ''; ?>>Page 5</a>
     </li>
   </ol>
 </nav>

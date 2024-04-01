@@ -31,7 +31,7 @@ $participantname = $rowDoc0['participantname'];
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/includes/style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.default.min.css">
     <title>Risk and Liability/Non-agency Acknowledgment</title>
 
 </head>
@@ -90,7 +90,7 @@ $participantname = $rowDoc0['participantname'];
 
 
 
-        <select id="instructorSelect" class="crew" name="instructors[]" multiple>
+            <select id="instructorSelect" class="crew" name="instructors[]" multiple>
                 <option value="" disabled selected>选择讲师(年代)</option>
                 <?php
                 while ($row = mysqli_fetch_assoc($instructorResult)) {
@@ -169,7 +169,7 @@ $participantname = $rowDoc0['participantname'];
         <p></p>
         <div class="col-md-12">
             <div class="form-check">
-                <p>D潜水员意外保险?</p>
+                <p>潜水员意外保险?</p>
                 <input class="form-check-input" type="checkbox" id="diverAccidentInsuranceYes" name="diverAccidentInsurance" value="Yes" required>
                 <label class="form-check-label" for="diverAccidentInsuranceYes">
                     是的
@@ -208,59 +208,63 @@ $participantname = $rowDoc0['participantname'];
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Include Select2 JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
 
-    <!-- Initialize Select2 -->
     <script>
         $(document).ready(function() {
-            $('#instructorSelect').select2();
+            $('#instructorSelect').selectize({
+                plugins: ['remove_button'],
+                delimiter: ',',
+                persist: false,
+                create: true,
+                maxItems: null,
+                placeholder: '选择教师',
+                render: {
+                    item: function(data, escape) {
+                        return '<div>' + escape(data.text) + '</div>';
+                    }
+                }
+            });
         });
     </script>
+
     <script>
-      function checkInstructorSelection() {
+        function checkInstructorSelection() {
             var selectElement = document.getElementById("instructorSelect");
-            if (selectElement.value.length === 0) {
+            if (selectElement && selectElement.selectedOptions.length === 0) {
                 showAlert('danger', '请选择至少一名教师。');
                 return false; // Prevent form submission
             }
-            // Form submission logic if needed
+            return true;
         }
 
-        function validateForm() {
+        function checkInsurance() {
+            // Check if Diver Accident Insurance checkbox is checked
             var diverAccidentInsuranceYes = document.getElementById('diverAccidentInsuranceYes');
             var diverAccidentInsuranceNo = document.getElementById('diverAccidentInsuranceNo');
-
             if (!diverAccidentInsuranceYes.checked && !diverAccidentInsuranceNo.checked) {
-                //alert('Please select whether you have Diver Accident Insurance.');
-                return false; // Prevent form submission if no checkbox is checked
+                showAlert('danger', '请选择是否购买潜水员意外保险');
+                return false; // Stop form submission if Diver Accident Insurance is not selected
             }
-
-            return true; // Allow form submission if at least one checkbox is checked
+            // Return true if insurance selection is valid
+            return true;
         }
 
-        document.getElementById("submit-doc2").addEventListener("click", function(event) {
-            if (!checkInstructorSelection()) {
-                event.preventDefault(); // Prevent form submission if instructor selection check fails
-            }
-
-            if (!validateForm()) {
-                event.preventDefault(); // Prevent form submission if form validation fails
-            }
-        });
-
-        // Function to toggle the visibility and requirement of the policy number input field
         function togglePolicyNumberInput() {
             var policyNumberInput = document.getElementById('policyNumberInput');
             var diverAccidentInsuranceYes = document.getElementById('diverAccidentInsuranceYes');
 
-            if (diverAccidentInsuranceYes.checked) {
-                policyNumberInput.style.display = 'block';
-                document.getElementById('policyNumber').required = true;
-            } else {
-                policyNumberInput.style.display = 'none';
-                document.getElementById('policyNumber').required = false;
+            if (policyNumberInput && diverAccidentInsuranceYes) {
+                if (diverAccidentInsuranceYes.checked) {
+                    policyNumberInput.style.display = 'block';
+                    document.getElementById('policyNumber').required = true;
+                } else {
+                    policyNumberInput.style.display = 'none';
+                    document.getElementById('policyNumber').required = false;
+                }
             }
         }
+
 
         // Add event listeners to the checkboxes to call the toggle function when their state changes
         document.getElementById('diverAccidentInsuranceYes').addEventListener('change', togglePolicyNumberInput);
@@ -301,10 +305,6 @@ $participantname = $rowDoc0['participantname'];
             });
         });
 
-        function submitForm() {
-            // Add logic to handle the submission of the entire form
-            alert('Form submitted successfully');
-        }
 
         // Participant Signature
 
@@ -480,48 +480,62 @@ $participantname = $rowDoc0['participantname'];
         }
 
         function handleFormSubmission() {
+            // Check crew member selection
+            if (!checkInstructorSelection()) {
+                return; // Stop form submission if crew member selection is invalid
+            }
+
+            // Check Insurance
+            if (!checkInsurance()) {
+                return; // Stop form submission if Insurance is invalid
+            }
+
             // Capture current date for participant and parent signatures
             let participantDate = new Date().toISOString();
             let parentDate = new Date().toISOString();
 
             // Capture the final point before form submission
-            let participantSignatureData = participantCanvas.toDataURL();
-            drawFinalPoint(); // Capture the final point for participant signature
-            let parentSignatureData = parentCanvas.toDataURL();
-            drawParentFinalPoint(); // Capture the final point for parent signature
+            let participantCanvas = document.getElementById('participantSignatureCanvas');
+            let parentCanvas = document.getElementById('parentSignatureCanvas');
+            if (participantCanvas && parentCanvas) {
+                let participantSignatureData = participantCanvas.toDataURL();
+                let parentSignatureData = parentCanvas.toDataURL();
 
-            // Get all selected crew members
-            let selectedInstructors = Array.from(document.getElementById('instructorSelect').selectedOptions).map(option => option.value);
+                // Get all selected crew members
+                let selectedInstructors = Array.from(document.getElementById('instructorSelect').selectedOptions).map(option => option.value);
 
-            let formData = new FormData();
-            formData.append('participantSignatureData', participantSignatureData);
-            formData.append('participantDate', participantDate);
-            formData.append('parentSignatureData', parentSignatureData);
-            formData.append('parentDate', parentDate);
-            // Include selected instructor names in form data
-            selectedInstructors.forEach(instructor => {
-                formData.append('selectedInstructor[]', instructor);
-            });
+                let formData = new FormData();
+                formData.append('participantSignatureData', participantSignatureData);
+                formData.append('participantDate', participantDate);
+                formData.append('parentSignatureData', parentSignatureData);
+                formData.append('parentDate', parentDate);
+                // Include selected instructor names in form data
+                selectedInstructors.forEach(instructor => {
+                    formData.append('selectedInstructor[]', instructor);
+                });
 
-            // Include selected resort name
-            let selectedResortName = document.getElementById('resortSelect').value;
-            formData.append('selectedResortName', selectedResortName);
+                // Include selected resort name
+                let selectedResortName = document.getElementById('resortSelect').value;
+                formData.append('selectedResortName', selectedResortName);
 
-            // Include diver accident insurance information
-            if (document.getElementById('diverAccidentInsuranceYes').checked) {
-                formData.append('diverAccidentInsurance', 'Yes');
-                let policyNumber = document.getElementById('policyNumber').value;
-                if (policyNumber.trim() === '') {
-                    showAlert('danger', '请输入潜水员意外保险保单编号。');
-                    return; // Stop form submission if policy number is not provided
+                // Include diver accident insurance information
+                if (document.getElementById('diverAccidentInsuranceYes').checked) {
+                    formData.append('diverAccidentInsurance', 'Yes');
+                    let policyNumber = document.getElementById('policyNumber').value;
+                    if (policyNumber.trim() === '') {
+                        showAlert('danger', '请输入潜水员意外保险保单编号。');
+                        return; // Stop form submission if policy number is not provided
+                    }
+                    formData.append('policyNumber', policyNumber);
+                } else {
+                    formData.append('diverAccidentInsurance', 'No');
                 }
-                formData.append('policyNumber', policyNumber);
-            } else {
-                formData.append('diverAccidentInsurance', 'No');
-            }
 
-            // Send the formData to the server using AJAX
-            sendToServer(formData);
+                // Send the formData to the server using AJAX
+                sendToServer(formData);
+            } else {
+                showAlert('danger', 'Signature canvas elements not found.');
+            }
         }
 
         function sendToServer(formData) {
@@ -534,10 +548,9 @@ $participantname = $rowDoc0['participantname'];
                         showAlert('success', '提交成功');
                         // Redirect to doc3.php
                         window.location.href = '/chineseDocuments/doc3/doc3.php';
-
                     } else {
                         // Display error message using Bootstrap alert
-                        showAlert('danger', '提交表单错误。');
+                        showAlert('danger', 'Error submitting form. Check console for details.');
                         console.error('Error:', xhr.status, xhr.statusText);
                     }
                 }
@@ -547,14 +560,6 @@ $participantname = $rowDoc0['participantname'];
                 showAlert('danger', 'Network error. Check console for details.');
                 console.error('Network error occurred');
             };
-
-            // Check if Diver Accident Insurance checkbox is checked
-            var diverAccidentInsuranceYes = document.getElementById('diverAccidentInsuranceYes');
-            var diverAccidentInsuranceNo = document.getElementById('diverAccidentInsuranceNo');
-            if (!diverAccidentInsuranceYes.checked && !diverAccidentInsuranceNo.checked) {
-                showAlert('danger', '请选择是否购买潜水员意外保险。');
-                return; // Stop form submission if Diver Accident Insurance is not selected
-            }
 
             xhr.send(formData);
         }
@@ -574,4 +579,5 @@ $participantname = $rowDoc0['participantname'];
         }
     </script>
 </body>
+
 </html>

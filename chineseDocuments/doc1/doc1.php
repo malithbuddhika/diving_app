@@ -42,7 +42,7 @@ $participantname = $rowDoc0['participantname'];
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/includes/style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.default.min.css">
 
 
 </head>
@@ -86,7 +86,7 @@ $participantname = $rowDoc0['participantname'];
                     </select>
 
                     <label for="crewMember">船员姓名: </label>
-                    <select class="crew" id="crewMember" name="crewMember[]" multiple>
+                    <select class="crew mb-2" id="crewMember" name="crewMember[]" multiple>
                         <?php
                         while ($row = mysqli_fetch_assoc($crewMemberResult)) {
                             echo "<option value='" . $row['crewMemberName'] . "'>" . $row['crewMemberName'] . "</option>";
@@ -176,19 +176,37 @@ $participantname = $rowDoc0['participantname'];
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Include Select2 JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
+
+
 
     <script>
-        $(document).ready(function() {
-            $('#crewMember').select2();
+         // Ensure jQuery is loaded before executing the script
+         $(document).ready(function() {
+            // Initialize Selectize plugin
+            $('#crewMember').selectize({
+                plugins: ['remove_button'],
+                delimiter: ',',
+                persist: false,
+                create: true,
+                maxItems: null,
+                placeholder: '选择船员',
+                render: {
+                    item: function(data, escape) {
+                        return '<div>' + escape(data.text) + '</div>';
+                    }
+                }
+            });
         });
-    </script>
 
-
-    <script>
-        function submitForm() {
-            // Add logic to handle the submission of the entire form
-            alert('Form submitted successfully');
+        // Check if at least one crew member is selected before form submission
+        function checkcrewMemberSelection() {
+            var selectize = $('#crewMember')[0].selectize;
+            if (selectize.items.length === 0) {
+                showAlert('danger', '请选择至少一名机组人员。');
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
         }
 
         // Participant Signature
@@ -365,6 +383,11 @@ $participantname = $rowDoc0['participantname'];
         }
 
         function handleFormSubmission() {
+            // Check crew member selection
+            if (!checkcrewMemberSelection()) {
+                return; // Stop form submission if crew member selection is invalid
+            }
+
             // Capture current date for participant and parent signatures
             let participantDate = new Date().toISOString();
             let parentDate = new Date().toISOString();

@@ -1,3 +1,30 @@
+.toast {
+    display: none;
+    position: fixed;
+    /* Adjust top position */
+    left: 20%;
+    /* Center horizontally */
+    transform: translateX(-50%);
+    /* Center horizontally */
+    background-color: orange;
+    color: white;
+    padding: 1px 1px;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 80%;
+}
+
+#signatureToastContainer {
+    position: relative;
+}
+
+.centered-image {
+    display: block;
+    margin: 0 auto;
+}
+
+
 .logo {
     display: block;
     margin: auto;
@@ -18,6 +45,7 @@
     max-width: 10%;
     height: auto;
 }
+
 .logo-Doc0 {
     display: block;
     margin: auto;
@@ -86,6 +114,11 @@ body {
     text-align: center;
 }
 
+.page-numbers {
+    text-align: right;
+}
+
+
 .paragraph {
     text-align: left;
 }
@@ -114,7 +147,8 @@ body {
     margin: 0;
     padding: 0;
 }
-.title-Doc0{
+
+.title-Doc0 {
     color: white;
     margin: 0;
     padding: 0;
@@ -128,6 +162,7 @@ body {
     text-decoration: underline;
     font-weight: bold;
 }
+
 .spacesAnswer {
     text-decoration: underline;
 }
@@ -158,8 +193,10 @@ body {
     left: 0;
     right: 0;
     border-top: 1px solid #000;
-    padding-top: 5px; /* Adjust this value to your preference */
-    width: 100%; /* Set initial width */
+    padding-top: 5px;
+    /* Adjust this value to your preference */
+    width: 100%;
+    /* Set initial width */
     text-align: center;
     margin-left: 50%;
 }
@@ -206,6 +243,7 @@ body {
     opacity: 0.5;
     pointer-events: none;
 }
+
 #homeBtn {
     float: right;
     margin-top: -44px;
@@ -213,14 +251,58 @@ body {
 }
 
 #alert-container {
-    width: 300px; /* Adjust width as needed */
-    height: 100px; /* Adjust height as needed */
+    width: 100vw;
+    height: 100px;
+    /* Adjust height as needed */
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 9999; /* Ensure the div is above other elements */
+    z-index: 9999;
+    /* Ensure the div is above other elements */
+    text-align: center;
+    pointer-events: none;
+    /* Disable pointer events on the container */
 }
+
+/* Base font size */
+.breadcrumb-item span {
+    font-size: 16px;
+    /* Adjust as needed */
+}
+
+/* Media query for small mobile displays */
+@media only screen and (max-width: 480px) {
+    .breadcrumb-item span {
+        font-size: 12px;
+        /* Adjust as needed for smaller screens */
+    }
+}
+
+
+
+/* Base font size */
+.breadcrumb-item a {
+    font-size: 16px;
+    /* Adjust as needed */
+}
+
+/* Media query for small mobile displays */
+@media only screen and (max-width: 480px) {
+    .breadcrumb-item a {
+        font-size: 12px;
+        /* Adjust as needed for smaller screens */
+    }
+}
+
+.line-separetor {
+    width: 100%; /* Or specify your desired width */
+    height: 2px; /* Or specify your desired thickness */
+    background-color: rgb(155, 153, 153); /* Or any color you prefer */
+    margin-bottom: 2%;
+}
+
+
 
 
 /* Media query for devices up to 375px width (extra small devices) */
@@ -230,6 +312,7 @@ body {
         bottom: 5px;
         right: 0px;
     }
+
     .logo-Doc3 {
         display: block;
         margin: auto;
@@ -245,6 +328,7 @@ body {
         bottom: 5px;
         right: -3px;
     }
+
     .logo-Doc3 {
         display: block;
         margin: auto;
@@ -261,10 +345,12 @@ body {
         bottom: 5px;
         right: 39px;
     }
+
     .logoDoc2 {
         max-width: 17%;
         /* Adjusted for smaller screens */
     }
+
     .logo-Doc3 {
         display: block;
         margin: auto;
@@ -280,10 +366,12 @@ body {
         bottom: 5px;
         right: 11px;
     }
+
     .logoDoc2 {
         max-width: 17%;
         /* Adjusted for smaller screens */
     }
+
     .logo-Doc3 {
         display: block;
         margin: auto;
@@ -299,7 +387,8 @@ body {
         bottom: 6%;
         right: 16%;
     }
-    .logo-Doc4  {
+
+    .logo-Doc4 {
         max-width: 100%;
         margin-top: 20px;
         margin-bottom: 10px;
@@ -314,10 +403,12 @@ body {
         margin-bottom: 15px;
         overflow-x: hidden;
     }
+
     .logoDoc2 {
         max-width: 17%;
         /* Adjusted for smaller screens */
     }
+
     .logo-Doc3 {
         display: block;
         margin: auto;
@@ -333,16 +424,19 @@ body {
         bottom: 5px;
         right: 55px;
     }
+
     .logoDoc2 {
         max-width: 17%;
     }
+
     .logo-Doc3 {
         display: block;
         margin: auto;
         max-width: 20%;
         height: auto;
     }
-    .logo-Doc4  {
+
+    .logo-Doc4 {
         max-width: 100%;
         margin-top: 20px;
         margin-bottom: 10px;
@@ -356,9 +450,11 @@ body {
         bottom: 25px;
         right: 780px;
     }
+
     .logoDoc2 {
         max-width: 17%;
     }
+
     .logo-Doc3 {
         display: block;
         margin: auto;
@@ -366,7 +462,7 @@ body {
         height: auto;
     }
 
-    .logo-Doc4  {
+    .logo-Doc4 {
         max-width: 100%;
         margin-top: 20px;
         margin-bottom: 10px;
@@ -401,6 +497,7 @@ body {
         bottom: 25px;
         right: 780px;
     }
+
     .logo-Doc4 {
         max-width: 99%;
         margin-top: 20px;
@@ -416,6 +513,7 @@ body {
         bottom: 25px;
         right: 780px;
     }
+
     .logo-Doc4 {
         max-width: 99%;
         margin-top: 20px;
@@ -423,9 +521,3 @@ body {
         height: auto;
     }
 }
-
-
-
-
-
-

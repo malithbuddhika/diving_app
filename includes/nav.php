@@ -124,19 +124,19 @@ switch ($currentURL) {
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb mt-2 mb-2">
     <li class="breadcrumb-item <?php echo ($currentPage === 'doc1') ? 'active' : 'disabled'; ?>">
-      <span <?php echo ($currentPage === 'doc0') ? '' : 'style="color: green; cursor: default;"'; ?>>Step 1</span>
+      <span <?php echo ($currentPage === 'doc0') ? '' : 'style="color: green; cursor: default;"'; ?>>Page 1</span>
     </li>
     <li class="breadcrumb-item <?php echo ($currentPage === 'doc1') ? 'active' : 'disabled'; ?>">
-      <span <?php echo ($currentPage === 'doc1') ? '' : 'style="color: green; cursor: default;"'; ?>>Step 2</span>
+      <span <?php echo ($currentPage === 'doc1') ? '' : 'style="color: green; cursor: default;"'; ?>>Page 2</span>
     </li>
     <li class="breadcrumb-item <?php echo ($currentPage === 'doc2') ? 'active' : 'disabled'; ?>">
-      <span <?php echo ($currentPage === 'doc2') ? '' : 'style="color: green; cursor: default;"'; ?>>Step 3</span>
+      <span <?php echo ($currentPage === 'doc2') ? '' : 'style="color: green; cursor: default;"'; ?>>Page 3</span>
     </li>
     <li class="breadcrumb-item <?php echo ($currentPage === 'doc3') ? 'active' : 'disabled'; ?>">
-      <span <?php echo ($currentPage === 'doc3') ? '' : 'style="color: green; cursor: default;"'; ?>>Step 4</span>
+      <span <?php echo ($currentPage === 'doc3') ? '' : 'style="color: green; cursor: default;"'; ?>>Page 4</span>
     </li>
     <li class="breadcrumb-item <?php echo ($currentPage === 'doc4') ? 'active' : 'disabled'; ?>">
-      <span <?php echo ($currentPage === 'doc4') ? '' : 'style="color: green; cursor: default;"'; ?>>Step 5</span>
+      <span <?php echo ($currentPage === 'doc4') ? '' : 'style="color: green; cursor: default;"'; ?>>Page 5</span>
     </li>
   </ol>
 </nav>

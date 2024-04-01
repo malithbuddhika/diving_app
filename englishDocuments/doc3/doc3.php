@@ -130,13 +130,21 @@ $participantname = $participantnameRow['participantname'];
                 <div class="form-group canvas-container">
                     <!-- Set canvas dimensions relative to the screen size -->
                     <label>Participant Signature</label>
-                    <canvas id="participantSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
+                    <canvas id="participantSignatureCanvas" class="signature-canvas" width="350" height="400"></canvas>
                     <button type="button" class="btn btn-secondary clearbutton" onclick="clearSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
-
             </form>
         </div>
     </div>
+
+    <!-- Tip for following the canvas -->
+    <div class="tip-container">
+        <div class="tip-content">
+            <p>Put participation signature in this box</p>
+            <div id="animatedDrawing"></div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <form class="mt-3" id="parentSignatureForm">

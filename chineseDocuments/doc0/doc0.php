@@ -306,7 +306,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         // Display success message using Bootstrap alert
-                        showAlert('success', 'Form submitted successfully');
+                        showAlert('success', '提交成功');
                         // Redirect to doc4.php
                         window.location.href = '/chineseDocuments/doc1/doc1.php';
 

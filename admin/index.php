@@ -18,8 +18,8 @@
 
 <body>
     <div class="container mt-5">
-        <h2>Medical Examiner User Login</h2>
-        <form action="login_process.php" method="post">
+        <h2>Admin User Login</h2>
+        <!-- <form action="login_process.php" method="post">
             <div class="form-group">
                 <label>Email</label>
                 <input type="email" class="form-control" name="email" required>
@@ -28,8 +28,8 @@
                 <label>Password</label>
                 <input type="password" class="form-control" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-            <a href="signup.php" class="btn btn-link">Create Account</a>
+            <button type="submit" class="btn btn-primary">Login</button> -->
+            <a href="participant_list.php" class="btn btn-link">See Participation List</a>
         </form>
     </div>
 </body>

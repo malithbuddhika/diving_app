@@ -77,12 +77,30 @@ $conn->close();
     <title>Welcome</title>
     <!-- Add Bootstrap CDN link -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+      background-image: url('/background.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: bottom center;
+      /* Set background position to bottom center */
+      background-size: cover;
+    }
+    </style>
 </head>
+
+
 
 <body>
 
     <div class="container mt-5">
-        <h2>Please fill in the following details / 请填写以下详细信息</h2>
+        <h4>Please fill in the following details </h4>
+        <h4>请填写以下详细信息</h4>
+        <br>
         <!-- Add the form element with the method and action attributes -->
         <form id="languageForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 

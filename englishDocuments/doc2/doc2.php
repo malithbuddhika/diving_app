@@ -207,42 +207,57 @@ $participantname = $rowDoc0['participantname'];
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
 
     <script>
-    $(document).ready(function() {
-        $('#instructorSelect').selectize({
-            plugins: ['remove_button'],
-            delimiter: ',',
-            persist: false,
-            create: true,
-            maxItems: null,
-            placeholder: 'Select Instructors',
-            render: {
-                item: function(data, escape) {
-                    return '<div>' + escape(data.text) + '</div>';
+        $(document).ready(function() {
+            $('#instructorSelect').selectize({
+                plugins: ['remove_button'],
+                delimiter: ',',
+                persist: false,
+                create: true,
+                maxItems: null,
+                placeholder: 'Select Instructors',
+                render: {
+                    item: function(data, escape) {
+                        return '<div>' + escape(data.text) + '</div>';
+                    }
                 }
-            }
+            });
         });
-    });
-</script>
+    </script>
 
     <script>
         function checkInstructorSelection() {
             var selectElement = document.getElementById("instructorSelect");
-            if (selectElement.value.length === 0) {
+            if (selectElement && selectElement.selectedOptions.length === 0) {
                 showAlert('danger', 'Please select at least one instructor.');
                 return false; // Prevent form submission
             }
+            return true;
         }
-        // Function to toggle the visibility and requirement of the policy number input field
+
+        function checkInsurance() {
+            // Check if Diver Accident Insurance checkbox is checked
+            var diverAccidentInsuranceYes = document.getElementById('diverAccidentInsuranceYes');
+            var diverAccidentInsuranceNo = document.getElementById('diverAccidentInsuranceNo');
+            if (!diverAccidentInsuranceYes.checked && !diverAccidentInsuranceNo.checked) {
+                showAlert('danger', 'Please select whether you have Diver Accident Insurance');
+                return false; // Stop form submission if Diver Accident Insurance is not selected
+            }
+            // Return true if insurance selection is valid
+            return true;
+        }
+
         function togglePolicyNumberInput() {
             var policyNumberInput = document.getElementById('policyNumberInput');
             var diverAccidentInsuranceYes = document.getElementById('diverAccidentInsuranceYes');
 
-            if (diverAccidentInsuranceYes.checked) {
-                policyNumberInput.style.display = 'block';
-                document.getElementById('policyNumber').required = true;
-            } else {
-                policyNumberInput.style.display = 'none';
-                document.getElementById('policyNumber').required = false;
+            if (policyNumberInput && diverAccidentInsuranceYes) {
+                if (diverAccidentInsuranceYes.checked) {
+                    policyNumberInput.style.display = 'block';
+                    document.getElementById('policyNumber').required = true;
+                } else {
+                    policyNumberInput.style.display = 'none';
+                    document.getElementById('policyNumber').required = false;
+                }
             }
         }
 
@@ -284,11 +299,6 @@ $participantname = $rowDoc0['participantname'];
                 label.textContent = resortSelect.value;
             });
         });
-
-        function submitForm() {
-            // Add logic to handle the submission of the entire form
-            alert('Form submitted successfully');
-        }
 
         // Participant Signature
 
@@ -464,48 +474,62 @@ $participantname = $rowDoc0['participantname'];
         }
 
         function handleFormSubmission() {
+            // Check crew member selection
+            if (!checkInstructorSelection()) {
+                return; // Stop form submission if crew member selection is invalid
+            }
+
+            // Check Insurance
+            if (!checkInsurance()) {
+                return; // Stop form submission if Insurance is invalid
+            }
+
             // Capture current date for participant and parent signatures
             let participantDate = new Date().toISOString();
             let parentDate = new Date().toISOString();
 
             // Capture the final point before form submission
-            let participantSignatureData = participantCanvas.toDataURL();
-            drawFinalPoint(); // Capture the final point for participant signature
-            let parentSignatureData = parentCanvas.toDataURL();
-            drawParentFinalPoint(); // Capture the final point for parent signature
+            let participantCanvas = document.getElementById('participantSignatureCanvas');
+            let parentCanvas = document.getElementById('parentSignatureCanvas');
+            if (participantCanvas && parentCanvas) {
+                let participantSignatureData = participantCanvas.toDataURL();
+                let parentSignatureData = parentCanvas.toDataURL();
 
-            // Get all selected crew members
-            let selectedInstructors = Array.from(document.getElementById('instructorSelect').selectedOptions).map(option => option.value);
+                // Get all selected crew members
+                let selectedInstructors = Array.from(document.getElementById('instructorSelect').selectedOptions).map(option => option.value);
 
-            let formData = new FormData();
-            formData.append('participantSignatureData', participantSignatureData);
-            formData.append('participantDate', participantDate);
-            formData.append('parentSignatureData', parentSignatureData);
-            formData.append('parentDate', parentDate);
-            // Include selected instructor names in form data
-            selectedInstructors.forEach(instructor => {
-                formData.append('selectedInstructor[]', instructor);
-            });
+                let formData = new FormData();
+                formData.append('participantSignatureData', participantSignatureData);
+                formData.append('participantDate', participantDate);
+                formData.append('parentSignatureData', parentSignatureData);
+                formData.append('parentDate', parentDate);
+                // Include selected instructor names in form data
+                selectedInstructors.forEach(instructor => {
+                    formData.append('selectedInstructor[]', instructor);
+                });
 
-            // Include selected resort name
-            let selectedResortName = document.getElementById('resortSelect').value;
-            formData.append('selectedResortName', selectedResortName);
+                // Include selected resort name
+                let selectedResortName = document.getElementById('resortSelect').value;
+                formData.append('selectedResortName', selectedResortName);
 
-            // Include diver accident insurance information
-            if (document.getElementById('diverAccidentInsuranceYes').checked) {
-                formData.append('diverAccidentInsurance', 'Yes');
-                let policyNumber = document.getElementById('policyNumber').value;
-                if (policyNumber.trim() === '') {
-                    showAlert('danger', 'Please enter the Policy Number for Diver Accident Insurance.');
-                    return; // Stop form submission if policy number is not provided
+                // Include diver accident insurance information
+                if (document.getElementById('diverAccidentInsuranceYes').checked) {
+                    formData.append('diverAccidentInsurance', 'Yes');
+                    let policyNumber = document.getElementById('policyNumber').value;
+                    if (policyNumber.trim() === '') {
+                        showAlert('danger', 'Please enter the Policy Number for Diver Accident Insurance.');
+                        return; // Stop form submission if policy number is not provided
+                    }
+                    formData.append('policyNumber', policyNumber);
+                } else {
+                    formData.append('diverAccidentInsurance', 'No');
                 }
-                formData.append('policyNumber', policyNumber);
-            } else {
-                formData.append('diverAccidentInsurance', 'No');
-            }
 
-            // Send the formData to the server using AJAX
-            sendToServer(formData);
+                // Send the formData to the server using AJAX
+                sendToServer(formData);
+            } else {
+                showAlert('danger', 'Signature canvas elements not found.');
+            }
         }
 
         function sendToServer(formData) {
@@ -517,8 +541,7 @@ $participantname = $rowDoc0['participantname'];
                         // Display success message using Bootstrap alert
                         showAlert('success', 'Form submitted successfully');
                         // Redirect to doc3.php
-                        // window.location.href = '/englishDocuments/doc3/doc3.php';
-
+                        window.location.href = '/englishDocuments/doc3/doc3.php';
                     } else {
                         // Display error message using Bootstrap alert
                         showAlert('danger', 'Error submitting form. Check console for details.');
@@ -532,19 +555,6 @@ $participantname = $rowDoc0['participantname'];
                 console.error('Network error occurred');
             };
 
-            // Check if Diver Accident Insurance checkbox is checked
-            var diverAccidentInsuranceYes = document.getElementById('diverAccidentInsuranceYes');
-            var diverAccidentInsuranceNo = document.getElementById('diverAccidentInsuranceNo');
-            if (!diverAccidentInsuranceYes.checked && !diverAccidentInsuranceNo.checked) {
-                showAlert('danger', 'Please select whether you have Diver Accident Insurance');
-
-                var selectElement = document.getElementById("instructorSelect");
-                if (selectElement.value.length === 0) {
-                    showAlert('danger', 'Please select at least one instructor.');
-                    return false; // Prevent form submission
-                }
-                return; // Stop form submission if Diver Accident Insurance is not selected
-            }
             xhr.send(formData);
         }
 

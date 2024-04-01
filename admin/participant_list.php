@@ -68,7 +68,7 @@ $result = $conn->query($sql);
                     var userId = row.getAttribute("data-userid");
                     var name = row.querySelector("td:nth-child(1)").innerText;
                     var birthday = row.querySelector("td:nth-child(2)").innerText;
-                    window.location.href = "viewParticipantQuestionnaire.php?userID=" + userId + "&name=" + name + "&birthday=" + birthday;
+                    window.location.href = "viewParticipantDocs.php?userID=" + userId;
                 });
             });
         });

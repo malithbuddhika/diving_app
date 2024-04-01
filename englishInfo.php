@@ -15,10 +15,10 @@
 
     <!-- Add Bootstrap form group for English inputs -->
     <div class="form-group">
-        <label for="birthdayInputEn">Select day:</label>
+        <label for="birthdayInputEn">Select Bday:</label>
         <!-- Add Bootstrap form-control class for styling -->
-        <input type="date" class="form-control" id="birthdayInputEn" name="birthdayInputEn" required>
+        <input type="date" class="form-control" id="birthdayInputEn" name="birthdayInputEn" placeholder="Bday" required>
     </div>
 </div>
 
-<button id="btn-en" type="submit" class="btn btn-primary">Next</button>
+<button style="text-align: center;" id="btn-en" type="submit" class="btn btn-primary">Next</button>

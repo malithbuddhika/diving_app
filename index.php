@@ -67,6 +67,43 @@ $conn->close();
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
   <style>
+    /* Loading overlay CSS */
+    .loading-overlay {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .loading-spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Hide content initially */
+    body {
+      display: none;
+    }
+
+
     body {
       overflow-x: hidden;
       position: relative;
@@ -108,6 +145,10 @@ $conn->close();
 </head>
 
 <body>
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+  </div>
+
   <div id="main">
 
     <div class="container">
@@ -138,20 +179,20 @@ $conn->close();
             <button class="btn btn-outline-secondary" onclick="search()" type="button">Search</button>
           </div>
         </div>
-      
 
-      <?php
-      // Display search results or "No results found" message
-      if ($showResults) {
 
-        echo  '<div>' . $searchResults . '</div>';
-        // Show the "View Document" button
-        echo '<div class="row mt-4"><div class="col-md-6"><button class="btn btn-primary" onclick="view_document()">View Documents</button></div></div>';
-      } elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['ppNumber'])) {
-        echo "No results found";
-      }
-      ?>
-    </div>
+        <?php
+        // Display search results or "No results found" message
+        if ($showResults) {
+
+          echo  '<div>' . $searchResults . '</div>';
+          // Show the "View Document" button
+          echo '<div class="row mt-4"><div class="col-md-6"><button class="btn btn-primary" onclick="view_document()">View Documents</button></div></div>';
+        } elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['ppNumber'])) {
+          echo "No results found";
+        }
+        ?>
+      </div>
     </div>
 
   </div>
@@ -160,6 +201,14 @@ $conn->close();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    // Show content after page load
+    window.onload = function() {
+      document.body.style.display = "block"; // Show content
+      document.getElementById('loadingOverlay').style.display = "none"; // Hide loading overlay
+    };
+  </script>
 
   <script>
     function apply() {
@@ -180,5 +229,4 @@ $conn->close();
   </script>
 
 </body>
-
 </html>
