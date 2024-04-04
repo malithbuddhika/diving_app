@@ -74,10 +74,18 @@ $participantname = $rowDoc0['participantname'];
 
             <p class="paragraph"><strong>责任排除</strong></p>
             <p><strong>我理解并同意这两种观点</strong></p>
+
             <div class="row">
                 <div class="col-md-12">
-                    <label for="divemaster">潜水长的名字: </label>
-                    <select class="crew" id="divemaster">
+                    <label for="divemaster">潜水大师: </label>
+                    <i id="divemaster-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
+                    <div class="toast" id="divemasterToast">
+                        <div class="toast-body">
+                            <b>请在给定框中选择潜水师</b>
+                            <div>潜水大师是一名潜水专业人士，他经过了广泛的培训，具备领导和监督娱乐潜水活动所需的知识和技能。</div>
+                        </div>
+                    </div>
+                    <select class="crew mb-2" id="divemaster" name="divemasters[]" multiple>
                         <?php
                         while ($row = mysqli_fetch_assoc($divemasterResult)) {
                             echo "<option value='" . $row['divemasterName'] . "'>" . $row['divemasterName'] . "</option>";
@@ -85,7 +93,14 @@ $participantname = $rowDoc0['participantname'];
                         ?>
                     </select>
 
-                    <label for="crewMember">船员姓名: </label>
+                    <label for="crewMember">船员: </label>
+                    <i id="crewmembers-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
+                    <div class="toast" id="crewmembersToast">
+                        <div class="toast-body">
+                            <b>请在给定的框中选择机组成员</b>
+                            <div> <b>"船员"</b>指负责操作和协助操作用于水肺潜水之船的人员。</div>
+                        </div>
+                    </div>
                     <select class="crew mb-2" id="crewMember" name="crewMember[]" multiple>
                         <?php
                         while ($row = mysqli_fetch_assoc($crewMemberResult)) {
@@ -138,28 +153,52 @@ $participantname = $rowDoc0['participantname'];
 
     <div class="row">
         <div class="col-md-12">
-            <form class="mt-3" id="participantSignatureForm">
+            <form class="mt-3 position-relative" id="participantSignatureForm">
                 <div class="form-group canvas-container">
+                    <div class="toast-container" id="signatureToastContainer">
+                        <div class="toast" id="signatureToast">
+                            <div class="toast-body">
+                                请您(参赛者)用手指在指定的方框内签名。
+                            </div>
+                            <div class="toast-body">
+                                <img src="sign.gif" alt="SIGN.GIF" class="centered-image">
+                            </div>
+                        </div>
+                    </div>
+                    <label>参与者的签名<i id="participant-signature-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
+                    </label>
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <label>参与者的签名</label>
                     <canvas id="participantSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                     <button type="button" class="btn btn-secondary clearbutton" onclick="clearSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
             </form>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
-            <form class="mt-3" id="parentSignatureForm">
+            <form class="mt-3 position-relative" id="parentSignatureForm">
                 <div class="form-group canvas-container">
+                    <div class="toast-container" id="parentSignatureToastContainer">
+                        <div class="toast" id="parentSignatureToast">
+                            <div class="toast-body">
+                                请提供家长或监护人的签名，用手指在指定的方框里画。
+                            </div>
+                            <div class="toast-body">
+                                <img src="sign.gif" alt="SIGN.GIF" class="centered-image">
+                            </div>
+                        </div>
+                    </div>
+                    <label>家长或监护人签名 <i id="parent-signature-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
+                    </label>
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <label>家长或监护人签署(如适用)</label>
                     <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                     <button type="button" class="btn btn-secondary clearbutton" onclick="clearParentSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
             </form>
         </div>
     </div>
+
 
     <div id="alert-container"></div>
     <div class="row">
@@ -172,17 +211,155 @@ $participantname = $rowDoc0['participantname'];
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Include Select2 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
 
-
-
     <script>
-         // Ensure jQuery is loaded before executing the script
-         $(document).ready(function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            const divemasterInfoIcon = document.getElementById('divemaster-info-icon');
+            const divemasterToast = document.getElementById('divemasterToast');
+
+            divemasterInfoIcon.addEventListener('click', function() {
+                positionToast(divemasterInfoIcon, divemasterToast);
+                $(divemasterToast).toast('show');
+            });
+
+            window.addEventListener('resize', function() {
+                // Adjust toast position on window resize
+                positionToast(divemasterInfoIcon, divemasterToast);
+            });
+
+            // Scroll event listener to keep toast position updated
+            window.addEventListener('scroll', function() {
+                positionToast(divemasterInfoIcon, divemasterToast);
+            });
+
+            // Function to calculate and set the position of the toast relative to the icon
+            function positionToast(targetElement, toastElement) {
+                const targetRect = targetElement.getBoundingClientRect();
+                const toastWidth = toastElement.offsetWidth;
+                const toastHeight = toastElement.offsetHeight;
+
+                // Position the toast near the icon
+                let toastTop = targetRect.top + (targetRect.height / 2) - (toastHeight / 2);
+                let toastLeft = targetRect.left + targetRect.width + 60; // 10px right of the icon
+
+                // Set the toast position
+                toastElement.style.top = toastTop + 'px';
+                toastElement.style.left = toastLeft + 'px';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const participationInfoIcon = document.getElementById('crewmembers-info-icon');
+            const crewMembersToast = document.getElementById('crewmembersToast');
+
+            participationInfoIcon.addEventListener('click', function() {
+                positionToast(participationInfoIcon, crewMembersToast);
+                $(crewMembersToast).toast('show');
+            });
+
+            window.addEventListener('resize', function() {
+                // Adjust toast position on window resize
+                positionToast(participationInfoIcon, crewMembersToast);
+            });
+
+            // Scroll event listener to keep toast position updated
+            window.addEventListener('scroll', function() {
+                positionToast(participationInfoIcon, crewMembersToast);
+            });
+
+            // Function to calculate and set the position of the toast relative to the icon
+            function positionToast(targetElement, toastElement) {
+                const targetRect = targetElement.getBoundingClientRect();
+                const toastWidth = toastElement.offsetWidth;
+                const toastHeight = toastElement.offsetHeight;
+
+                // Position the toast near the icon
+                let toastTop = targetRect.top + (targetRect.height / 2) - (toastHeight / 2);
+                let toastLeft = targetRect.left + targetRect.width + 50; // 10px right of the icon
+
+                // Set the toast position
+                toastElement.style.top = toastTop + 'px';
+                toastElement.style.left = toastLeft + 'px';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const participantSignatureInfoIcon = document.getElementById('participant-signature-info-icon');
+            const signatureToast = document.getElementById('signatureToast');
+
+            participantSignatureInfoIcon.addEventListener('click', function() {
+                positionToast(participantSignatureInfoIcon, signatureToast);
+                $(signatureToast).toast('show');
+            });
+
+            window.addEventListener('resize', function() {
+                // Adjust toast position on window resize
+                positionToast(participantSignatureInfoIcon, signatureToast);
+            });
+
+            // Scroll event listener to keep toast position updated
+            window.addEventListener('scroll', function() {
+                positionToast(participantSignatureInfoIcon, signatureToast);
+            });
+
+            // Function to calculate and set the position of the toast relative to the icon
+            function positionToast(targetElement, toastElement) {
+                const targetRect = targetElement.getBoundingClientRect();
+                const toastWidth = toastElement.offsetWidth;
+                const toastHeight = toastElement.offsetHeight;
+
+                // Position the toast near the icon
+                let toastTop = targetRect.top + (targetRect.height / 2) - (toastHeight / 2);
+                let toastLeft = targetRect.left + targetRect.width + 70; // 10px right of the icon
+
+                // Set the toast position
+                toastElement.style.top = toastTop + 'px';
+                toastElement.style.left = toastLeft + 'px';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const parentSignatureInfoIcon = document.getElementById('parent-signature-info-icon'); // Corrected variable name
+            const parentSignatureToast = document.getElementById('parentSignatureToast'); // Corrected variable name
+
+            parentSignatureInfoIcon.addEventListener('click', function() { // Corrected event listener
+                positionToast(parentSignatureInfoIcon, parentSignatureToast); // Corrected variable names
+                $(parentSignatureToast).toast('show');
+            });
+
+            window.addEventListener('resize', function() {
+                // Adjust toast position on window resize
+                positionToast(parentSignatureInfoIcon, parentSignatureToast); // Corrected variable names
+            });
+
+            // Scroll event listener to keep toast position updated
+            window.addEventListener('scroll', function() {
+                positionToast(parentSignatureInfoIcon, parentSignatureToast); // Corrected variable names
+            });
+
+            // Function to calculate and set the position of the toast relative to the icon
+            function positionToast(targetElement, toastElement) {
+                const targetRect = targetElement.getBoundingClientRect();
+                const toastWidth = toastElement.offsetWidth;
+                const toastHeight = toastElement.offsetHeight;
+
+                // Position the toast near the icon
+                let toastTop = targetRect.top + (targetRect.height / 2) - (toastHeight / 2);
+                let toastLeft = targetRect.left + targetRect.width + 50; // 10px right of the icon
+
+                // Set the toast position
+                toastElement.style.top = toastTop + 'px';
+                toastElement.style.left = toastLeft + 'px';
+            }
+        });
+
+        // Ensure jQuery is loaded before executing the script
+        $(document).ready(function() {
             // Initialize Selectize plugin
             $('#crewMember').selectize({
                 plugins: ['remove_button'],
@@ -204,6 +381,34 @@ $participantname = $rowDoc0['participantname'];
             var selectize = $('#crewMember')[0].selectize;
             if (selectize.items.length === 0) {
                 showAlert('danger', '请选择至少一名机组人员。');
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+
+        // Ensure jQuery is loaded before executing the script
+        $(document).ready(function() {
+            // Initialize Selectize plugin
+            $('#divemaster').selectize({
+                plugins: ['remove_button'],
+                delimiter: ',',
+                persist: false,
+                create: true,
+                maxItems: null,
+                placeholder: '选择潜水教练',
+                render: {
+                    item: function(data, escape) {
+                        return '<div>' + escape(data.text) + '</div>';
+                    }
+                }
+            });
+        });
+
+        // Check if at least one crew member is selected before form submission
+        function diveMasterSelection() {
+            var selectize = $('#divemaster')[0].selectize;
+            if (selectize.items.length === 0) {
+                showAlert('danger', '请选择至少一名潜水员。');
                 return false; // Prevent form submission
             }
             return true; // Allow form submission
@@ -384,6 +589,11 @@ $participantname = $rowDoc0['participantname'];
 
         function handleFormSubmission() {
             // Check crew member selection
+            if (!diveMasterSelection()) {
+                return; // Stop form submission if crew member selection is invalid
+            }
+
+            // Check crew member selection
             if (!checkcrewMemberSelection()) {
                 return; // Stop form submission if crew member selection is invalid
             }
@@ -456,9 +666,6 @@ $participantname = $rowDoc0['participantname'];
 
         }
     </script>
-
-
-
 </body>
 
 </html>

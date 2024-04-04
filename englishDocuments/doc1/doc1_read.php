@@ -3,33 +3,6 @@ session_start();
 include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
 ?>
 
-<?php
-
-include $_SERVER['DOCUMENT_ROOT'] . '/connection.php';
-
-// Query to retrieve divemasters from the database
-$divemasterQuery = "SELECT divemasterName FROM divemasters";
-$divemasterResult = mysqli_query($conn, $divemasterQuery);
-
-// Query to retrieve crew members from the database
-$crewMemberQuery = "SELECT crewMemberName FROM crewmembers";
-$crewMemberResult = mysqli_query($conn, $crewMemberQuery);
-
-// Query to retrieve captains from the database
-$captainQuery = "SELECT captainName FROM captains";
-$captainResult = mysqli_query($conn, $captainQuery);
-
-// Query to retrieve vessel names from the database
-$vesselQuery = "SELECT vesselName FROM vessels";
-$vesselResult = mysqli_query($conn, $vesselQuery);
-
-// Close the statement and database connection
-// Query to retrieve medical examiner data from medical_examiner
-$queryDoc0 = "SELECT * FROM doc0 WHERE userID = $userID ;";
-$resultDoc0 = mysqli_query($conn, $queryDoc0);
-$rowDoc0 = mysqli_fetch_assoc($resultDoc0);
-$participantname = $rowDoc0['participantname'];
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -83,7 +56,7 @@ $participantname = $rowDoc0['participantname'];
 
             <p class="paragraph"><strong>EXCLUSION OF LIABILITY</strong></p>
             <p><strong>I understand and agree that neither</strong></p>
-            
+
             <div class="row">
                 <div class="col-md-12">
                     <label for="divemaster">Divemasters: </label>
@@ -94,12 +67,8 @@ $participantname = $rowDoc0['participantname'];
                             <div>A Divemaster is a diving professional who has undergone extensive training and has the necessary knowledge and skills to lead and supervise recreational diving activities.</div>
                         </div>
                     </div>
-                    <select class="crew mb-2" id="divemaster" name="divemasters[]" multiple>
-                        <?php
-                        while ($row = mysqli_fetch_assoc($divemasterResult)) {
-                            echo "<option value='" . $row['divemasterName'] . "'>" . $row['divemasterName'] . "</option>";
-                        }
-                        ?>
+                    <select class="crew mb-2" id="divemaster" name="divemasters[]" multiple disabled>
+                        <option>Select Divemaster</option>
                     </select>
 
 
@@ -111,22 +80,14 @@ $participantname = $rowDoc0['participantname'];
                             <div> <b>"Crew Members"</b>refer to individuals who are responsible for operating and assisting with the operation of the vessel used for the scuba diving trips.</div>
                         </div>
                     </div>
-                    <select class="crew mb-2" id="crewMember" name="crewMember[]" multiple>
-                        <?php
-                        while ($row = mysqli_fetch_assoc($crewMemberResult)) {
-                            echo "<option value='" . $row['crewMemberName'] . "'>" . $row['crewMemberName'] . "</option>";
-                        }
-                        ?>
+                    <select class="crew mb-2" id="crewMember" name="crewMember[]" multiple disabled>
+                       <option>Select Crew Member</option>
                     </select>
 
 
                     <label for="captain">Captain : </label>
-                    <select class="crew" id="captain">
-                        <?php
-                        while ($row = mysqli_fetch_assoc($captainResult)) {
-                            echo "<option value='" . $row['captainName'] . "'>" . $row['captainName'] . "</option>";
-                        }
-                        ?>
+                    <select class="crew" id="captain" disabled>
+                        <option>Captain Name</option>
                     </select>
                 </div>
             </div>
@@ -135,12 +96,8 @@ $participantname = $rowDoc0['participantname'];
                 <div class="col-md-12">
                     <p><strong>nor the crew or the owner of the vessel,</strong></p>
                     <label for="vesselName">Vessel: </label>
-                    <select class="vessel" id="vesselName">
-                        <?php
-                        while ($row = mysqli_fetch_assoc($vesselResult)) {
-                            echo "<option value='" . $row['vesselName'] . "'>" . $row['vesselName'] . "</option>";
-                        }
-                        ?>
+                    <select class="vessel" id="vesselName" disabled>
+                        <option>Vessel Name</option>
                     </select>
                     <strong>nor</strong>
                 </div>
@@ -169,7 +126,7 @@ $participantname = $rowDoc0['participantname'];
             <form>
                 <label for="participantname">Participant's Name:</label>
                 <!-- Input field for participant's name -->
-                <label class="spaces"> <?php echo $participantname; ?></label>
+                <label class="spaces">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp, </label>
             </form>
         </div>
     </div>
@@ -191,8 +148,7 @@ $participantname = $rowDoc0['participantname'];
                     <label>Participant Signature <i id="participant-signature-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
                     </label>
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <canvas id="participantSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
-                    <button type="button" class="btn btn-secondary clearbutton" onclick="clearSignature()"><span class="bi bi-x-lg"></span></button>
+                    <canvas id="participantSignatureCanvas" class="signature-canvas" width="350%" height="400%" disabled></canvas>
                 </div>
             </form>
         </div>
@@ -215,18 +171,10 @@ $participantname = $rowDoc0['participantname'];
                     <label>Signature of Parent or Guardian <i id="parent-signature-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
                     </label>
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
-                    <button type="button" class="btn btn-secondary clearbutton" onclick="clearParentSignature()"><span class="bi bi-x-lg"></span></button>
+                    <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%" disabled></canvas>
+
                 </div>
             </form>
-        </div>
-    </div>
-
-    <div id="alert-container"></div>
-
-    <div class="row">
-        <div class="col-md-12 btn-container">
-            <button type="button" id="submit-doc1" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">Submit</button>
         </div>
     </div>
 
@@ -439,260 +387,6 @@ $participantname = $rowDoc0['participantname'];
                 return false; // Prevent form submission
             }
             return true; // Allow form submission
-        }
-
-
-        // Participant Signature
-        let participantCanvas = document.getElementById('participantSignatureCanvas');
-        let ctx = participantCanvas.getContext('2d');
-        let drawing = false;
-        let points = [];
-
-        function startDrawing(e) {
-            drawing = true;
-            points = [];
-            draw(e);
-        }
-
-        function draw(e) {
-            if (!drawing) return;
-
-            e.preventDefault();
-
-            ctx.lineWidth = 2;
-            ctx.lineCap = 'round';
-            ctx.strokeStyle = '#000';
-
-            // Adjust touch coordinates
-            const currentX = e.clientX || e.touches[0].clientX - participantCanvas.getBoundingClientRect().left;
-            const currentY = e.clientY || e.touches[0].clientY - participantCanvas.getBoundingClientRect().top;
-
-            points.push({
-                x: currentX,
-                y: currentY
-            });
-
-            if (points.length > 1) {
-                const prevPoint = points[points.length - 2];
-                const currentPoint = points[points.length - 1];
-
-                // Draw a line segment
-                ctx.beginPath();
-                ctx.moveTo(prevPoint.x, prevPoint.y);
-                ctx.lineTo(currentPoint.x, currentPoint.y);
-                ctx.stroke();
-            }
-        }
-
-        function stopDrawing() {
-            if (drawing) {
-                drawing = false;
-                // Capture the final point when stopping drawing
-                drawFinalPoint();
-            }
-        }
-
-        function drawFinalPoint() {
-            if (points.length > 0) {
-                const finalPoint = points[points.length - 1];
-                // Add a full stop at the final point
-                ctx.lineWidth = 2;
-                ctx.lineCap = 'round';
-                ctx.strokeStyle = '#000';
-                ctx.beginPath();
-                ctx.arc(finalPoint.x, finalPoint.y, 1, 0, 2 * Math.PI);
-                ctx.stroke();
-            }
-        }
-
-        participantCanvas.addEventListener('mousedown', startDrawing);
-        participantCanvas.addEventListener('mousemove', draw);
-        participantCanvas.addEventListener('mouseup', stopDrawing);
-
-        // Touch events
-        participantCanvas.addEventListener('touchstart', startDrawing);
-        participantCanvas.addEventListener('touchmove', draw);
-        participantCanvas.addEventListener('touchend', stopDrawing);
-
-        function saveSignature() {
-            let participantSignatureData = participantCanvas.toDataURL();
-            let formData = new FormData(document.getElementById('participantSignatureForm'));
-
-            formData.append('participantSignatureData', participantSignatureData);
-            // Send the formData to the server using AJAX
-            sendToServer(formData);
-        }
-
-        function clearSignature() {
-            ctx.clearRect(0, 0, participantCanvas.width, participantCanvas.height);
-        }
-
-
-        // Parent Signature
-
-        let parentCanvas = document.getElementById('parentSignatureCanvas');
-        let parentCtx = parentCanvas.getContext('2d');
-        let parentDrawing = false;
-        let parentPoints = [];
-
-        function startParentDrawing(e) {
-            parentDrawing = true;
-            parentPoints = [];
-            drawParent(e);
-        }
-
-        function drawParent(e) {
-            if (!parentDrawing) return;
-
-            e.preventDefault();
-
-            parentCtx.lineWidth = 2;
-            parentCtx.lineCap = 'round';
-            parentCtx.strokeStyle = '#000';
-
-            // Adjust touch coordinates
-            const currentX = e.clientX || e.touches[0].clientX - parentCanvas.getBoundingClientRect().left;
-            const currentY = e.clientY || e.touches[0].clientY - parentCanvas.getBoundingClientRect().top;
-
-            parentPoints.push({
-                x: currentX,
-                y: currentY
-            });
-
-            if (parentPoints.length > 1) {
-                const prevPoint = parentPoints[parentPoints.length - 2];
-                const currentPoint = parentPoints[parentPoints.length - 1];
-
-                // Draw a line segment
-                parentCtx.beginPath();
-                parentCtx.moveTo(prevPoint.x, prevPoint.y);
-                parentCtx.lineTo(currentPoint.x, currentPoint.y);
-                parentCtx.stroke();
-            }
-        }
-
-        function stopParentDrawing() {
-            if (parentDrawing) {
-                parentDrawing = false;
-                // Capture the final point when stopping drawing
-                drawParentFinalPoint();
-            }
-        }
-
-        function drawParentFinalPoint() {
-            if (parentPoints.length > 0) {
-                const finalPoint = parentPoints[parentPoints.length - 1];
-                // Add a full stop at the final point
-                parentCtx.lineWidth = 2;
-                parentCtx.lineCap = 'round';
-                parentCtx.strokeStyle = '#000';
-                parentCtx.beginPath();
-                parentCtx.arc(finalPoint.x, finalPoint.y, 1, 0, 2 * Math.PI);
-                parentCtx.stroke();
-            }
-        }
-
-        parentCanvas.addEventListener('mousedown', startParentDrawing);
-        parentCanvas.addEventListener('mousemove', drawParent);
-        parentCanvas.addEventListener('mouseup', stopParentDrawing);
-
-        // Touch events
-        parentCanvas.addEventListener('touchstart', startParentDrawing);
-        parentCanvas.addEventListener('touchmove', drawParent);
-        parentCanvas.addEventListener('touchend', stopParentDrawing);
-
-
-        function saveParentSignature() {
-            let parentSignatureData = parentCanvas.toDataURL();
-            let formData = new FormData(document.getElementById('parentSignatureForm'));
-
-            formData.append('parentSignatureData', parentSignatureData);
-            sendToServer(formData);
-        }
-
-        function clearParentSignature() {
-            parentCtx.clearRect(0, 0, parentCanvas.width, parentCanvas.height);
-        }
-
-        function handleFormSubmission() {
-            // Check crew member selection
-            if (!diveMasterSelection()) {
-                return; // Stop form submission if crew member selection is invalid
-            }
-
-            // Check crew member selection
-            if (!checkcrewMemberSelection()) {
-                return; // Stop form submission if crew member selection is invalid
-            }
-
-            // Capture current date for participant and parent signatures
-            let participantDate = new Date().toISOString();
-            let parentDate = new Date().toISOString();
-
-            // Capture the final point before form submission
-            let participantSignatureData = participantCanvas.toDataURL();
-            drawParentFinalPoint(); // Capture the final point for parent signature
-            let parentSignatureData = parentCanvas.toDataURL();
-
-            // Get all selected crew members
-            let selectedCrewMembers = Array.from(document.getElementById('crewMember').selectedOptions).map(option => option.value);
-
-            // Create FormData object and append form data
-            let formData = new FormData();
-            formData.append('divemaster', document.getElementById('divemaster').value);
-            formData.append('crewMember', JSON.stringify(selectedCrewMembers)); // Convert array to JSON string
-            formData.append('captain', document.getElementById('captain').value);
-            formData.append('vesselName', document.getElementById('vesselName').value);
-            formData.append('participantSignatureData', participantSignatureData);
-            formData.append('participantDate', participantDate);
-            formData.append('parentSignatureData', parentSignatureData);
-            formData.append('parentDate', parentDate);
-
-            // Send the formData to the server using AJAX
-            sendToServer(formData);
-        }
-
-
-
-
-        function sendToServer(formData) {
-            let xhr = new XMLHttpRequest();
-            xhr.open('POST', 'doc1_save_data.php', true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        // Display success message using Bootstrap alert
-                        showAlert('success', 'Form submitted successfully');
-                        window.location.href = '/englishDocuments/doc2/doc2.php';
-
-                    } else {
-                        // Display error message using Bootstrap alert
-                        showAlert('danger', 'Error submitting form. Check console for details.');
-                        console.error('Error:', xhr.status, xhr.statusText);
-                    }
-                }
-            };
-
-            xhr.onerror = function() {
-                // Display network error message using Bootstrap alert
-                showAlert('danger', 'Network error. Check console for details.');
-                console.error('Network error occurred');
-            };
-            xhr.send(formData);
-        }
-
-        function showAlert(type, message) {
-            let alertContainer = document.getElementById('alert-container');
-            let alertElement = document.createElement('div');
-            alertElement.className = `alert alert-${type} mt-3`;
-            alertElement.textContent = message;
-            alertContainer.appendChild(alertElement);
-
-            // Remove the alert after a few seconds (optional)
-            setTimeout(function() {
-                alertContainer.removeChild(alertElement);
-            }, 7000);
-
         }
     </script>
 </body>

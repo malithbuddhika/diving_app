@@ -41,7 +41,15 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
         </div>
     </div>
 
-    <p>我, <input type="text" id="participantname" name="participantname">我明白，作为一名潜水员我应该:</p>
+    <p>我, <input type="text" id="participantname" name="participantname"> <i id="participation-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i></p>
+    <div class="toast" id="participantNameToast">
+        <div class="toast-body">
+        请确保您的全名输入正确。如果不是，请提供正确的名称。
+            <br>
+            <u><b>例如,</b></u>
+            如果你的名字是<b>John Smith</b>, 但它被输入为 <b>John Smyth</b>, 请相应更正。
+        </div>
+    </div>
     <p>1. 为潜水保持良好的身心健康。潜水时避免酒精或危险药物的影响。保持对潜水技能的精通，在一段时间不活动潜水后，努力通过继续教育和在受控条件下复习来提高自己的潜水技能，并参考我的课程材料来了解最新情况，更新重要信息。</p>
     <p>2. 熟悉我的潜水地点。如果没有，从一个有知识的当地人士那里获得正式的潜水指导。如果潜水条件比我的经验差，请推迟潜水或选择条件较好的备用地点。只从事与我的训练和经验相符的潜水活动。除非经过专门训练，否则不要从事洞穴潜水或技术潜水。</p>
     <p>3. 使用自己熟悉的完整、维护良好、可靠的设备;并且在每次潜水前检查它的正确配合和功能。当你进行水肺潜水时，要准备好浮力控制装置、低压浮力控制充气系统、潜水压力表和备用气源以及潜水计划/监测设备(潜水电脑、RDP/潜水表——无论你接受过何种训练)。禁止未经认证的潜水员使用我的设备。</p>
@@ -57,22 +65,45 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
 
     <div class="row">
         <div class="col-md-12">
-            <form class="mt-3" id="participantSignatureForm">
+            <form class="mt-3 position-relative" id="participantSignatureForm">
                 <div class="form-group canvas-container">
-                    <label>参与者的签名</label>
+                    <div class="toast-container" id="signatureToastContainer">
+                        <div class="toast" id="signatureToast">
+                            <div class="toast-body">
+                            请您(参赛者)用手指在指定的方框内签名。
+                            </div>
+                            <div class="toast-body">
+                                <img src="sign.gif" alt="SIGN.GIF" class="centered-image">
+                            </div>
+                        </div>
+                    </div>
+                    <label>参与者的签名 <i id="participant-signature-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
+                    </label>
+                    <!-- Set canvas dimensions relative to the screen size -->
                     <canvas id="participantSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                     <button type="button" class="btn btn-secondary clearbutton" onclick="clearSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
-
             </form>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <form class="mt-3" id="parentSignatureForm">
+            <form class="mt-3 position-relative" id="parentSignatureForm">
                 <div class="form-group canvas-container">
-                    <label>家长或监护人签署(如适用)</label>
+                    <div class="toast-container" id="parentSignatureToastContainer">
+                        <div class="toast" id="parentSignatureToast">
+                            <div class="toast-body">
+                            请提供家长或监护人的签名，用手指在指定的方框里画。
+                            </div>
+                            <div class="toast-body">
+                                <img src="sign.gif" alt="SIGN.GIF" class="centered-image">
+                            </div>
+                        </div>
+                    </div>
+                    <label>家长或监护人签名 <i id="parent-signature-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
+                    </label>
+                    <!-- Set canvas dimensions relative to the screen size -->
                     <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                     <button type="button" class="btn btn-secondary clearbutton" onclick="clearParentSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
@@ -84,12 +115,124 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
 
     <div class="row">
         <div class="col-md-12 btn-container">
-            <button type="button" id="submit-doc3" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">提交</button>
+            <button type="button" id="submit-doc3" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">下一个</button>
         </div>
     </div>
 
+     <!-- Include jQuery and Bootstrap JS -->
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+   
+
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const participationInfoIcon = document.getElementById('participation-info-icon');
+            const participantNameToast = document.getElementById('participantNameToast');
+
+            participationInfoIcon.addEventListener('click', function() {
+                positionToast(participationInfoIcon, participantNameToast);
+                $(participantNameToast).toast('show');
+            });
+
+            window.addEventListener('resize', function() {
+                // Adjust toast position on window resize
+                positionToast(participationInfoIcon, participantNameToast);
+            });
+
+            // Scroll event listener to keep toast position updated
+            window.addEventListener('scroll', function() {
+                positionToast(participationInfoIcon, participantNameToast);
+            });
+
+            // Function to calculate and set the position of the toast relative to the icon
+            function positionToast(targetElement, toastElement) {
+                const targetRect = targetElement.getBoundingClientRect();
+                const toastWidth = toastElement.offsetWidth;
+                const toastHeight = toastElement.offsetHeight;
+
+                // Position the toast near the icon
+                let toastTop = targetRect.top + (targetRect.height / 2) - (toastHeight / 2);
+                let toastLeft = targetRect.left + targetRect.width - 50; // 10px right of the icon
+
+                // Set the toast position
+                toastElement.style.top = toastTop + 'px';
+                toastElement.style.left = toastLeft + 'px';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const participantSignatureInfoIcon = document.getElementById('participant-signature-info-icon');
+            const signatureToast = document.getElementById('signatureToast');
+
+            participantSignatureInfoIcon.addEventListener('click', function() {
+                positionToast(participantSignatureInfoIcon, signatureToast);
+                $(signatureToast).toast('show');
+            });
+
+            window.addEventListener('resize', function() {
+                // Adjust toast position on window resize
+                positionToast(participantSignatureInfoIcon, signatureToast);
+            });
+
+            // Scroll event listener to keep toast position updated
+            window.addEventListener('scroll', function() {
+                positionToast(participantSignatureInfoIcon, signatureToast);
+            });
+
+            // Function to calculate and set the position of the toast relative to the icon
+            function positionToast(targetElement, toastElement) {
+                const targetRect = targetElement.getBoundingClientRect();
+                const toastWidth = toastElement.offsetWidth;
+                const toastHeight = toastElement.offsetHeight;
+
+                // Position the toast near the icon
+                let toastTop = targetRect.top + (targetRect.height / 2) - (toastHeight / 2);
+                let toastLeft = targetRect.left + targetRect.width + 70; // 10px right of the icon
+
+                // Set the toast position
+                toastElement.style.top = toastTop + 'px';
+                toastElement.style.left = toastLeft + 'px';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const parentSignatureInfoIcon = document.getElementById('parent-signature-info-icon'); // Corrected variable name
+            const parentSignatureToast = document.getElementById('parentSignatureToast'); // Corrected variable name
+
+            parentSignatureInfoIcon.addEventListener('click', function() { // Corrected event listener
+                positionToast(parentSignatureInfoIcon, parentSignatureToast); // Corrected variable names
+                $(parentSignatureToast).toast('show');
+            });
+
+            window.addEventListener('resize', function() {
+                // Adjust toast position on window resize
+                positionToast(parentSignatureInfoIcon, parentSignatureToast); // Corrected variable names
+            });
+
+            // Scroll event listener to keep toast position updated
+            window.addEventListener('scroll', function() {
+                positionToast(parentSignatureInfoIcon, parentSignatureToast); // Corrected variable names
+            });
+
+            // Function to calculate and set the position of the toast relative to the icon
+            function positionToast(targetElement, toastElement) {
+                const targetRect = targetElement.getBoundingClientRect();
+                const toastWidth = toastElement.offsetWidth;
+                const toastHeight = toastElement.offsetHeight;
+
+                // Position the toast near the icon
+                let toastTop = targetRect.top + (targetRect.height / 2) - (toastHeight / 2);
+                let toastLeft = targetRect.left + targetRect.width + 50; // 10px right of the icon
+
+                // Set the toast position
+                toastElement.style.top = toastTop + 'px';
+                toastElement.style.left = toastLeft + 'px';
+            }
+        });
+
         // Function to retrieve the participant's name from localStorage
         function getParticipantName() {
             return localStorage.getItem('participantName');

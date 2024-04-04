@@ -71,7 +71,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                     <div class="toast-container" id="signatureToastContainer">
                         <div class="toast" id="signatureToast">
                             <div class="toast-body">
-                                Please draw your signature in the given box using your finger
+                            Please kindly provide your (Participant) signature by drawing it in the designated box using your finger.
                             </div>
                             <div class="toast-body">
                                 <img src="sign.gif" alt="SIGN.GIF" class="centered-image">
@@ -95,7 +95,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                     <div class="toast-container" id="parentSignatureToastContainer">
                         <div class="toast" id="parentSignatureToast">
                             <div class="toast-body">
-                                This signature confirms that the parent or guardian acknowledges and consents to the risks associated with the diver's activities, particularly in the context of scuba diving.
+                            Please kindly provide the signature of the parent or guardian by drawing it in the designated box using finger.
                             </div>
                             <div class="toast-body">
                                 <img src="sign.gif" alt="SIGN.GIF" class="centered-image">
@@ -223,7 +223,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
 
                 // Position the toast near the icon
                 let toastTop = targetRect.top + (targetRect.height / 2) - (toastHeight / 2);
-                let toastLeft = targetRect.left + targetRect.width + 10; // 10px right of the icon
+                let toastLeft = targetRect.left + targetRect.width - 40; // 10px right of the icon
 
                 // Set the toast position
                 toastElement.style.top = toastTop + 'px';

@@ -4,22 +4,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
 
 ?>
 
-<?php
-include $_SERVER['DOCUMENT_ROOT'] . '/connection.php';
 
-// Query to retrieve instructors from the database
-$instructorQuery = "SELECT instructorName FROM instructors";
-$instructorResult = mysqli_query($conn, $instructorQuery);
-
-// Query to retrieve resort from the database
-$resortQuery = "SELECT resortName FROM resort";
-$resortResult = mysqli_query($conn, $resortQuery);
-
-$queryDoc0 = "SELECT participantname FROM doc0 WHERE userID = $userID ;";
-$resultDoc0 = mysqli_query($conn, $queryDoc0);
-$rowDoc0 = mysqli_fetch_assoc($resultDoc0);
-$participantname = $rowDoc0['participantname'];
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,12 +44,8 @@ $participantname = $rowDoc0['participantname'];
 
         <p class="paragraph">I understand and agree that PADI® Members (“Members”), including
 
-            <select id="resortSelect" class="underline">
-                <?php
-                while ($row = mysqli_fetch_assoc($resortResult)) {
-                    echo "<option value='" . $row['resortName'] . "'>" . $row['resortName'] . "</option>";
-                }
-                ?>
+            <select id="resortSelect" class="underline" disabled>
+                <option>store/resort</option>
             </select>
             , and/or any individual PADI Instructors and Divemasters associated with the program in which I am participating, are licensed to use various PADI Trademarks and to conduct PADI training, but are not agents, employees or franchisees of PADI EMEA Ltd., PADI Americas, Inc., or its parent, subsidiary and affiliated corporations (“PADI”). I further understand that Member business activities are independent, and are neither owned nor operated by PADI, and that while PADI establishes the standards for PADI diver training programs, it is not responsible for, nor does it have the right to control, the operation of the Members’ business activities and the day-to-day conduct of PADI programs and supervision of divers by the Members or their associated staff.
         </p>
@@ -95,13 +76,9 @@ $participantname = $rowDoc0['participantname'];
                     <div> <b>"Instructor(s)"</b> typically refers to individuals who have attained certification as scuba diving instructors. These instructors have undergone extensive training and evaluation to qualify them to teach and supervise diving activities.</div>
                 </div>
             </div>
-            <select id="instructorSelect" class="crew" name="instructors[]" multiple>
+            <select id="instructorSelect" class="crew" name="instructors[]" multiple disabled>
                 <option value="" disabled selected>Select Instructors</option>
-                <?php
-                while ($row = mysqli_fetch_assoc($instructorResult)) {
-                    echo "<option value='" . $row['instructorName'] . "'>" . $row['instructorName'] . "</option>";
-                }
-                ?>
+
             </select>
         </div>
         , nor
@@ -110,21 +87,21 @@ $participantname = $rowDoc0['participantname'];
         <p class="paragraph">the facility through which this program is conducted,
 
             <!-- resort name -->
-            <label class="selectedResortName"></label>, nor PADI EMEA Ltd., nor
+            <label class="spaces">store/resort name</label>, nor PADI EMEA Ltd., nor
 
             PADI Americas, Inc. nor their affiliate or subsidiary corporations, nor any of their respective employees, officers, agents, contractors or assigns accept any responsibility for any death, injury or other loss suffered by me to the extent that it results from my own conduct or any matter or condition under my control that amounts to my own contributory negligence.
         </p>
         <p class="paragraph">In the absence of any negligence or other breach of duty by the dive professionals conducting this program,
 
             <!-- Instructor name -->
-            <label class="selectedInstructorLabel"></label>
+            <label class="spaces">Instructor(s) name</label>
         </p>
 
         <p class="paragraph">the facility through which this program is offered,
 
             <!-- resort name -->
 
-            <label class="selectedResortName">,</label>
+            <label class="spaces">store/resort name</label>
 
             PADI EMEA Ltd., PADI Americas, Inc. and all parties referred to above, my participation in this diving program is entirely at my own risk.
         </p>
@@ -137,7 +114,7 @@ $participantname = $rowDoc0['participantname'];
                 <form>
                     <label for="participantname">Participant's Name:</label>
                     <!-- Input field for participant's name -->
-                    <label class="spaces"> <?php echo $participantname; ?></label>
+                    <label class="spaces">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp,</label>
                 </form>
             </div>
         </div>
@@ -161,7 +138,6 @@ $participantname = $rowDoc0['participantname'];
                         </label>
                         <!-- Set canvas dimensions relative to the screen size -->
                         <canvas id="participantSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
-                        <button type="button" class="btn btn-secondary clearbutton" onclick="clearSignature()"><span class="bi bi-x-lg"></span></button>
                     </div>
                 </form>
             </div>
@@ -185,7 +161,6 @@ $participantname = $rowDoc0['participantname'];
                         </label>
                         <!-- Set canvas dimensions relative to the screen size -->
                         <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
-                        <button type="button" class="btn btn-secondary clearbutton" onclick="clearParentSignature()"><span class="bi bi-x-lg"></span></button>
                     </div>
                 </form>
             </div>
@@ -196,32 +171,17 @@ $participantname = $rowDoc0['participantname'];
             <div class="col-md-12">
                 <div class="form-check">
                     <p>Diver Accident Insurance?</p>
-                    <input class="form-check-input" type="checkbox" id="diverAccidentInsuranceYes" name="diverAccidentInsurance" value="Yes" required>
+                    <input class="form-check-input" type="checkbox" id="diverAccidentInsuranceYes" name="diverAccidentInsurance" value="Yes" required disabled>
                     <label class="form-check-label" for="diverAccidentInsuranceYes">
                         Yes
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="diverAccidentInsuranceNo" name="diverAccidentInsurance" value="No" required>
+                    <input class="form-check-input" type="checkbox" id="diverAccidentInsuranceNo" name="diverAccidentInsurance" value="No" required disabled>
                     <label class="form-check-label" for="diverAccidentInsuranceNo">
                         No
                     </label>
                 </div>
-                <!-- Add the input field for Policy Number -->
-                <div id="policyNumberInput" style="display: none;">
-                    <label for="policyNumber">Enter Policy Number:</label>
-                    <input type="text" id="policyNumber" name="policyNumber">
-                </div>
-            </div>
-        </div>
-
-        <div id="alert-container"></div>
-
-        <div class="row">
-            <div class="col-md-12 btn-container">
-
-                <button type="button" id="submit-doc2" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">Submit</button>
-
             </div>
         </div>
     </div>
@@ -361,356 +321,6 @@ $participantname = $rowDoc0['participantname'];
                 }
             });
         });
-    </script>
-
-    <script>
-        function checkInstructorSelection() {
-            var selectElement = document.getElementById("instructorSelect");
-            if (selectElement && selectElement.selectedOptions.length === 0) {
-                showAlert('danger', 'Please select at least one instructor.');
-                return false; // Prevent form submission
-            }
-            return true;
-        }
-
-        function checkInsurance() {
-            // Check if Diver Accident Insurance checkbox is checked
-            var diverAccidentInsuranceYes = document.getElementById('diverAccidentInsuranceYes');
-            var diverAccidentInsuranceNo = document.getElementById('diverAccidentInsuranceNo');
-            if (!diverAccidentInsuranceYes.checked && !diverAccidentInsuranceNo.checked) {
-                showAlert('danger', 'Please select whether you have Diver Accident Insurance');
-                return false; // Stop form submission if Diver Accident Insurance is not selected
-            }
-            // Return true if insurance selection is valid
-            return true;
-        }
-
-        function togglePolicyNumberInput() {
-            var policyNumberInput = document.getElementById('policyNumberInput');
-            var diverAccidentInsuranceYes = document.getElementById('diverAccidentInsuranceYes');
-
-            if (policyNumberInput && diverAccidentInsuranceYes) {
-                if (diverAccidentInsuranceYes.checked) {
-                    policyNumberInput.style.display = 'block';
-                    document.getElementById('policyNumber').required = true;
-                } else {
-                    policyNumberInput.style.display = 'none';
-                    document.getElementById('policyNumber').required = false;
-                }
-            }
-        }
-
-        // Add event listeners to the checkboxes to call the toggle function when their state changes
-        document.getElementById('diverAccidentInsuranceYes').addEventListener('change', togglePolicyNumberInput);
-        document.getElementById('diverAccidentInsuranceNo').addEventListener('change', togglePolicyNumberInput);
-
-        // Call the toggle function initially to set up the form according to the initial state of the checkboxes
-        togglePolicyNumberInput();
-
-        // Get the initially selected instructor        
-        var instructorSelect = document.getElementById('instructorSelect');
-        var selectedInstructorLabels = document.querySelectorAll('.selectedInstructorLabel');
-
-        // Set the initially selected instructor name for all labels
-        selectedInstructorLabels.forEach(function(label) {
-            label.textContent = instructorSelect.value;
-        });
-
-        // Update selected instructor name whenever selection changes for all labels
-        instructorSelect.addEventListener('change', function() {
-            selectedInstructorLabels.forEach(function(label) {
-                label.textContent = instructorSelect.value;
-            });
-        });
-
-        // Get the initially selected resort
-        var resortSelect = document.getElementById('resortSelect');
-        var selectedResortLabels = document.querySelectorAll('.selectedResortName');
-
-        // Set the initially selected resort name for all labels
-        selectedResortLabels.forEach(function(label) {
-            label.textContent = resortSelect.value;
-        });
-
-        // Update selected resort name whenever selection changes for all labels
-        resortSelect.addEventListener('change', function() {
-            selectedResortLabels.forEach(function(label) {
-                label.textContent = resortSelect.value;
-            });
-        });
-
-        // Participant Signature
-
-        let participantCanvas = document.getElementById('participantSignatureCanvas');
-        let ctx = participantCanvas.getContext('2d');
-        let drawing = false;
-        let points = [];
-
-        function startDrawing(e) {
-            drawing = true;
-            points = [];
-            draw(e);
-        }
-
-        function draw(e) {
-            if (!drawing) return;
-
-            e.preventDefault();
-
-            ctx.lineWidth = 2;
-            ctx.lineCap = 'round';
-            ctx.strokeStyle = '#000';
-
-            // Adjust touch coordinates
-            const currentX = e.clientX || e.touches[0].clientX - participantCanvas.getBoundingClientRect().left;
-            const currentY = e.clientY || e.touches[0].clientY - participantCanvas.getBoundingClientRect().top;
-
-            points.push({
-                x: currentX,
-                y: currentY
-            });
-
-            if (points.length > 1) {
-                const prevPoint = points[points.length - 2];
-                const currentPoint = points[points.length - 1];
-
-                // Draw a line segment
-                ctx.beginPath();
-                ctx.moveTo(prevPoint.x, prevPoint.y);
-                ctx.lineTo(currentPoint.x, currentPoint.y);
-                ctx.stroke();
-            }
-        }
-
-        function stopDrawing() {
-            if (drawing) {
-                drawing = false;
-                // Capture the final point when stopping drawing
-                drawFinalPoint();
-            }
-        }
-
-        function drawFinalPoint() {
-            if (points.length > 0) {
-                const finalPoint = points[points.length - 1];
-                // Add a full stop at the final point
-                ctx.lineWidth = 2;
-                ctx.lineCap = 'round';
-                ctx.strokeStyle = '#000';
-                ctx.beginPath();
-                ctx.arc(finalPoint.x, finalPoint.y, 1, 0, 2 * Math.PI);
-                ctx.stroke();
-            }
-        }
-
-        participantCanvas.addEventListener('mousedown', startDrawing);
-        participantCanvas.addEventListener('mousemove', draw);
-        participantCanvas.addEventListener('mouseup', stopDrawing);
-
-        // Touch events
-        participantCanvas.addEventListener('touchstart', startDrawing);
-        participantCanvas.addEventListener('touchmove', draw);
-        participantCanvas.addEventListener('touchend', stopDrawing);
-
-        function saveSignature() {
-            let participantSignatureData = participantCanvas.toDataURL();
-            let formData = new FormData(document.getElementById('participantSignatureForm'));
-
-            formData.append('participantSignatureData', participantSignatureData);
-            // Send the formData to the server using AJAX
-            sendToServer(formData);
-        }
-
-        function clearSignature() {
-            ctx.clearRect(0, 0, participantCanvas.width, participantCanvas.height);
-        }
-
-
-        // Parent Signature
-
-        let parentCanvas = document.getElementById('parentSignatureCanvas');
-        let parentCtx = parentCanvas.getContext('2d');
-        let parentDrawing = false;
-        let parentPoints = [];
-
-        function startParentDrawing(e) {
-            parentDrawing = true;
-            parentPoints = [];
-            drawParent(e);
-        }
-
-        function drawParent(e) {
-            if (!parentDrawing) return;
-
-            e.preventDefault();
-
-            parentCtx.lineWidth = 2;
-            parentCtx.lineCap = 'round';
-            parentCtx.strokeStyle = '#000';
-
-            // Adjust touch coordinates
-            const currentX = e.clientX || e.touches[0].clientX - parentCanvas.getBoundingClientRect().left;
-            const currentY = e.clientY || e.touches[0].clientY - parentCanvas.getBoundingClientRect().top;
-
-            parentPoints.push({
-                x: currentX,
-                y: currentY
-            });
-
-            if (parentPoints.length > 1) {
-                const prevPoint = parentPoints[parentPoints.length - 2];
-                const currentPoint = parentPoints[parentPoints.length - 1];
-
-                // Draw a line segment
-                parentCtx.beginPath();
-                parentCtx.moveTo(prevPoint.x, prevPoint.y);
-                parentCtx.lineTo(currentPoint.x, currentPoint.y);
-                parentCtx.stroke();
-            }
-        }
-
-        function stopParentDrawing() {
-            if (parentDrawing) {
-                parentDrawing = false;
-                // Capture the final point when stopping drawing
-                drawParentFinalPoint();
-            }
-        }
-
-        function drawParentFinalPoint() {
-            if (parentPoints.length > 0) {
-                const finalPoint = parentPoints[parentPoints.length - 1];
-                // Add a full stop at the final point
-                parentCtx.lineWidth = 2;
-                parentCtx.lineCap = 'round';
-                parentCtx.strokeStyle = '#000';
-                parentCtx.beginPath();
-                parentCtx.arc(finalPoint.x, finalPoint.y, 1, 0, 2 * Math.PI);
-                parentCtx.stroke();
-            }
-        }
-
-        parentCanvas.addEventListener('mousedown', startParentDrawing);
-        parentCanvas.addEventListener('mousemove', drawParent);
-        parentCanvas.addEventListener('mouseup', stopParentDrawing);
-
-        // Touch events
-        parentCanvas.addEventListener('touchstart', startParentDrawing);
-        parentCanvas.addEventListener('touchmove', drawParent);
-        parentCanvas.addEventListener('touchend', stopParentDrawing);
-
-
-        function saveParentSignature() {
-            let parentSignatureData = parentCanvas.toDataURL();
-            let formData = new FormData(document.getElementById('parentSignatureForm'));
-
-            formData.append('parentSignatureData', parentSignatureData);
-            sendToServer(formData);
-        }
-
-        function clearParentSignature() {
-            parentCtx.clearRect(0, 0, parentCanvas.width, parentCanvas.height);
-        }
-
-        function handleFormSubmission() {
-            // Check crew member selection
-            if (!checkInstructorSelection()) {
-                return; // Stop form submission if crew member selection is invalid
-            }
-
-            // Check Insurance
-            if (!checkInsurance()) {
-                return; // Stop form submission if Insurance is invalid
-            }
-
-            // Capture current date for participant and parent signatures
-            let participantDate = new Date().toISOString();
-            let parentDate = new Date().toISOString();
-
-            // Capture the final point before form submission
-            let participantCanvas = document.getElementById('participantSignatureCanvas');
-            let parentCanvas = document.getElementById('parentSignatureCanvas');
-            if (participantCanvas && parentCanvas) {
-                let participantSignatureData = participantCanvas.toDataURL();
-                let parentSignatureData = parentCanvas.toDataURL();
-
-                // Get all selected crew members
-                let selectedInstructors = Array.from(document.getElementById('instructorSelect').selectedOptions).map(option => option.value);
-
-                let formData = new FormData();
-                formData.append('participantSignatureData', participantSignatureData);
-                formData.append('participantDate', participantDate);
-                formData.append('parentSignatureData', parentSignatureData);
-                formData.append('parentDate', parentDate);
-                // Include selected instructor names in form data
-                selectedInstructors.forEach(instructor => {
-                    formData.append('selectedInstructor[]', instructor);
-                });
-
-                // Include selected resort name
-                let selectedResortName = document.getElementById('resortSelect').value;
-                formData.append('selectedResortName', selectedResortName);
-
-                // Include diver accident insurance information
-                if (document.getElementById('diverAccidentInsuranceYes').checked) {
-                    formData.append('diverAccidentInsurance', 'Yes');
-                    let policyNumber = document.getElementById('policyNumber').value;
-                    if (policyNumber.trim() === '') {
-                        showAlert('danger', 'Please enter the Policy Number for Diver Accident Insurance.');
-                        return; // Stop form submission if policy number is not provided
-                    }
-                    formData.append('policyNumber', policyNumber);
-                } else {
-                    formData.append('diverAccidentInsurance', 'No');
-                }
-
-                // Send the formData to the server using AJAX
-                sendToServer(formData);
-            } else {
-                showAlert('danger', 'Signature canvas elements not found.');
-            }
-        }
-
-        function sendToServer(formData) {
-            let xhr = new XMLHttpRequest();
-            xhr.open('POST', 'doc2_save_data.php', true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        // Display success message using Bootstrap alert
-                        showAlert('success', 'Form submitted successfully');
-                        // Redirect to doc3.php
-                        window.location.href = '/englishDocuments/doc3/doc3.php';
-                    } else {
-                        // Display error message using Bootstrap alert
-                        showAlert('danger', 'Error submitting form. Check console for details.');
-                        console.error('Error:', xhr.status, xhr.statusText);
-                    }
-                }
-            };
-            xhr.onerror = function() {
-                // Display network error message using Bootstrap alert
-                showAlert('danger', 'Network error. Check console for details.');
-                console.error('Network error occurred');
-            };
-
-            xhr.send(formData);
-        }
-
-
-        function showAlert(type, message) {
-            let alertContainer = document.getElementById('alert-container');
-            let alertElement = document.createElement('div');
-            alertElement.className = `alert alert-${type} mt-3`;
-            alertElement.textContent = message;
-            alertContainer.appendChild(alertElement);
-
-            // Remove the alert after a few seconds (optional)
-            setTimeout(function() {
-                alertContainer.removeChild(alertElement);
-            }, 7000);
-
-        }
     </script>
 </body>
 
