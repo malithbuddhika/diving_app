@@ -1,14 +1,15 @@
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav_chinese.php';
 ?>
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>STATEMENT OF RISKS AND LIABILITY – SCUBA DIVING TRIPS AND BOAT TRAVEL</title>
     <!-- Include Bootstrap CSS -->
@@ -29,94 +30,71 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
 
     <div class="row">
         <div class="col-md-12">
-            <h3 class="title_bottom">STATEMENT OF RISKS AND LIABILITY – SCUBA DIVING TRIPS AND BOAT TRAVEL (PADI
-                International Ltd)</h3>
+            <h3 class="title_bottom"> 风险和责任声明 - 水肺潜水旅行和乘船旅行 (PADI International Ltd) </h3>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <p class="paragraph"><strong>Please read carefully and fill in all blanks before signing</strong></p>
+            <p class="paragraph"><strong>请仔细阅读并填写后再签字</strong></p>
 
-            <p>This is a statement in which you are informed of the risks of hazards occurring whilst travelling to and participating in scuba dives either as a certified diver or as a student under the control and supervision of a certified scuba instructor. This statement covers recreational scuba dive trips and scuba dive trips carried out as part of a scuba diving class. This statement also sets out the circumstances in which you participate in the scuba diving trip at your own risk.</p>
-            <p>Your signature on this statement is required as proof that you have received and read this statement. It is important that you read the contents of this statement before signing it. If you do not understand anything contained in this statement then please discuss it with your instructor / dive professional. If you are a minor, this form must also be signed by a parent or guardian.</p>
+            <p>这是一份声明，告知您在旅行和参与水肺潜水时发生的危险风险，无论是作为认证潜水员还是在认证水肺教练的控制和监督下作为学生。本声明包括娱乐性的水肺潜水旅行和作为水肺潜水课程的一部分进行的水肺潜水旅行。本声明还列出了您参加水肺潜水之旅的情况，风险由您自行承担。</p>
+            <p>您必须在此声明上签名，以证明您已收到并阅读此声明。你在签字前仔细阅读这份声明的内容是很重要的。如果您不理解本声明中的任何内容，请与您的教练/潜水专业人员讨论。如果你是未成年人，这份表格也必须由父母或监护人签署。</p>
 
-            <p class="paragraph"><strong>WARNING</strong></p>
-            <p>Skin and scuba diving have inherent risks which may result in serious injury or death.</p>
-            <p>Diving with compressed air involves certain inherent risks; decompression sickness, embolism or other
-                hyperbaric
-                injury can occur that require treatment in a recompression chamber. Open water scuba diving trips may be
-                conducted at a site that is remote, either by time or distance, from such a recompression chamber.</p>
-            <p>In addition, during boat travel to and from dive sites, you should follow all safety instructions from
-                the
-                captain / crew members and take care while getting on or off the boat and while on board to avoid
-                slipping,
-                falling or drowning.
-            </p>
+            <p class="paragraph"><strong>警告</strong></p>
+            <p>皮肤潜水和水肺潜水具有固有的风险，可能导致严重的伤害或死亡。</p>
+            <p>使用压缩空气潜水具有一定的内在风险;减压病、栓塞或其他高压损伤可能发生，需要在再压缩室中治疗。开放水域的水肺潜水旅行可以在距离这种再压缩室较远的地点进行，无论是时间上还是距离上。</p>
+            <p>此外，在乘船往返潜水地点期间，您应遵守船长/船员的所有安全指示，在上下船和在船上时要小心，以免滑倒、摔倒或溺水。</p>
 
-            <p class="paragraph"><strong>EXCLUSION OF LIABILITY</strong></p>
-            <p><strong>I understand and agree that neither</strong></p>
+            <p class="paragraph"><strong>责任排除</strong></p>
+            <p><strong>我理解并同意这两种观点</strong></p>
 
             <div class="row">
                 <div class="col-md-12">
-                    <label for="divemaster">Divemasters: </label>
+                    <label for="divemaster">潜水大师: </label>
                     <i id="divemaster-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
                     <div class="toast" id="divemasterToast">
                         <div class="toast-body">
-                            <b>Please select Divemasters in the given box</b>
-                            <div>A Divemaster is a diving professional who has undergone extensive training and has the necessary knowledge and skills to lead and supervise recreational diving activities.</div>
+                            <b>请在给定框中选择潜水师</b>
+                            <div>潜水大师是一名潜水专业人士，他经过了广泛的培训，具备领导和监督娱乐潜水活动所需的知识和技能。</div>
                         </div>
                     </div>
                     <select class="crew mb-2" id="divemaster" name="divemasters[]" multiple disabled>
-                        <option>Select Divemaster</option>
+                        <option>选择潜水大师</option>
                     </select>
 
-
-                    <label for="crewMember">Crew Members: </label>
+                    <label for="crewMember">船员: </label>
                     <i id="crewmembers-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
                     <div class="toast" id="crewmembersToast">
                         <div class="toast-body">
-                            <b>Please select Crew Members in the given box</b>
-                            <div> <b>"Crew Members"</b>refer to individuals who are responsible for operating and assisting with the operation of the vessel used for the scuba diving trips.</div>
+                            <b>请在给定的框中选择机组成员</b>
+                            <div> <b>"船员"</b>指负责操作和协助操作用于水肺潜水之船的人员。</div>
                         </div>
                     </div>
                     <select class="crew mb-2" id="crewMember" name="crewMember[]" multiple disabled>
-                       <option>Select Crew Member</option>
+                       <option>选择机组成员</option>
                     </select>
 
-
-                    <label for="captain">Captain : </label>
+                    <label for="captain">船长的名字: </label>
                     <select class="crew" id="captain" disabled>
-                        <option>Captain Name</option>
+                        <option>选择船长姓名</option>
                     </select>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <p><strong>nor the crew or the owner of the vessel,</strong></p>
-                    <label for="vesselName">Vessel: </label>
+                    <p><strong>无论是船员还是船主,</strong></p>
+                    <label for="vesselName">船舶名称: </label>
                     <select class="vessel" id="vesselName" disabled>
-                        <option>Select Vessel Name</option>
+                        <option>选择船舶名称</option>
                     </select>
-                    <strong>nor</strong>
+                    <strong>也不</strong>
                 </div>
             </div>
 
-            <p><strong> PADI International Ltd., nor PADI Americas Inc., nor their affiliate or subsidiary companies,
-                    nor any
-                    of their respective employees, officers, agents or assigns (hereinafter referred to as “Released
-                    Parties”)
-                    accept any responsibility for any death, injury or other loss suffered or caused by me or resulting
-                    from my
-                    own conduct or any matter or condition under my control which amounts to my own contributory
-                    negligence,
-                    during or as a consequence of my participation in this scuba diving trip.</strong></p>
-            <p><strong>In the absence of any negligence or breach of duty by the crew or owner of the vessel, PADI
-                    International
-                    Ltd., PADI Americas, Inc., and all released entities and released parties as defined above, my
-                    participation
-                    in this scuba diving trip is entirely at my own risk.</strong></p>
+            <p><strong>PADI International Ltd.、PADI Americas Inc.、它们的附属公司或子公司，以及它们各自的雇员、官员、代理或受让人(以下简称“免责方”)，对我在参加这次水肺潜水旅行期间或由于我自己的行为或我控制下的任何事项或情况造成的任何死亡、受伤或其他损失承担任何责任。</strong></p>
+            <p><strong>在船员或船东、PADI International Ltd.、PADI Americas, Inc.以及上述所有被释放实体和被释放方没有任何疏忽或违反义务的情况下，我参加这次水肺潜水之旅的风险完全由我自己承担。</strong></p>
 
         </div>
     </div>
@@ -124,7 +102,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
     <div class="row">
         <div class="col-md-12">
             <form>
-                <label for="participantname">Participant's Name:</label>
+                <label for="participantname">参与者的名字:</label>
                 <!-- Input field for participant's name -->
                 <label class="spaces">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp, </label>
             </form>
@@ -138,17 +116,17 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                     <div class="toast-container" id="signatureToastContainer">
                         <div class="toast" id="signatureToast">
                             <div class="toast-body">
-                                Please kindly provide your (Participant) signature by drawing it in the designated box using your finger.
+                                请您(参赛者)用手指在指定的方框内签名。
                             </div>
                             <div class="toast-body">
                                 <img src="sign.gif" alt="SIGN.GIF" class="centered-image">
                             </div>
                         </div>
                     </div>
-                    <label>Participant Signature <i id="participant-signature-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
+                    <label>参与者的签名<i id="participant-signature-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
                     </label>
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <canvas id="participantSignatureCanvas" class="signature-canvas" width="350%" height="400%" disabled></canvas>
+                    <canvas id="participantSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                 </div>
             </form>
         </div>
@@ -161,18 +139,17 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                     <div class="toast-container" id="parentSignatureToastContainer">
                         <div class="toast" id="parentSignatureToast">
                             <div class="toast-body">
-                                Please kindly provide the signature of the parent or guardian by drawing it in the designated box using finger.
+                                请提供家长或监护人的签名，用手指在指定的方框里画。
                             </div>
                             <div class="toast-body">
                                 <img src="sign.gif" alt="SIGN.GIF" class="centered-image">
                             </div>
                         </div>
                     </div>
-                    <label>Signature of Parent or Guardian <i id="parent-signature-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
+                    <label>家长或监护人签名 <i id="parent-signature-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
                     </label>
                     <!-- Set canvas dimensions relative to the screen size -->
-                    <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%" disabled></canvas>
-
+                    <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
                 </div>
             </form>
         </div>
@@ -187,8 +164,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Include Select2 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
-
-
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -288,7 +263,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
 
                 // Position the toast near the icon
                 let toastTop = targetRect.top + (targetRect.height / 2) - (toastHeight / 2);
-                let toastLeft = targetRect.left + targetRect.width + 10; // 10px right of the icon
+                let toastLeft = targetRect.left + targetRect.width + 70; // 10px right of the icon
 
                 // Set the toast position
                 toastElement.style.top = toastTop + 'px';
@@ -323,14 +298,13 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
 
                 // Position the toast near the icon
                 let toastTop = targetRect.top + (targetRect.height / 2) - (toastHeight / 2);
-                let toastLeft = targetRect.left + targetRect.width - 40; // 10px right of the icon
+                let toastLeft = targetRect.left + targetRect.width + 50; // 10px right of the icon
 
                 // Set the toast position
                 toastElement.style.top = toastTop + 'px';
                 toastElement.style.left = toastLeft + 'px';
             }
         });
-
 
         // Ensure jQuery is loaded before executing the script
         $(document).ready(function() {
@@ -341,7 +315,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                 persist: false,
                 create: true,
                 maxItems: null,
-                placeholder: 'Select Crew Member(s)',
+                placeholder: '选择船员',
                 render: {
                     item: function(data, escape) {
                         return '<div>' + escape(data.text) + '</div>';
@@ -354,12 +328,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
         function checkcrewMemberSelection() {
             var selectize = $('#crewMember')[0].selectize;
             if (selectize.items.length === 0) {
-                showAlert('danger', 'Please select at least one crew member.');
+                showAlert('danger', '请选择至少一名机组人员。');
                 return false; // Prevent form submission
             }
             return true; // Allow form submission
         }
-
 
         // Ensure jQuery is loaded before executing the script
         $(document).ready(function() {
@@ -370,7 +343,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                 persist: false,
                 create: true,
                 maxItems: null,
-                placeholder: 'Select Dive Master(s)',
+                placeholder: '选择潜水教练',
                 render: {
                     item: function(data, escape) {
                         return '<div>' + escape(data.text) + '</div>';
@@ -383,7 +356,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
         function diveMasterSelection() {
             var selectize = $('#divemaster')[0].selectize;
             if (selectize.items.length === 0) {
-                showAlert('danger', 'Please select at least one divemaster.');
+                showAlert('danger', '请选择至少一名潜水员。');
                 return false; // Prevent form submission
             }
             return true; // Allow form submission

@@ -68,27 +68,27 @@ while ($smallestNotExisting < 5 && ($isUserDocument0 || $isUserDocument1 || $isU
 
 // Set navigation URLs based on whether the user's ID exists in respective tables
 $pageURLs = [
-    '/englishDocuments/doc0/doc0.php',
-    '/englishDocuments/doc1/doc1.php',
-    '/englishDocuments/doc2/doc2.php',
-    '/englishDocuments/doc3/doc3.php',
-    '/englishDocuments/doc4/doc4.php'
+    '/chineseDocuments/doc0/doc0.php',
+    '/chineseDocuments/doc1/doc1.php',
+    '/chineseDocuments/doc2/doc2.php',
+    '/chineseDocuments/doc3/doc3.php',
+    '/chineseDocuments/doc4/doc4.php'
 ];
 
 $viewURLs = [
-    '/englishDocuments/doc0/doc0_view.php',
-    '/englishDocuments/doc1/doc1_view.php',
-    '/englishDocuments/doc2/doc2_view.php',
-    '/englishDocuments/doc3/doc3_view.php',
-    '/englishDocuments/doc4/doc4_view.php'
+    '/chineseDocuments/doc0/doc0_view.php',
+    '/chineseDocuments/doc1/doc1_view.php',
+    '/chineseDocuments/doc2/doc2_view.php',
+    '/chineseDocuments/doc3/doc3_view.php',
+    '/chineseDocuments/doc4/doc4_view.php'
 ];
 
 $readURLs = [
-    '/englishDocuments/doc0/doc0_read.php',
-    '/englishDocuments/doc1/doc1_read.php',
-    '/englishDocuments/doc2/doc2_read.php',
-    '/englishDocuments/doc3/doc3_read.php',
-    '/englishDocuments/doc4/doc4_read.php'
+    '/chineseDocuments/doc0/doc0_read.php',
+    '/chineseDocuments/doc1/doc1_read.php',
+    '/chineseDocuments/doc2/doc2_read.php',
+    '/chineseDocuments/doc3/doc3_read.php',
+    '/chineseDocuments/doc4/doc4_read.php'
 ];
 
 ?>
@@ -98,7 +98,7 @@ $readURLs = [
     <?php for ($i = 0; $i < 5; $i++): ?>
       <li class="breadcrumb-item <?php echo ($smallestNotExisting === $i) ? 'active' : ''; ?>" <?php if ($i === 0): ?>style="margin-left: -10px;"<?php endif; ?>>
         <a <?php echo ($userID !== null && ${"isUserDocument$i"}) ? "href=\"$viewURLs[$i]\"" : "href=\"" . (($smallestNotExisting === $i && $userID !== null) ? $pageURLs[$i] : $readURLs[$i]) . "\""; ?>>
-          <span <?php echo ($smallestNotExisting === $i) ? 'style="background-color: yellow; color: black; cursor: default; border-radius: 5px; padding: 3px 8px 4px 8px;"' : (($userID !== null && ${"isUserDocument$i"}) ? 'style="background-color: #24ae2d; color: white; cursor: default; border-radius: 5px; padding: 3px 8px 4px 8px;"' : 'style="color: green; cursor: default; border-radius: 5px; padding: 3px 8px 4px 8px;"'); ?>>Page <?php echo $i + 1; ?></span>
+          <span <?php echo ($smallestNotExisting === $i) ? 'style="background-color: yellow; color: black; cursor: default; border-radius: 5px; padding: 3px 8px 4px 8px;"' : (($userID !== null && ${"isUserDocument$i"}) ? 'style="background-color: #24ae2d; color: white; cursor: default; border-radius: 5px; padding: 3px 8px 4px 8px;"' : 'style="color: green; cursor: default; border-radius: 5px; padding: 3px 8px 4px 8px;"'); ?>>页面 <?php echo $i + 1; ?></span>
         </a>
       </li>
     <?php endfor; ?>

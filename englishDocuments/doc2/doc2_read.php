@@ -1,10 +1,7 @@
 <?php
 session_start();
 include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -78,7 +75,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
             </div>
             <select id="instructorSelect" class="crew" name="instructors[]" multiple disabled>
                 <option value="" disabled selected>Select Instructors</option>
-
             </select>
         </div>
         , nor

@@ -1,25 +1,6 @@
 <?php
 session_start();
 include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav_chinese.php';
-
-?>
-
-<?php
-include $_SERVER['DOCUMENT_ROOT'] . '/connection.php';
-
-// Query to retrieve instructors from the database
-$instructorQuery = "SELECT instructorName FROM instructors";
-$instructorResult = mysqli_query($conn, $instructorQuery);
-
-// Query to retrieve resort from the database
-$resortQuery = "SELECT resortName FROM resort";
-$resortResult = mysqli_query($conn, $resortQuery);
-
-$queryDoc0 = "SELECT participantname FROM doc0 WHERE userID = $userID ;";
-$resultDoc0 = mysqli_query($conn, $queryDoc0);
-$rowDoc0 = mysqli_fetch_assoc($resultDoc0);
-$participantname = $rowDoc0['participantname'];
-
 ?>
 
 <!DOCTYPE html>
@@ -60,13 +41,8 @@ $participantname = $rowDoc0['participantname'];
         </div>
 
         <p class="paragraph">我明白并同意PADI®会员(“会员”)，包括
-
-            <select id="resortSelect" class="underline">
-                <?php
-                while ($row = mysqli_fetch_assoc($resortResult)) {
-                    echo "<option value='" . $row['resortName'] . "'>" . $row['resortName'] . "</option>";
-                }
-                ?>
+            <select id="resortSelect" class="underline" disabled>
+                <option>存储/度假村</option>
             </select>
             ，和/或与我所参加的项目相关的任何PADI教练和潜水师个人，被授权使用各种PADI商标和进行PADI培训，但不是PADI EMEA有限公司、PADI Americas, Inc.或其母公司、子公司和附属公司(“PADI”)的代理、员工或特许经营商。我进一步了解，会员的商业活动是独立的，既不属于PADI所有也不属于PADI运营。虽然PADI制定了PADI潜水员培训项目的标准，但它不负责也无权控制会员商业活动的运作、PADI项目的日常实施以及会员或其相关人员对潜水员的监督。
         </p>
@@ -97,13 +73,8 @@ $participantname = $rowDoc0['participantname'];
                     <div> <b>"教练"</b> 通常指的是获得水肺潜水教练认证的个人。这些教练经过了广泛的培训和评估，使他们有资格教授和监督潜水活动。</div>
                 </div>
             </div>
-            <select id="instructorSelect" class="crew" name="instructors[]" multiple>
+            <select id="instructorSelect" class="crew" name="instructors[]" multiple disabled>
                 <option value="" disabled selected>选择教师</option>
-                <?php
-                while ($row = mysqli_fetch_assoc($instructorResult)) {
-                    echo "<option value='" . $row['instructorName'] . "'>" . $row['instructorName'] . "</option>";
-                }
-                ?>
             </select>
         </div> , 也不
         </p>
@@ -111,21 +82,21 @@ $participantname = $rowDoc0['participantname'];
         <p class="paragraph">执行这个项目的机构，
 
             <!-- resort name -->
-            <label class="selectedResortName"></label>
+            <label class="spaces">存储/度假村的名字</label>
 
             PADI EMEA Ltd.、PADI Americas, Inc.、它们的关联公司或子公司，以及它们各自的员工、官员、代理、承包商或受让人，都不对我因自己的行为或在我控制下的构成我的共同过失的任何事项或情况而遭受的任何死亡、受伤或其他损失承担任何责任。
         </p>
         <p class="paragraph">在潜水专业人员没有任何疏忽或其他违反职责的情况下，
 
             <!-- Instructor name -->
-            <label class="selectedInstructorLabel"></label>
+            <label class="spaces">老师的名字</label>
         </p>
 
         <p class="paragraph">提供这个项目的机构，
 
             <!-- resort name -->
 
-            <label class="selectedResortName">,</label>
+            <label class="spaces">存储/度假村的名字</label>
 
             PADI EMEA有限公司，PADI Americas, Inc.和上述各方，我参加这个潜水项目的风险完全由我自己承担。
         </p>
@@ -137,7 +108,7 @@ $participantname = $rowDoc0['participantname'];
             <div class="col-md-12">
                 <form>
                     <label for="participantname">参与者的名字:</label>
-                    <label class="spaces"> <?php echo $participantname; ?></label>
+                    <label class="spaces">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp,</label>
                 </form>
             </div>
         </div>
@@ -162,7 +133,6 @@ $participantname = $rowDoc0['participantname'];
                     </label>
                     <!-- Set canvas dimensions relative to the screen size -->
                     <canvas id="participantSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
-                    <button type="button" class="btn btn-secondary clearbutton" onclick="clearSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
             </form>
         </div>
@@ -186,7 +156,6 @@ $participantname = $rowDoc0['participantname'];
                     </label>
                     <!-- Set canvas dimensions relative to the screen size -->
                     <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
-                    <button type="button" class="btn btn-secondary clearbutton" onclick="clearParentSignature()"><span class="bi bi-x-lg"></span></button>
                 </div>
             </form>
         </div>
@@ -209,22 +178,6 @@ $participantname = $rowDoc0['participantname'];
                     没有
                 </label>
             </div>
-            <!-- Add the input field for Policy Number -->
-            <div id="policyNumberInput" style="display: none;">
-                <label for="policyNumber">输入保单编号:</label>
-                <input type="text" id="policyNumber" name="policyNumber">
-            </div>
-        </div>
-    </div>
-
-
-    <div id="alert-container"></div>
-
-    <div class="row">
-        <div class="col-md-12 btn-container">
-
-            <button type="button" id="submit-doc2" class="btn btn-primary btn-sm" onclick="handleFormSubmission()">提交</button>
-
         </div>
     </div>
     </div>
@@ -363,356 +316,6 @@ $participantname = $rowDoc0['participantname'];
         });
     </script>
 
-    <script>
-        function checkInstructorSelection() {
-            var selectElement = document.getElementById("instructorSelect");
-            if (selectElement && selectElement.selectedOptions.length === 0) {
-                showAlert('danger', '请选择至少一名教师。');
-                return false; // Prevent form submission
-            }
-            return true;
-        }
-
-        function checkInsurance() {
-            // Check if Diver Accident Insurance checkbox is checked
-            var diverAccidentInsuranceYes = document.getElementById('diverAccidentInsuranceYes');
-            var diverAccidentInsuranceNo = document.getElementById('diverAccidentInsuranceNo');
-            if (!diverAccidentInsuranceYes.checked && !diverAccidentInsuranceNo.checked) {
-                showAlert('danger', '请选择是否购买潜水员意外保险');
-                return false; // Stop form submission if Diver Accident Insurance is not selected
-            }
-            // Return true if insurance selection is valid
-            return true;
-        }
-
-        function togglePolicyNumberInput() {
-            var policyNumberInput = document.getElementById('policyNumberInput');
-            var diverAccidentInsuranceYes = document.getElementById('diverAccidentInsuranceYes');
-
-            if (policyNumberInput && diverAccidentInsuranceYes) {
-                if (diverAccidentInsuranceYes.checked) {
-                    policyNumberInput.style.display = 'block';
-                    document.getElementById('policyNumber').required = true;
-                } else {
-                    policyNumberInput.style.display = 'none';
-                    document.getElementById('policyNumber').required = false;
-                }
-            }
-        }
-
-
-        // Add event listeners to the checkboxes to call the toggle function when their state changes
-        document.getElementById('diverAccidentInsuranceYes').addEventListener('change', togglePolicyNumberInput);
-        document.getElementById('diverAccidentInsuranceNo').addEventListener('change', togglePolicyNumberInput);
-
-        // Call the toggle function initially to set up the form according to the initial state of the checkboxes
-        togglePolicyNumberInput();
-
-        // Get the initially selected instructor        
-        var instructorSelect = document.getElementById('instructorSelect');
-        var selectedInstructorLabels = document.querySelectorAll('.selectedInstructorLabel');
-
-        // Set the initially selected instructor name for all labels
-        selectedInstructorLabels.forEach(function(label) {
-            label.textContent = instructorSelect.value;
-        });
-
-        // Update selected instructor name whenever selection changes for all labels
-        instructorSelect.addEventListener('change', function() {
-            selectedInstructorLabels.forEach(function(label) {
-                label.textContent = instructorSelect.value;
-            });
-        });
-
-        // Get the initially selected resort
-        var resortSelect = document.getElementById('resortSelect');
-        var selectedResortLabels = document.querySelectorAll('.selectedResortName');
-
-        // Set the initially selected resort name for all labels
-        selectedResortLabels.forEach(function(label) {
-            label.textContent = resortSelect.value;
-        });
-
-        // Update selected resort name whenever selection changes for all labels
-        resortSelect.addEventListener('change', function() {
-            selectedResortLabels.forEach(function(label) {
-                label.textContent = resortSelect.value;
-            });
-        });
-
-
-        // Participant Signature
-
-        let participantCanvas = document.getElementById('participantSignatureCanvas');
-        let ctx = participantCanvas.getContext('2d');
-        let drawing = false;
-        let points = [];
-
-        function startDrawing(e) {
-            drawing = true;
-            points = [];
-            draw(e);
-        }
-
-        function draw(e) {
-            if (!drawing) return;
-
-            e.preventDefault();
-
-            ctx.lineWidth = 2;
-            ctx.lineCap = 'round';
-            ctx.strokeStyle = '#000';
-
-            // Adjust touch coordinates
-            const currentX = e.clientX || e.touches[0].clientX - participantCanvas.getBoundingClientRect().left;
-            const currentY = e.clientY || e.touches[0].clientY - participantCanvas.getBoundingClientRect().top;
-
-            points.push({
-                x: currentX,
-                y: currentY
-            });
-
-            if (points.length > 1) {
-                const prevPoint = points[points.length - 2];
-                const currentPoint = points[points.length - 1];
-
-                // Draw a line segment
-                ctx.beginPath();
-                ctx.moveTo(prevPoint.x, prevPoint.y);
-                ctx.lineTo(currentPoint.x, currentPoint.y);
-                ctx.stroke();
-            }
-        }
-
-        function stopDrawing() {
-            if (drawing) {
-                drawing = false;
-                // Capture the final point when stopping drawing
-                drawFinalPoint();
-            }
-        }
-
-        function drawFinalPoint() {
-            if (points.length > 0) {
-                const finalPoint = points[points.length - 1];
-                // Add a full stop at the final point
-                ctx.lineWidth = 2;
-                ctx.lineCap = 'round';
-                ctx.strokeStyle = '#000';
-                ctx.beginPath();
-                ctx.arc(finalPoint.x, finalPoint.y, 1, 0, 2 * Math.PI);
-                ctx.stroke();
-            }
-        }
-
-        participantCanvas.addEventListener('mousedown', startDrawing);
-        participantCanvas.addEventListener('mousemove', draw);
-        participantCanvas.addEventListener('mouseup', stopDrawing);
-
-        // Touch events
-        participantCanvas.addEventListener('touchstart', startDrawing);
-        participantCanvas.addEventListener('touchmove', draw);
-        participantCanvas.addEventListener('touchend', stopDrawing);
-
-        function saveSignature() {
-            let participantSignatureData = participantCanvas.toDataURL();
-            let formData = new FormData(document.getElementById('participantSignatureForm'));
-
-            formData.append('participantSignatureData', participantSignatureData);
-            // Send the formData to the server using AJAX
-            sendToServer(formData);
-        }
-
-        function clearSignature() {
-            ctx.clearRect(0, 0, participantCanvas.width, participantCanvas.height);
-        }
-
-
-        // Parent Signature
-
-        let parentCanvas = document.getElementById('parentSignatureCanvas');
-        let parentCtx = parentCanvas.getContext('2d');
-        let parentDrawing = false;
-        let parentPoints = [];
-
-        function startParentDrawing(e) {
-            parentDrawing = true;
-            parentPoints = [];
-            drawParent(e);
-        }
-
-        function drawParent(e) {
-            if (!parentDrawing) return;
-
-            e.preventDefault();
-
-            parentCtx.lineWidth = 2;
-            parentCtx.lineCap = 'round';
-            parentCtx.strokeStyle = '#000';
-
-            // Adjust touch coordinates
-            const currentX = e.clientX || e.touches[0].clientX - parentCanvas.getBoundingClientRect().left;
-            const currentY = e.clientY || e.touches[0].clientY - parentCanvas.getBoundingClientRect().top;
-
-            parentPoints.push({
-                x: currentX,
-                y: currentY
-            });
-
-            if (parentPoints.length > 1) {
-                const prevPoint = parentPoints[parentPoints.length - 2];
-                const currentPoint = parentPoints[parentPoints.length - 1];
-
-                // Draw a line segment
-                parentCtx.beginPath();
-                parentCtx.moveTo(prevPoint.x, prevPoint.y);
-                parentCtx.lineTo(currentPoint.x, currentPoint.y);
-                parentCtx.stroke();
-            }
-        }
-
-        function stopParentDrawing() {
-            if (parentDrawing) {
-                parentDrawing = false;
-                // Capture the final point when stopping drawing
-                drawParentFinalPoint();
-            }
-        }
-
-        function drawParentFinalPoint() {
-            if (parentPoints.length > 0) {
-                const finalPoint = parentPoints[parentPoints.length - 1];
-                // Add a full stop at the final point
-                parentCtx.lineWidth = 2;
-                parentCtx.lineCap = 'round';
-                parentCtx.strokeStyle = '#000';
-                parentCtx.beginPath();
-                parentCtx.arc(finalPoint.x, finalPoint.y, 1, 0, 2 * Math.PI);
-                parentCtx.stroke();
-            }
-        }
-
-        parentCanvas.addEventListener('mousedown', startParentDrawing);
-        parentCanvas.addEventListener('mousemove', drawParent);
-        parentCanvas.addEventListener('mouseup', stopParentDrawing);
-
-        // Touch events
-        parentCanvas.addEventListener('touchstart', startParentDrawing);
-        parentCanvas.addEventListener('touchmove', drawParent);
-        parentCanvas.addEventListener('touchend', stopParentDrawing);
-
-
-        function saveParentSignature() {
-            let parentSignatureData = parentCanvas.toDataURL();
-            let formData = new FormData(document.getElementById('parentSignatureForm'));
-
-            formData.append('parentSignatureData', parentSignatureData);
-            sendToServer(formData);
-        }
-
-        function clearParentSignature() {
-            parentCtx.clearRect(0, 0, parentCanvas.width, parentCanvas.height);
-        }
-
-        function handleFormSubmission() {
-            // Check crew member selection
-            if (!checkInstructorSelection()) {
-                return; // Stop form submission if crew member selection is invalid
-            }
-
-            // Check Insurance
-            if (!checkInsurance()) {
-                return; // Stop form submission if Insurance is invalid
-            }
-
-            // Capture current date for participant and parent signatures
-            let participantDate = new Date().toISOString();
-            let parentDate = new Date().toISOString();
-
-            // Capture the final point before form submission
-            let participantCanvas = document.getElementById('participantSignatureCanvas');
-            let parentCanvas = document.getElementById('parentSignatureCanvas');
-            if (participantCanvas && parentCanvas) {
-                let participantSignatureData = participantCanvas.toDataURL();
-                let parentSignatureData = parentCanvas.toDataURL();
-
-                // Get all selected crew members
-                let selectedInstructors = Array.from(document.getElementById('instructorSelect').selectedOptions).map(option => option.value);
-
-                let formData = new FormData();
-                formData.append('participantSignatureData', participantSignatureData);
-                formData.append('participantDate', participantDate);
-                formData.append('parentSignatureData', parentSignatureData);
-                formData.append('parentDate', parentDate);
-                // Include selected instructor names in form data
-                selectedInstructors.forEach(instructor => {
-                    formData.append('selectedInstructor[]', instructor);
-                });
-
-                // Include selected resort name
-                let selectedResortName = document.getElementById('resortSelect').value;
-                formData.append('selectedResortName', selectedResortName);
-
-                // Include diver accident insurance information
-                if (document.getElementById('diverAccidentInsuranceYes').checked) {
-                    formData.append('diverAccidentInsurance', 'Yes');
-                    let policyNumber = document.getElementById('policyNumber').value;
-                    if (policyNumber.trim() === '') {
-                        showAlert('danger', '请输入潜水员意外保险保单编号。');
-                        return; // Stop form submission if policy number is not provided
-                    }
-                    formData.append('policyNumber', policyNumber);
-                } else {
-                    formData.append('diverAccidentInsurance', 'No');
-                }
-
-                // Send the formData to the server using AJAX
-                sendToServer(formData);
-            } else {
-                showAlert('danger', 'Signature canvas elements not found.');
-            }
-        }
-
-        function sendToServer(formData) {
-            let xhr = new XMLHttpRequest();
-            xhr.open('POST', 'doc2_save_data.php', true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        // Display success message using Bootstrap alert
-                        showAlert('success', '提交成功');
-                        // Redirect to doc3.php
-                        window.location.href = '/chineseDocuments/doc3/doc3.php';
-                    } else {
-                        // Display error message using Bootstrap alert
-                        showAlert('danger', 'Error submitting form. Check console for details.');
-                        console.error('Error:', xhr.status, xhr.statusText);
-                    }
-                }
-            };
-            xhr.onerror = function() {
-                // Display network error message using Bootstrap alert
-                showAlert('danger', 'Network error. Check console for details.');
-                console.error('Network error occurred');
-            };
-
-            xhr.send(formData);
-        }
-
-        function showAlert(type, message) {
-            let alertContainer = document.getElementById('alert-container');
-            let alertElement = document.createElement('div');
-            alertElement.className = `alert alert-${type} mt-3`;
-            alertElement.textContent = message;
-            alertContainer.appendChild(alertElement);
-
-            // Remove the alert after a few seconds (optional)
-            setTimeout(function() {
-                alertContainer.removeChild(alertElement);
-            }, 7000);
-
-        }
-    </script>
 </body>
 
 </html>
