@@ -47,8 +47,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                     <tr>
                         <td>1.</td>
                         <td>I have had problems with my lungs, breathing, heart and/or blood affecting my normal physical or mental performance.</td>
-                        <td><input class="form-check-input" type="radio" name="q1" value="yes" required ><Label>Yes</Label></td>
-                        <td><input class="form-check-input" type="radio" name="q1" value="no" required ><Label>No</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q1" value="yes" required><Label>Yes</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q1" value="no" required><Label>No</Label></td>
                     </tr>
                 </tbody>
             </table>
@@ -99,8 +99,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                     <tr>
                         <td>2.</td>
                         <td text-align: left;>I am over 45 years of age.</td>
-                        <td><input class="form-check-input" type="radio" name="q2" value="yes" required ><Label>Yes</Label></td>
-                        <td><input class="form-check-input" type="radio" name="q2" value="no" required ><Label>No</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q2" value="yes" required><Label>Yes</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q2" value="no" required><Label>No</Label></td>
                     </tr>
                 </tbody>
             </table>
@@ -149,8 +149,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                         <td>3.</td>
                         <td text-align: left;>I struggle to perform moderate exercise (for example, walk 1.6 kilometer/one mile in 14 minutes or swim 200 meters/yards without resting), OR I have been unable to participate in a
                             normal physical activity due to fitness or health reasons within the past 12 months.</td>
-                        <td><input class="form-check-input" type="radio" name="q3" value="yes" required ><Label>Yes</Label></td>
-                        <td><input class="form-check-input" type="radio" name="q3" value="no" required ><Label>No</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q3" value="yes" required><Label>Yes</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q3" value="no" required><Label>No</Label></td>
                     </tr>
                 </tbody>
             </table>
@@ -162,8 +162,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                     <tr>
                         <td>4.</td>
                         <td text-align: left;>I have had problems with my eyes, ears, or nasal passages/sinuses.</td>
-                        <td><input class="form-check-input" type="radio" name="q4" value="yes" required ><Label>Yes</Label></td>
-                        <td><input class="form-check-input" type="radio" name="q4" value="no" required ><Label>No</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q4" value="yes" required><Label>Yes</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q4" value="no" required><Label>No</Label></td>
                     </tr>
                 </tbody>
             </table>
@@ -211,8 +211,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                     <tr>
                         <td>5.</td>
                         <td text-align: left;>I have had surgery within the last 12 months, OR I have ongoing problems related to past surgery.</td>
-                        <td><input class="form-check-input" type="radio" name="q5" value="yes" required ><Label>Yes</Label></td>
-                        <td><input class="form-check-input" type="radio" name="q5" value="no" required ><Label>No</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q5" value="yes" required><Label>Yes</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q5" value="no" required><Label>No</Label></td>
                     </tr>
                 </tbody>
             </table>
@@ -223,8 +223,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                     <tr>
                         <td>6.</td>
                         <td text-align: left;>I have lost consciousness, had migraine headaches, seizures, stroke, significant head injury, or suffer from persistent neurologic injury or disease.</td>
-                        <td><input class="form-check-input" type="radio" name="q6" value="yes" required ><Label>Yes</Label></td>
-                        <td><input class="form-check-input" type="radio" name="q6" value="no" required ><Label>No</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q6" value="yes" required><Label>Yes</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q6" value="no" required><Label>No</Label></td>
                     </tr>
                 </tbody>
             </table>
@@ -276,8 +276,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                     <tr>
                         <td>7.</td>
                         <td text-align: left;>I am currently undergoing treatment (or have required treatment within the last five years) for psychological problems, personality disorder, panic attacks, or an addiction to drugs or alcohol; or, I have been diagnosed with a learning or developmental disability.</td>
-                        <td><input class="form-check-input" type="radio" name="q7" value="yes" required ><Label>Yes</Label></td>
-                        <td><input class="form-check-input" type="radio" name="q7" value="no" required ><Label>No</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q7" value="yes" required><Label>Yes</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q7" value="no" required><Label>No</Label></td>
                     </tr>
                 </tbody>
             </table>
@@ -323,8 +323,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                     <tr>
                         <td>8.</td>
                         <td text-align: left;>I have had back problems, hernia, ulcers, or diabetes.</td>
-                        <td><input class="form-check-input" type="radio" name="q8" value="yes" required ><Label>Yes</Label></td>
-                        <td><input class="form-check-input" type="radio" name="q8" value="no" required ><Label>No</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q8" value="yes" required><Label>Yes</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q8" value="no" required><Label>No</Label></td>
                     </tr>
                 </tbody>
             </table>
@@ -375,8 +375,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                     <tr>
                         <td>9.</td>
                         <td text-align: left;>I have had stomach or intestine problems, including recent diarrhea.</td>
-                        <td><input class="form-check-input" type="radio" name="q9" value="yes" required ><Label>Yes</Label></td>
-                        <td><input class="form-check-input" type="radio" name="q9" value="no" required ><Label>No</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q9" value="yes" required><Label>Yes</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q9" value="no" required><Label>No</Label></td>
                     </tr>
                 </tbody>
             </table>
@@ -432,8 +432,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                     <tr>
                         <td>10.</td>
                         <td text-align: left;>I am taking prescription medications with the exception of birth control or anti-malarial drugs other than mefloquine (Lariam).</td>
-                        <td><input class="form-check-input" type="radio" name="q10" value="yes" required ><Label>Yes</Label></td>
-                        <td><input class="form-check-input" type="radio" name="q10" value="no" required ><Label>No</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q10" value="yes" required><Label>Yes</Label></td>
+                        <td><input class="form-check-input" type="radio" name="q10" value="no" required><Label>No</Label></td>
                     </tr>
                 </tbody>
             </table>
@@ -492,37 +492,37 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                 </form>
 
                 <div class="row">
-                <div class="col-md-12">
-                    <span class="info">Participant Name : </span> <label class="spaces">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp, </label>
+                    <div class="col-md-12">
+                        <span class="info">Participant Name : </span> <label class="spaces">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp, </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="info">Date : </span> <label class="spaces"> dd/mm/yyyy </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="info">Birthday : </span> <label class="spaces"> dd/mm/yyyy</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="info">Instructor(s) :</span> <label class="spaces"> Instructor(s) name </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="info">Facility Name :</span> <label class="spaces">Facility name </label>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <span class="info">Date : </span> <label class="spaces"> dd/mm/yyyy </label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <span class="info">Birthday : </span> <label class="spaces"> dd/mm/yyyy</label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <span class="info">Instructor(s) :</span> <label class="spaces"> Instructor(s) name </label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <span class="info">Facility Name :</span> <label class="spaces">Facility name </label>
-                </div>
-            </div>
-        </div>
-                
-        </form>
+    </form>
     </div>
 
     <!-- Include Bootstrap JS and Popper.js -->
