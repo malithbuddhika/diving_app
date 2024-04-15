@@ -62,7 +62,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
     <p>9. Use a boat, float or other surface support station, whenever feasible.</p>
     <p>10. Know and obey local dive laws and regulations, including fish and game and dive flag laws.</p>
 
-    <h6> <strong>I understand the importance and purposes of these established practices. I recognize they are for my own safety and well-being, and that failure to adhere to them can place me in jeopardy when diving.</strong> </h6>
+    <h6> <strong>I understand the importance and purposes of these established practices. I recognize they are for my own safety and well being, and that failure to adhere to them can place me in jeopardy when diving.</strong> </h6>
 
     <div class="container">
         <div class="row">
@@ -72,21 +72,24 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                         <div class="toast-container" id="signatureToastContainer">
                             <div class="toast" id="signatureToast">
                                 <div class="toast-body">
-                                    Please kindly provide your (Participant) signature by drawing it in the designated box using your finger.
+                                    Please kindly press the <strong>"Draw Signature"</strong> button, and then use your finger to draw your signature inside the box.
                                 </div>
                                 <div class="toast-body">
                                     <img src="sign.gif" alt="SIGN.GIF" class="centered-image">
                                 </div>
                             </div>
                         </div>
-                        <label>
-                            Participant Signature
-                            <i id="participant-signature-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
-                        </label>
-                        <!-- Button to trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signatureModal">
-                            Open Signature Popup
-                        </button>
+                        <div class="row">
+                            <label>
+                                Participant Signature
+                                <i id="participant-signature-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
+                            </label>
+                        </div>
+                        <!-- Preview Canvas -->
+                        <div>
+                            <canvas id="participantSignatureCanvasPreview" class="signature-canvas" style="display: none; "></canvas>
+                            <button type="button" class="btn btn-primary btn-sm mt-3" data-toggle="modal" data-target="#signatureModal">Draw Signature</button>
+                        </div> <!-- Button to trigger modal -->
 
                         <!-- Modal -->
                         <div class="modal fade" id="signatureModal" tabindex="-1" role="dialog" aria-labelledby="signatureModalLabel" aria-hidden="true">
@@ -109,38 +112,61 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                             </div>
                         </div>
 
-                        <!-- Preview Canvas -->
-                        <label>
-                            Participant Signature Preview
-                        </label>
-                        <canvas id="participantSignatureCanvasPreview" class="signature-preview-canvas"></canvas>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <form class="mt-3 position-relative" id="parentSignatureForm">
-                <div class="form-group canvas-container">
-                    <div class="toast-container" id="parentSignatureToastContainer">
-                        <div class="toast" id="parentSignatureToast">
-                            <div class="toast-body">
-                                Please kindly provide the signature of the parent or guardian by drawing it in the designated box using finger.
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="mt-3 position-relative" id="parentSignatureForm">
+                    <div class="form-group canvas-container">
+                        <div class="toast-container" id="parentSignatureToastContainer">
+                            <div class="toast" id="parentSignatureToast">
+                                <div class="toast-body">
+                                    Please kindly provide your (Parent/Guardian) signature by pressing the <strong>"Draw Signature"</strong> button, and then using your finger to draw your signature inside the box.
+                                </div>
+                                <div class="toast-body">
+                                    <img src="sign.gif" alt="SIGN.GIF" class="centered-image">
+                                </div>
                             </div>
-                            <div class="toast-body">
-                                <img src="sign.gif" alt="SIGN.GIF" class="centered-image">
+                        </div>
+                        <div class="row">
+                            <label>
+                                Parent Signature
+                                <i id="parent-signature-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
+                            </label>
+                        </div>
+                        <!-- Preview Canvas -->
+                        <div>
+                            <canvas id="parentSignatureCanvasPreview" class="signature-canvas" style="display: none;"></canvas>
+                            <button type="button" class="btn btn-primary btn-sm mt-3" data-toggle="modal" data-target="#parentSignatureModal">Draw Signature</button>
+                        </div> <!-- Button to trigger modal -->
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="parentSignatureModal" tabindex="-1" role="dialog" aria-labelledby="parentSignatureModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="parentSignatureModalLabel">Parent Signature</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body overflow-hidden no-scroll" style="overflow: hidden;">
+                                        <canvas id="parentSignatureCanvas" class="signature-canvas"></canvas>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" onclick="clearParentSignature()">Clear</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveAndCloseParentSignature()">Save Signature</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <label>Signature of Parent of Guardian <i id="parent-signature-info-icon" class="bi bi-info-circle" style="cursor: pointer;"></i>
-                    </label>
-                    <!-- Set canvas dimensions relative to the screen size -->
-                    <canvas id="parentSignatureCanvas" class="signature-canvas" width="350%" height="400%"></canvas>
-                    <button type="button" class="btn btn-secondary clearbutton" onclick="clearParentSignature()"><span class="bi bi-x-lg"></span></button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -153,19 +179,23 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
     </div>
     </div>
 
-    <!-- Include jQuery and Bootstrap JS -->
+    <!-- Include Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
 
 
-
-
-    <!-- <script>
-        // Get the canvas element
+    <script>
+        // Get the canvas elements
         var participantCanvas = document.getElementById('participantSignatureCanvas');
+        var participantCanvasPreview = document.getElementById('participantSignatureCanvasPreview');
         var ctx = participantCanvas.getContext('2d');
+        var ctxPreview = participantCanvasPreview.getContext('2d');
         var drawing = false;
         var points = [];
         var prevPoint = null; // Track previous point for smoother curves
@@ -180,6 +210,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
         // Set canvas width and height
         participantCanvas.width = 0.86 * screenWidth; // 85% of the width
         participantCanvas.height = 0.9 * screenHeight; // 90% of the height
+        participantCanvasPreview.width = participantCanvas.width;
+        participantCanvasPreview.height = participantCanvas.height;
 
         // Set canvas style for margin
         participantCanvas.style.margin = margin + 'px';
@@ -236,6 +268,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                     prevPoint = points[i];
                 }
             }
+
+            // Update preview canvas
+            updatePreview();
         }
 
         function drawDot(x, y) {
@@ -266,172 +301,202 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
         participantCanvas.addEventListener('touchmove', draw);
         participantCanvas.addEventListener('touchend', stopDrawing);
 
+        function updatePreview() {
+            ctxPreview.drawImage(participantCanvas, 0, 0);
+        }
+
         function saveSignature() {
             let participantSignatureData = participantCanvas.toDataURL();
             let formData = new FormData(document.getElementById('participantSignatureForm'));
 
             formData.append('participantSignatureData', participantSignatureData);
             // Send the formData to the server using AJAX
-            sendToServer(formData);
+            // sendToServer(formData);
+            console.log('Signature saved:', participantSignatureData);
         }
 
         function clearSignature() {
             ctx.clearRect(0, 0, participantCanvas.width, participantCanvas.height);
+            ctxPreview.clearRect(0, 0, participantCanvasPreview.width, participantCanvasPreview.height);
+        }
+
+        function updatePreview() {
+            // Clear the preview canvas
+            ctxPreview.clearRect(0, 0, participantCanvasPreview.width, participantCanvasPreview.height);
+
+            // Scale and draw the content from the participantCanvas to the preview canvas
+            ctxPreview.save(); // Save the current state of the context
+            ctxPreview.scale(1, 1); // Scale the context to 30%
+            ctxPreview.drawImage(participantCanvas, 0, 0);
+            ctxPreview.restore(); // Restore the saved state to avoid affecting other drawings
+
+            // Set the scaled dimensions for the canvas element
+            participantCanvasPreview.style.width = (participantCanvas.width * 0.3) + 'px';
+            participantCanvasPreview.style.height = (participantCanvas.height * 0.3) + 'px';
         }
 
         function saveAndCloseSignature() {
-
+            saveSignature();
             // Close the modal
             $('#signatureModal').modal('hide');
-        }
-    </script> -->
 
+            updatePreview();
+
+            // Make the participantSignatureCanvasPreview visible
+            participantSignatureCanvasPreview.style.display = "block";
+        }
+    </script>
     <script>
-    // Get the canvas elements
-    var participantCanvas = document.getElementById('participantSignatureCanvas');
-    var participantCanvasPreview = document.getElementById('participantSignatureCanvasPreview');
-    var ctx = participantCanvas.getContext('2d');
-    var ctxPreview = participantCanvasPreview.getContext('2d');
-    var drawing = false;
-    var points = [];
-    var prevPoint = null; // Track previous point for smoother curves
+        // Get the canvas elements
+        var parentCanvas = document.getElementById('parentSignatureCanvas');
+        var parentCanvasPreview = document.getElementById('parentSignatureCanvasPreview');
+        var parentCtx = parentCanvas.getContext('2d');
+        var parentCtxPreview = parentCanvasPreview.getContext('2d');
+        var parentDrawing = false;
+        var parentPoints = [];
+        var parentPrevPoint = null; // Track previous point for smoother curves
 
-    // Set margin
-    var margin = 0;
+        // Set margin
+        var parentMargin = 0;
 
-    // Calculate width and height based on screen size
-    var screenWidth = window.innerWidth;
-    var screenHeight = window.innerHeight;
+        // Set canvas width and height
+        parentCanvas.width = 0.86 * screenWidth; // 85% of the width
+        parentCanvas.height = 0.9 * screenHeight; // 90% of the height
+        parentCanvasPreview.width = parentCanvas.width;
+        parentCanvasPreview.height = parentCanvas.height;
 
-    // Set canvas width and height
-    participantCanvas.width = 0.86 * screenWidth; // 85% of the width
-    participantCanvas.height = 0.9 * screenHeight; // 90% of the height
-    participantCanvasPreview.width = participantCanvas.width;
-    participantCanvasPreview.height = participantCanvas.height;
+        // Set canvas style for margin
+        parentCanvas.style.margin = parentMargin + 'px';
 
-    // Set canvas style for margin
-    participantCanvas.style.margin = margin + 'px';
+        function startParentDrawing(e) {
+            parentDrawing = true;
+            parentPoints = [];
+            parentPrevPoint = null;
 
-    function startDrawing(e) {
-        drawing = true;
-        points = [];
-        prevPoint = null;
+            // Prevent default behavior for touch events to prevent page scrolling
+            if (e.type === 'touchstart') {
+                e.preventDefault();
+            }
 
-        // Prevent default behavior for touch events to prevent page scrolling
-        if (e.type === 'touchstart') {
-            e.preventDefault();
+            drawParent(e);
         }
 
-        draw(e);
-    }
+        function drawParent(e) {
+            if (!parentDrawing) return;
 
-    function draw(e) {
-        if (!drawing) return;
+            e.preventDefault();
 
-        e.preventDefault();
+            // Adjust touch coordinates
+            const currentX = e.clientX || e.touches[0].clientX - parentCanvas.getBoundingClientRect().left;
+            const currentY = e.clientY || e.touches[0].clientY - parentCanvas.getBoundingClientRect().top;
 
-        // Adjust touch coordinates
-        const currentX = e.clientX || e.touches[0].clientX - participantCanvas.getBoundingClientRect().left;
-        const currentY = e.clientY || e.touches[0].clientY - participantCanvas.getBoundingClientRect().top;
+            parentPoints.push({
+                x: currentX,
+                y: currentY
+            });
 
-        points.push({
-            x: currentX,
-            y: currentY
-        });
+            // Draw only if there are more than 1 point
+            if (parentPoints.length > 1) {
+                parentCtx.beginPath();
+                parentCtx.moveTo(parentPoints[0].x, parentPoints[0].y);
 
-        // Draw only if there are more than 1 point
-        if (points.length > 1) {
-            ctx.beginPath();
-            ctx.moveTo(points[0].x, points[0].y);
+                for (let i = 1; i < parentPoints.length; i++) {
+                    const midPoint = {
+                        x: (parentPoints[i].x + parentPoints[i - 1].x) / 2,
+                        y: (parentPoints[i].y + parentPoints[i - 1].y) / 2
+                    };
 
-            for (let i = 1; i < points.length; i++) {
-                const midPoint = {
-                    x: (points[i].x + points[i - 1].x) / 2,
-                    y: (points[i].y + points[i - 1].y) / 2
-                };
+                    // Adjust the line width and opacity randomly for a more natural look
+                    parentCtx.lineWidth = Math.random() * 3 + 1; // Random line width between 1 and 4
+                    parentCtx.strokeStyle = `rgba(0, 0, 0, ${Math.random() * 0.5 + 0.3 + 0.1})`; // Random opacity between 0.2 and 0.7
 
-                // Adjust the line width and opacity randomly for a more natural look
-                ctx.lineWidth = Math.random() * 3 + 1; // Random line width between 1 and 4
-                ctx.strokeStyle = `rgba(0, 0, 0, ${Math.random() * 0.5 + 0.3 + 0.1})`; // Random opacity between 0.2 and 0.7
+                    // Draw a quadratic curve using the previous and current points
+                    parentCtx.quadraticCurveTo(parentPoints[i - 1].x, parentPoints[i - 1].y, midPoint.x, midPoint.y);
 
-                // Draw a quadratic curve using the previous and current points
-                ctx.quadraticCurveTo(points[i - 1].x, points[i - 1].y, midPoint.x, midPoint.y);
+                    // Draw the stroke
+                    parentCtx.stroke();
 
-                // Draw the stroke
-                ctx.stroke();
+                    // Store the current point as the previous point for the next iteration
+                    parentPrevPoint = parentPoints[i];
+                }
+            }
 
-                // Store the current point as the previous point for the next iteration
-                prevPoint = points[i];
+            // Update preview canvas
+            updateParentPreview();
+        }
+
+        function drawParentDot(x, y) {
+            parentCtx.beginPath();
+            parentCtx.arc(x, y, 2, 0, Math.PI * 2);
+            parentCtx.fillStyle = 'black';
+            parentCtx.fill();
+        }
+
+
+        function stopParentDrawing() {
+            if (parentDrawing) {
+                parentDrawing = false;
+                parentPrevPoint = null;
             }
         }
 
-        // Update preview canvas
-        updatePreview();
-    }
+        // Event listeners for mouse input
+        parentCanvas.addEventListener('mousedown', startParentDrawing);
+        parentCanvas.addEventListener('mousemove', drawParent);
+        parentCanvas.addEventListener('mouseup', stopParentDrawing);
 
-    function drawDot(x, y) {
-        ctx.beginPath();
-        ctx.arc(x, y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = 'black';
-        ctx.fill();
-    }
+        // Event listener for touch input
+        parentCanvas.addEventListener('touchstart', function(e) {
+            // Draw a dot at the touch location
+            drawParentDot(e.touches[0].clientX - parentCanvas.getBoundingClientRect().left, e.touches[0].clientY - parentCanvas.getBoundingClientRect().top);
+            startParentDrawing(e);
+        });
 
-    function stopDrawing() {
-        if (drawing) {
-            drawing = false;
-            prevPoint = null;
+        parentCanvas.addEventListener('touchmove', drawParent);
+        parentCanvas.addEventListener('touchend', stopParentDrawing);
+
+        function updateParentPreview() {
+            // Clear the preview canvas
+            parentCtxPreview.clearRect(0, 0, parentCanvasPreview.width, parentCanvasPreview.height);
+
+            // Scale and draw the content from the parentCanvas to the preview canvas
+            parentCtxPreview.save(); // Save the current state of the context
+            parentCtxPreview.scale(1, 1); // Scale the context to 30%
+            parentCtxPreview.drawImage(parentCanvas, 0, 0);
+            parentCtxPreview.restore(); // Restore the saved state to avoid affecting other drawings
+
+            // Set the scaled dimensions for the canvas element
+            parentCanvasPreview.style.width = (parentCanvas.width * 0.3) + 'px';
+            parentCanvasPreview.style.height = (parentCanvas.height * 0.3) + 'px';
         }
-    }
-
-    // Event listeners for mouse input
-    participantCanvas.addEventListener('mousedown', startDrawing);
-    participantCanvas.addEventListener('mousemove', draw);
-    participantCanvas.addEventListener('mouseup', stopDrawing);
-
-    // Event listeners for touch input
-    participantCanvas.addEventListener('touchstart', function(e) {
-        // Draw a dot at the touch location
-        drawDot(e.touches[0].clientX - participantCanvas.getBoundingClientRect().left, e.touches[0].clientY - participantCanvas.getBoundingClientRect().top);
-        startDrawing(e);
-    });
-    participantCanvas.addEventListener('touchmove', draw);
-    participantCanvas.addEventListener('touchend', stopDrawing);
-
-    function updatePreview() {
-        ctxPreview.drawImage(participantCanvas, 0, 0);
-    }
-
-    function saveSignature() {
-        let participantSignatureData = participantCanvas.toDataURL();
-        let formData = new FormData(document.getElementById('participantSignatureForm'));
-
-        formData.append('participantSignatureData', participantSignatureData);
-        // Send the formData to the server using AJAX
-        // sendToServer(formData);
-        console.log('Signature saved:', participantSignatureData);
-    }
-
-    function clearSignature() {
-        ctx.clearRect(0, 0, participantCanvas.width, participantCanvas.height);
-        ctxPreview.clearRect(0, 0, participantCanvasPreview.width, participantCanvasPreview.height);
-    }
-
-    function saveAndCloseSignature() {
-        saveSignature();
-        // Close the modal
-        $('#signatureModal').modal('hide');
-    }
-</script>
 
 
+        function saveParentSignature() {
+            let parentSignatureData = parentCanvas.toDataURL();
+            let formData = new FormData(document.getElementById('parentSignatureForm'));
 
+            formData.append('parentSignatureData', parentSignatureData);
+            // sendToServer(formData);
+            console.log('Signature saved:', parentSignatureData);
 
+        }
 
+        function clearParentSignature() {
+            parentCtx.clearRect(0, 0, parentCanvas.width, parentCanvas.height);
+            parentCtxPreview.clearRect(0, 0, parentCanvasPreview.width, parentCanvasPreview.height);
+        }
 
+        function saveAndCloseParentSignature() {
+            saveParentSignature();
+            // Close the modal
+            $('#parentSignatureModal').modal('hide');
 
+            updateParentPreview();
 
-
-
+            // Make the parentSignatureCanvasPreview visible
+            parentSignatureCanvasPreview.style.display = "block";
+        }
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const participationInfoIcon = document.getElementById('participation-info-icon');
@@ -460,7 +525,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
 
                 // Position the toast near the icon
                 let toastTop = targetRect.top + (targetRect.height / 2) - (toastHeight / 2);
-                let toastLeft = targetRect.left + targetRect.width + 10; // 10px right of the icon
+                let toastLeft = targetRect.left + targetRect.width - 50; // 10px right of the icon
 
                 // Set the toast position
                 toastElement.style.top = toastTop + 'px';
@@ -530,7 +595,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
 
                 // Position the toast near the icon
                 let toastTop = targetRect.top + (targetRect.height / 2) - (toastHeight / 2);
-                let toastLeft = targetRect.left + targetRect.width - 40; // 10px right of the icon
+                let toastLeft = targetRect.left + targetRect.width + 20; // 10px right of the icon
 
                 // Set the toast position
                 toastElement.style.top = toastTop + 'px';
@@ -558,93 +623,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
         };
 
 
-
-
-        // Parent Signature
-        let parentCanvas = document.getElementById('parentSignatureCanvas');
-        let parentCtx = parentCanvas.getContext('2d');
-        let parentDrawing = false;
-        let parentPoints = [];
-
-        function startParentDrawing(e) {
-            parentDrawing = true;
-            parentPoints = [];
-            drawParent(e);
-        }
-
-        function drawParent(e) {
-            if (!parentDrawing) return;
-
-            e.preventDefault();
-
-            parentCtx.lineWidth = 2;
-            parentCtx.lineCap = 'round';
-            parentCtx.strokeStyle = '#000';
-
-            // Adjust touch coordinates
-            const currentX = e.clientX || e.touches[0].clientX - parentCanvas.getBoundingClientRect().left;
-            const currentY = e.clientY || e.touches[0].clientY - parentCanvas.getBoundingClientRect().top;
-
-            parentPoints.push({
-                x: currentX,
-                y: currentY
-            });
-
-            if (parentPoints.length > 1) {
-                const prevPoint = parentPoints[parentPoints.length - 2];
-                const currentPoint = parentPoints[parentPoints.length - 1];
-
-                // Draw a line segment
-                parentCtx.beginPath();
-                parentCtx.moveTo(prevPoint.x, prevPoint.y);
-                parentCtx.lineTo(currentPoint.x, currentPoint.y);
-                parentCtx.stroke();
-            }
-        }
-
-        function stopParentDrawing() {
-            if (parentDrawing) {
-                parentDrawing = false;
-                // Capture the final point when stopping drawing
-                drawParentFinalPoint();
-            }
-        }
-
-        function drawParentFinalPoint() {
-            if (parentPoints.length > 0) {
-                const finalPoint = parentPoints[parentPoints.length - 1];
-                // Add a full stop at the final point
-                parentCtx.lineWidth = 2;
-                parentCtx.lineCap = 'round';
-                parentCtx.strokeStyle = '#000';
-                parentCtx.beginPath();
-                parentCtx.arc(finalPoint.x, finalPoint.y, 1, 0, 2 * Math.PI);
-                parentCtx.stroke();
-            }
-        }
-
-        parentCanvas.addEventListener('mousedown', startParentDrawing);
-        parentCanvas.addEventListener('mousemove', drawParent);
-        parentCanvas.addEventListener('mouseup', stopParentDrawing);
-
-        // Touch events
-        parentCanvas.addEventListener('touchstart', startParentDrawing);
-        parentCanvas.addEventListener('touchmove', drawParent);
-        parentCanvas.addEventListener('touchend', stopParentDrawing);
-
-
-        function saveParentSignature() {
-            let parentSignatureData = parentCanvas.toDataURL();
-            let formData = new FormData(document.getElementById('parentSignatureForm'));
-
-            formData.append('parentSignatureData', parentSignatureData);
-            sendToServer(formData);
-        }
-
-        function clearParentSignature() {
-            parentCtx.clearRect(0, 0, parentCanvas.width, parentCanvas.height);
-        }
-
         function handleFormSubmission() {
             let participantName = document.getElementById('participantname').value;
             // Capture current date for participant and parent signatures
@@ -655,7 +633,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
             let participantSignatureData = participantCanvas.toDataURL();
             // drawFinalPoint(); // Capture the final point for participant signature
             let parentSignatureData = parentCanvas.toDataURL();
-            drawParentFinalPoint(); // Capture the final point for parent signature
+            // drawParentFinalPoint(); // Capture the final point for parent signature
 
             let formData = new FormData();
             formData.append('participantname', participantName);
@@ -674,6 +652,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
                     if (xhr.status === 200) {
                         // Display success message using Bootstrap alert
                         showAlert('success', 'Form submitted successfully');
+                        window.location.href = '/englishDocuments/doc1/doc1.php';
 
                     } else {
                         // Display error message using Bootstrap alert
@@ -701,8 +680,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php';
             setTimeout(function() {
                 alertContainer.removeChild(alertElement);
             }, 7000);
-            // Redirect to doc4.php
-            window.location.href = '/englishDocuments/doc1/doc1.php';
+            // Redirect to doc1.php
+
         }
     </script>
 

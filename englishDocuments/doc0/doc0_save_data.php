@@ -1,5 +1,6 @@
 <?php
 session_start();
+// print_r($_POST);
 // Database connection parameters
 
 include $_SERVER['DOCUMENT_ROOT'] . '/connection.php';
@@ -46,6 +47,7 @@ $stmt->close();
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
 
 $conn->close();
 
